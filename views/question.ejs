@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>SHOW YOUR MBTI</title>
+    <link rel="stylesheet" href="/main.css" >
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="background"></div>
+        <div id="header" role="header">
+            <header>
+                <%- include('nav.ejs') %>
+            </header>
+        </div>
+        <div id="container">
+            <div class="main-content-wrap">
+                <div class="contentsType mb-4">연애 / 썸 유형</div>
+                <div class="contentsQBox">
+                    <div class="questionNum">
+                        Question 1.
+                    </div>
+                    <div class="questionTitle">
+                        <%= JSON.stringify(questionList.질문)%>
+                    </div>
+                    <ul class="answerList">
+                        <li>
+                            <span class="listNum">①</span>
+                            <%= JSON.stringify(questionList.문항1)%>
+                        </li>
+                        <li>
+                            <span class="listNum">②</span>
+                            <%= JSON.stringify(questionList.문항2)%>
+                        </li>
+                        <li>
+                            <span class="listNum">②</span>
+                            <%= JSON.stringify(questionList.문항3)%>
+                        </li>
+                        <li>
+                            <span class="listNum">②</span>
+                            <%= JSON.stringify(questionList.문항4)%>
+                        </li>
+                    </ul>
+                    <button type="submit" class="btn submitbtn btn-outline-secondary">답변선택 완료 후 결과보기</button>
+                </div>
+            </div>
+        </div>
+        <div id="footer"></div>
+    </div>
+</body>
+
+</html>
