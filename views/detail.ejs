@@ -16,15 +16,36 @@
                 <%- include('nav.ejs') %>
             </header>
         </div>
-        <div id="container">
-            <div class="detail-bg">
-                <%= JSON.stringify(result) %>
-            </div> 
-            <div class="detail-bg">
-                <h4><%= result.title %></h4>
-                <p><%= result.content1 %></p>
-                <p><%= result.content2 %></p>
-            </div> 
+        <div class="main-content-wrap">
+            <div class="contentsType mb-4">연애 / 썸 유형</div>
+            <div class="contentsQBox">
+                <div class="questionNum">
+                    Question 1.
+                </div>
+                <div class="questionTitle">
+                    <%= 바인딩.question %>
+                </div>
+                <ul class="answerList">
+                    <li>
+                        <span class="listNum">①</span>
+                        <%= 바인딩.answer1 %>
+                    </li>
+                    <li>
+                        <span class="listNum">②</span>
+                        <%= 바인딩.answer2 %>
+                    </li>
+                    <li>
+                        <span class="listNum">②</span>
+                        <%= 바인딩.answer3 %>
+                    </li>
+                    <li>
+                        <span class="listNum">②</span>
+                        <%= 바인딩.answer4 %>
+                    </li>
+                </ul>
+                <a href="/edit/<%= 바인딩._id %>" class="btn btn-outline-secondary">수정하기</a>
+                <!-- <button type="submit" class="btn submitbtn btn-outline-secondary">답변선택 완료 후 결과보기</button> -->
+            </div>
         </div>
         <div id="footer"></div>
     </div>

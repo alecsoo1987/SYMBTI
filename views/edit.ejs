@@ -16,34 +16,36 @@
       </div>
       <div id="container">
             <div class="main-content-wrap addQuestion">
-                <div class="contentsType mb-4">질문 등록하기</div>
-                <form action="/submit_question" method="POST" class="uploadForm">
+                <div class="contentsType mb-4">질문 수정하기</div>
+                <form action="/update" method="POST" class="uploadForm">
+                    <input type="hidden" name="id" value="<%= 바인딩._id %>">
                     <div class="form-group inputQuestionWrap">
                         <label for="title">질문</label>
-                        <input type="text" class="form-control" name="questionTitle" class="mt-4"  value="<%= 바인딩.질문 %>">
+                        <input type="text" class="form-control" id="question" name="question" class="mt-4"  value="<%= 바인딩.question %>">
                     </div>
                     <div class="form-group inputAnswerWrap">
-                        <label for="question_1">
-                            문항1
+                        <label for="answer1">
+                            answer1
                         </label>
-                        <input type="text" class="form-control" name="question_1" value="<%= 바인딩.문항1 %>">
+                        <input type="text" class="form-control" id="answer1" name="answer1" value="<%= 바인딩.answer1 %>">
 
-                        <label for="question_2">
-                            문항2
+                        <label for="answer2">
+                            answer2
                         </label>
-                        <input type="text" class="form-control" name="question_2" value="<%= 바인딩.문항2 %>">
+                        <input type="text" class="form-control" id="answer2" name="answer2" value="<%= 바인딩.answer2 %>">
 
-                        <label for="question_3">
-                            문항3
+                        <label for="answer3">
+                            answer3
                         </label>
-                        <input type="text" class="form-control" name="question_3" value="<%= 바인딩.문항3 %>">
+                        <input type="text" class="form-control" id="answer3" name="answer3" value="<%= 바인딩.answer3 %>">
 
-                        <label for="question_4">
-                            문항4
+                        <label for="answer4">
+                            answer4
                         </label>
-                        <input type="text" class="form-control" name="question_4" value="<%= 바인딩.문항4 %>">
+                        <input type="text" class="form-control" id="answer4" name="answer4" value="<%= 바인딩.answer4 %>">
                     </div>
-                    <button type="submit" class="addQuestionBtn btn btn-outline-secondary">수정하기</button>
+                    <a href="/detail/<%= 바인딩._id %>" class="btn btn-outline-secondary">수정하기</a>
+
                 </form>
             </div>
       </div>
@@ -53,7 +55,6 @@
 <body class="grey-bg">
    
   <div class="white-bg">
-      ``````
     </div>
   </body>
 </html>

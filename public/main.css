@@ -108,6 +108,7 @@ b {
   display: flex;
   flex-direction: column;
   width: 65%;
+  margin: 0 auto;
 }
 
 .main-content-wrap.addQuestion {
