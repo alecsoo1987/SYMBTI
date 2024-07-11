@@ -30,6 +30,11 @@ app.get('/add_Some', async (요청, 응답) => { //Some 관련 문항 등록
   let result = await db.collection('SYMBTI_Some').find().toArray()
   응답.render('add_Some.ejs', { 글목록 : result})
 }) 
+
+app.get('/edit/:Id', async (요청, 응답) => { //Some 관련 문항 등록
+  let result = await db.collection('New Question').findOne({ _id : new ObjectId(요청.params.Id)})
+	응답.render('edit.ejs',{바인딩 : result})
+}) 
 /*
 app.get('/add_dailyLife', (요청, 응답) => { //일상 문항 등록
   db.collection('SYMBTI_dailyLife').insertOne({title : '타이틀'})
@@ -43,9 +48,8 @@ app.get('/write', (요청, 응답) => { //연애 문항 등록
   응답.render('write.ejs')
 }) 
 
-app.get('/detail/:aaa', async (요청, 응답) => {
-	let result = 요청.params.aaa
-	let renders = await db.collection('SYMBTI_Some').findOne({ _id : new ObjectId(result)})
+app.get('/detail/:Id', async (요청, 응답) => {
+	let result = await db.collection('SYMBTI_Some').findOne({ _id : new ObjectId(요청.params.Id)})
 	응답.render('detail.ejs',{바인딩 : renders})
 })
 

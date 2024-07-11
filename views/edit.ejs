@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+  <div id="wrap">
+      <div class="background"></div>
+      <div id="header" role="header">
+          <header>
+              <%- include('nav.ejs') %>
+          </header>
+      </div>
+      <div id="container">
+            <div class="main-content-wrap addQuestion">
+                <div class="contentsType mb-4">질문 등록하기</div>
+                <form action="/submit_question" method="POST" class="uploadForm">
+                    <div class="form-group inputQuestionWrap">
+                        <label for="title">질문</label>
+                        <input type="text" class="form-control" name="questionTitle" class="mt-4"  value="<%= 바인딩.질문 %>">
+                    </div>
+                    <div class="form-group inputAnswerWrap">
+                        <label for="question_1">
+                            문항1
+                        </label>
+                        <input type="text" class="form-control" name="question_1" value="<%= 바인딩.문항1 %>">
+
+                        <label for="question_2">
+                            문항2
+                        </label>
+                        <input type="text" class="form-control" name="question_2" value="<%= 바인딩.문항2 %>">
+
+                        <label for="question_3">
+                            문항3
+                        </label>
+                        <input type="text" class="form-control" name="question_3" value="<%= 바인딩.문항3 %>">
+
+                        <label for="question_4">
+                            문항4
+                        </label>
+                        <input type="text" class="form-control" name="question_4" value="<%= 바인딩.문항4 %>">
+                    </div>
+                    <button type="submit" class="addQuestionBtn btn btn-outline-secondary">수정하기</button>
+                </form>
+            </div>
+      </div>
+      <div id="footer"></div>
+  </div>
+</body>
+<body class="grey-bg">
+   
+  <div class="white-bg">
+      ``````
+    </div>
+  </body>
+</html>
