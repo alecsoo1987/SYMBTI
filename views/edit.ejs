@@ -17,10 +17,10 @@
       <div id="container">
             <div class="main-content-wrap addQuestion">
                 <div class="contentsType mb-4">질문 수정하기</div>
-                <form action="/update" method="POST" class="uploadForm">
+                <form action="/edit" method="POST" class="uploadForm">
                     <input type="hidden" name="id" value="<%= 바인딩._id %>">
                     <div class="form-group inputQuestionWrap">
-                        <label for="title">질문</label>
+                        <label for="question">질문</label>
                         <input type="text" class="form-control" id="question" name="question" class="mt-4"  value="<%= 바인딩.question %>">
                     </div>
                     <div class="form-group inputAnswerWrap">
@@ -44,8 +44,9 @@
                         </label>
                         <input type="text" class="form-control" id="answer4" name="answer4" value="<%= 바인딩.answer4 %>">
                     </div>
-                    <a href="/detail/<%= 바인딩._id %>" class="btn btn-outline-secondary">수정하기</a>
-
+                    <button type="submit"class="btn btn-outline-secondary">
+                        수정하기                     
+                    </button>
                 </form>
             </div>
       </div>

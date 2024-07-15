@@ -26,9 +26,9 @@ app.get('/', (요청, 응답) => {
   응답.sendFile(__dirname + '/index.html')
 }) 
 
-app.get('/add_Some', async (요청, 응답) => { //Some 관련 문항 등록
+app.get('/list', async (요청, 응답) => { //Some 관련 문항 등록
   let result = await db.collection('SYMBTI_Some').find().toArray()
-  응답.render('add_Some.ejs', { 글목록 : result})
+  응답.render('list.ejs', { DBList : result})
 }) 
 
 app.get('/edit/:Id', async (요청, 응답) => { //Some 관련 문항 등록
@@ -48,25 +48,24 @@ app.get('/write', (요청, 응답) => { //연애 문항 등록
   응답.render('write.ejs')
 }) 
 
-app.get('/detail/:Id', async (요청, 응답) => {
+app.get('/list/:Id', async (요청, 응답) => {
   let result = await db.collection('SYMBTI_Some').findOne({ _id : new ObjectId(요청.params.Id)})
-	응답.render('detail.ejs',{바인딩 : result})
+	응답.render('list.ejs',{바인딩 : result})
 })
 
-app.post('/update', async (요청, 응답) => {
-  let id = 요청.body.id;
-  let updatedData = {
-      question: 요청.body.question,
-      answer1: 요청.body.answer1,
-      answer2: 요청.body.answer2,
-      answer3: 요청.body.answer3,
-      answer4: 요청.body.answer4,
-  };
+app.post('/edit', async (요청, 응답) => {
+  let id = 요청.body.id
   await db.collection('SYMBTI_Some').updateOne(
       { _id: new ObjectId(id) },
-      { $set: updatedData }
-  );
-  응답.redirect('/detail/' + id);
+      { $set: 
+        { question : 요청.body.question, 
+          answer1: 요청.body.answer1,
+          answer2: 요청.body.answer2,
+          answer3: 요청.body.answer3,
+          answer4: 요청.body.answer4
+        }
+    });
+  응답.redirect('/list/' + id);
 });
 
 app.post('/submit_question', async (요청, 응답) =>{ // form action이 add여서, add 요청이 오면 동작.

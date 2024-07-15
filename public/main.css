@@ -38,6 +38,26 @@
 
    */
 
+/* declair font */
+.fs-xs {
+  font-size: 0.8rem;
+}
+
+.fw-b {
+  font-weight: bold;
+}
+
+/* declair display */
+.d-flex {
+  display : flex;
+}
+
+/* 여백 */
+.m-auto {
+  margin: 0 auto;
+}
+
+
 .nav {
   background: rgb(255, 220, 220);
   border-bottom: 1px solid #d9d9d9;
@@ -261,4 +281,9 @@ b {
 .addQuestionBtn:hover {
   color: #fff;
   background-color: #333;
+}
+
+.btn-edit {
+  width: fit-content;
+  margin-left: auto;
 }

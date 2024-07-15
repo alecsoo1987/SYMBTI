@@ -19,8 +19,13 @@
         <div class="main-content-wrap">
             <div class="contentsType mb-4">연애 / 썸 유형</div>
             <div class="contentsQBox">
-                <div class="questionNum">
+                <div class="questionNum d-flex">
                     Question 1.
+                    <a href="/edit/<%= 바인딩._id %>" class="btn btn-outline-secondary btn-edit">
+                        <span class="fs-xs fw-b">
+                            수정하기
+                        </span>
+                    </a>
                 </div>
                 <div class="questionTitle">
                     <%= 바인딩.question %>
@@ -43,8 +48,8 @@
                         <%= 바인딩.answer4 %>
                     </li>
                 </ul>
-                <a href="/edit/<%= 바인딩._id %>" class="btn btn-outline-secondary">수정하기</a>
-                <!-- <button type="submit" class="btn submitbtn btn-outline-secondary">답변선택 완료 후 결과보기</button> -->
+                
+                <button type="submit" class="btn submitbtn btn-outline-secondary m-auto">답변선택 완료 후 결과보기</button>
             </div>
         </div>
         <div id="footer"></div>

@@ -24,6 +24,9 @@
                             <a href="/edit/<%= doc._id %>" class="btn btn-outline-secondary btn-edit">
                                 <span class="fs-xs fw-b">수정하기</span>
                             </a>
+                            <a href="/edit/<%= doc._id %>" class="btn btn-outline-secondary btn-edit">
+                                <span class="fs-xs fw-b delete">🗑️</span>
+                            </a>
                         </div>
                         <div class="questionTitle">
                             <!-- <% if (doc.question) { %> -->
@@ -57,3 +60,9 @@
   </div>
 </body>
 </html>
+
+<script>
+    document.querySelectorAll('.delete')[0].addEventListener('click', function(){
+      fetch()
+    })
+</script>
