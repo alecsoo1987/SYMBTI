@@ -54,7 +54,7 @@ app.get('/list/:Id', async (요청, 응답) => {
 })
 
 app.delete('/delete', async (요청, 응답) => {
-  let result = await db.collection('post').deleteOne( { _id : new ObjectId(요청.query.DBID) } )
+  let result = await db.collection('SYMBTI_Some').deleteOne( { _id : new ObjectId(요청.query.DBID) } )
   응답.send('삭제완료')
 })
 

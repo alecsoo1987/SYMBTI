@@ -63,12 +63,13 @@
     var deleteLinks = document.getElementsByClassName('delete');
     for (var i = 0; i < deleteLinks.length; i++) {
         deleteLinks[i].addEventListener('click', function(event) {
-            fetch('/delete?DBID='+ e.target.dataset.id, {
+            fetch('/delete?DBID='+ event.target.dataset.id, {
                 method : 'DELETE'
             })
-            // .then(response => response.json())
-            // .then(data => console.log(data))
-            // .catch(error => console.error('Error:', error));
+            .then((r)=>r.text())
+            .then((r)=>{
+                event.target.parentElement.parentElement.style.display = "none"
+            })
         })
     }
     // document.querySelectorAll('.delete')[0].addEventListener('click', function(){
