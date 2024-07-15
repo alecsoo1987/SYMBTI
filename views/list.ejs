@@ -21,12 +21,10 @@
                     <div class="contentsQBox">
                         <div class="questionNum d-flex">
                             Question <%= index + 1 %>.
-                            <a href="/edit/<%= doc._id %>" class="btn btn-outline-secondary btn-edit">
+                            <a href="/edit/<%= doc._id %>" data-id="<%=doc._id %>" class="btn btn-outline-secondary btn-edit ml-auto">
                                 <span class="fs-xs fw-b">수정하기</span>
                             </a>
-                            <a href="/edit/<%= doc._id %>" class="btn btn-outline-secondary btn-edit">
-                                <span class="fs-xs fw-b delete">🗑️</span>
-                            </a>
+                            <span class="fs-xs fw-b btn btn-outline-secondary btn-edit delete" data-id="<%=doc._id %>">🗑️</span>
                         </div>
                         <div class="questionTitle">
                             <!-- <% if (doc.question) { %> -->
@@ -50,7 +48,7 @@
                                     </li>
                                 <% } %> -->
                             <% } %>
-                        </ul>                
+                        </ul>
                         <button type="submit" class="btn submitbtn btn-outline-secondary m-auto">답변선택 완료 후 결과보기</button>
                     </div>
                 <% }); %>
@@ -62,7 +60,18 @@
 </html>
 
 <script>
-    document.querySelectorAll('.delete')[0].addEventListener('click', function(){
-      fetch()
-    })
+    var deleteLinks = document.getElementsByClassName('delete');
+    for (var i = 0; i < deleteLinks.length; i++) {
+        deleteLinks[i].addEventListener('click', function(event) {
+            fetch('/delete?DBID='+ e.target.dataset.id, {
+                method : 'DELETE'
+            })
+            // .then(response => response.json())
+            // .then(data => console.log(data))
+            // .catch(error => console.error('Error:', error));
+        })
+    }
+    // document.querySelectorAll('.delete')[0].addEventListener('click', function(){
+    //   fetch('/test') // /test?age=20 과 같이 테스트 이후에 서버로 전송할 데이터의 형태를 내맘대로 지정할 수 있다.
+    // })
 </script>

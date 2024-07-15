@@ -57,6 +57,13 @@
   margin: 0 auto;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
+.ml-xs {
+  margin-left: 0.8rem;
+}
 
 .nav {
   background: rgb(255, 220, 220);
@@ -285,5 +292,4 @@ b {
 
 .btn-edit {
   width: fit-content;
-  margin-left: auto;
 }

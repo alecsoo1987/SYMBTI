@@ -53,6 +53,11 @@ app.get('/list/:Id', async (요청, 응답) => {
 	응답.render('list.ejs',{바인딩 : result})
 })
 
+app.delete('/delete', async (요청, 응답) => {
+  let result = await db.collection('post').deleteOne( { _id : new ObjectId(요청.query.DBID) } )
+  응답.send('삭제완료')
+})
+
 app.post('/edit', async (요청, 응답) => {
   let id = 요청.body.id
   await db.collection('SYMBTI_Some').updateOne(
