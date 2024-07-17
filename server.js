@@ -58,6 +58,10 @@ app.delete('/delete', async (요청, 응답) => {
   응답.send('삭제완료')
 })
 
+app.get('list/1', async (요청, 응답) => {
+  let result = await db.collection('post')
+})
+
 app.post('/edit', async (요청, 응답) => {
   let id = 요청.body.id
   await db.collection('SYMBTI_Some').updateOne(
