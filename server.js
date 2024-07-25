@@ -135,7 +135,7 @@ app.post('/edit', async (요청, 응답) => {
           answer1: 요청.body.answer1,
           answer2: 요청.body.answer2,
           answer3: 요청.body.answer3,
-          answer4: 요청.body.answer4
+          answer4: 요청.nombody.answer4
         }
     });
   응답.redirect('/list/' + id);
