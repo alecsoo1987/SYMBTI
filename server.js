@@ -49,10 +49,10 @@ const upload = multer({
   })
 })
 
-let db
-const url = process.env.DB_URL
-new MongoClient(url).connect().then((client)=>{
-  console.log('DB연결성공')
+let connectDB = require('./database.js')
+
+let db;
+connectDB.then((client)=>{
   db = client.db('SYMBTI')
 }).catch((err)=>{
   console.log(err)
@@ -237,3 +237,38 @@ app.post('/register', nullCheck, async (요청, 응답)=> { // 버튼을 누르�
   응답.redirect('/')
 })
 
+app.use('/shop', require('./routes/shop.js')) //routes/shop.js에 있는 겟 주소의 api를 전부 사용, / 또는 /shop처럼 중복되는 단어는 여기서 통합해서 사용할 수 있다.
+app.use('/board/sub', loginCheck, require('./routes/sports.js'))
+// boare/sub로 시작하는 페이지에 접속하면, loginCheck 미들웨어를 실행하고, next를 통해 routes/sports.js에 있는 api를 찾아서 실행한다.
+
+
+/* index 없이 단어가 포함된 질문을 모두 검색 결과로 불러올 때 사용 
+
+app.get('/search', async (요청,응답) => {
+  let inputSearch = 요청.query.inputSearch
+  let searchResults = await db.collection('SYMBTI_Some').find({
+    $or: [
+      { question: { $regex: inputSearch, $options: 'i' } },
+      { answer1: { $regex: inputSearch, $options: 'i' } },   
+      { answer2: { $regex: inputSearch, $options: 'i' } }, 
+      { answer3: { $regex: inputSearch, $options: 'i' } }   
+    ]
+  }).toArray();
+
+  let ids = searchResults.map(doc => doc._id);
+
+  let result = await db.collection('SYMBTI_Some').find({
+    _id: { $in: ids }
+  }).toArray()
+  
+  응답.render('searchResult.ejs', {바인딩 : result})
+}) */
+
+
+// 아래의 검색이 되긴하는데 어절을 전체 검색해야함.. 중간 단어는 검색이 안됨
+app.get('/search', async (요청,응답) => {
+  let searchResults = await db.collection('SYMBTI_Some')
+  .find({$text : { $search : 요청.query.inputSearch }}).toArray();
+  
+  응답.render('searchResult.ejs', {바인딩 : searchResults})
+})

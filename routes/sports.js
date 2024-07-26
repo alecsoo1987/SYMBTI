@@ -2,7 +2,7 @@
 
 const router = require('express').Router()
 
-let connectDB = require('./../database.js')
+let connectDB = require('../database.js')
 
 let db;
 connectDB.then((client)=>{
@@ -11,13 +11,13 @@ connectDB.then((client)=>{
   console.log(err)
 })
 
-router.get('/shirts', async (요청, 응답) => {
+router.get('/sports', async (요청, 응답) => {
    await db.collection('SYMBTI').find().toArray()
-   응답.send('셔츠 파는 페이지입니다')
+   응답.send('스포츠 게시판')
 })
 
-router.get('/pants', (요청, 응답) => {
-   응답.send('바지 파는 페이지입니다')
+router.get('/game', (요청, 응답) => {
+   응답.send('게임 게시판')
 })
 
 module.exports = router 

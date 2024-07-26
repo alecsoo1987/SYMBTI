@@ -39,17 +39,24 @@
 
 						</ul>
 						<div class="dropdown profile ml-auto">
-							<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-							  프로필
+							<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+								aria-expanded="false">
+								프로필
 							</button>
 							<ul class="dropdown-menu">
-							  <li><a class="dropdown-item" href="/register">회원가입</a></li>
-							  <li><a class="dropdown-item" href="/login">로그인</a></li>
-							  <li><a class="dropdown-item" href="/porifle">회원정보 수정</a></li>
+								<li>
+									<a class="dropdown-item" href="/register">회원가입</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="/login">로그인</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="/porifle">회원정보 수정</a>
+								</li>
 							</ul>
-						  </div>
-						<form class="d-flex" role="search">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+						</div>
+						<form class="d-flex" role="search" action="/search" method="get">
+							<input class="form-control me-2" type="search" placeholder="제목 검색" aria-label="Search" name="inputSearch" id="inputSearch">
 							<button class="btn btn-outline-success" type="submit">Search</button>
 						</form>
 					</div>

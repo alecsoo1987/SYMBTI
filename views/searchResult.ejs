@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+  <div id="wrap">
+        <div class="background"></div>
+        <div id="header" role="header">
+            <header>
+              <%- include('nav.ejs') %>
+            </header>
+        </div>
+        <div id="container">
+            <div class="main-content-wrap">
+                <div class="contentsType mb-4">연애 / 썸 유형</div>                
+                <% 바인딩.forEach(doc => { %>
+                    <div class="contentsQBox">
+                        <div class="questionNum d-flex">
+                            Question 1.
+                            <a href="/edit/<%= doc._id %>" data-id="<%= doc._id %>" class="btn btn-outline-secondary btn-edit ml-auto">
+                                <span class="fs-xs fw-b">수정하기</span>
+                            </a>
+                            <span class="fs-xs fw-b btn btn-outline-secondary btn-edit delete" data-id="<%= doc._id %>">🗑️</span>
+                        </div>
+                        <div class="questionTitle">
+                            <%= doc.question %>
+                        </div>
+                        <ul class="answerList">
+                            <% for (var key in doc) { %>
+                                <% if (key.startsWith('answer') && doc[key]) { %>
+                                    <li>
+                                        <span class="listNum"><%= key.replace('answer', '') %></span>
+                                        <%= doc[key] %>
+                                    </li>
+                                <% } %>
+                            <% } %>
+                        </ul>
+                        <a href="/list/next/<%= doc._id %>" data-id="<%= doc._id %>" class="btn submitbtn btn-outline-secondary m-auto">
+                            <span class="fs-xs fw-b">
+                                답변선택 완료 후 결과보기
+                            </span>
+                        </a>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+        <div id="footer"></div>
+  </div>
+</body>
+</html>
+
+<script>
+    var deleteLinks = document.getElementsByClassName('delete');
+    for (var i = 0; i < deleteLinks.length; i++) {
+        deleteLinks[i].addEventListener('click', function(event) {
+            fetch('/delete?DBID='+ event.target.dataset.id, {
+                method : 'DELETE'
+            })
+            .then((r)=>r.text())
+            .then((r)=>{
+                event.target.parentElement.parentElement.style.display = "none"
+            })
+        })
+    }
+    // document.querySelectorAll('.delete')[0].addEventListener('click', function(){
+    //   fetch('/test') // /test?age=20 과 같이 테스트 이후에 서버로 전송할 데이터의 형태를 내맘대로 지정할 수 있다.
+    // })
+</script>
