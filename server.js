@@ -265,10 +265,15 @@ app.get('/search', async (요청,응답) => {
 }) */
 
 
-// 아래의 검색이 되긴하는데 어절을 전체 검색해야함.. 중간 단어는 검색이 안됨
 app.get('/search', async (요청,응답) => {
-  let searchResults = await db.collection('SYMBTI_Some')
-  .find({$text : { $search : 요청.query.inputSearch }}).toArray();
+  let searchItem = 요청.query.val;
+  let searchCondition = [
+    {$search : {
+      index : 'question_index',
+      text : { query : searchItem, path : 'question' }
+    }}
+  ]
+  let searchResults = await db.collection('SYMBTI_Some').aggregate(searchCondition).toArray();
   
   응답.render('searchResult.ejs', {바인딩 : searchResults})
 })
