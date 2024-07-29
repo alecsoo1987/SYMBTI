@@ -245,7 +245,7 @@ app.post('/register', nullCheck, async (요청, 응답) => { // 버튼을 누르
     password: 해시,
     mbti : 요청.body.selectMBTI
   })
-  응답.redirect('/')
+  응답.redirect('/login')
 })
 
 app.use('/shop', require('./routes/shop.js')) //routes/shop.js에 있는 겟 주소의 api를 전부 사용, / 또는 /shop처럼 중복되는 단어는 여기서 통합해서 사용할 수 있다.
@@ -298,25 +298,55 @@ app.get('/search', async (요청, 응답) => {
 })
 
 
-app.post('/submitAnswer', async(요청,응답)=>{  
+app.post('/submitAnswer', loginCheck, async(요청,응답)=>{  
   let questionId = 요청.body.questionId;
+  let question = 요청.body.question;
   let selectedAnswer = 요청.body.selectedAnswer;
   let userId = 요청.user._id;
   let mbti = 요청.user.mbti;
+  console.log(question)
 
-  console.log(questionId);
-  console.log(selectedAnswer);  
-  console.log(userId);
-  console.log(mbti);
+  try {
+    // 2. 이미 참여한 적이 있는지 검사
+    let existingAnswer = await db.collection('answers').findOne({ questionId: new ObjectId(questionId), userId: new ObjectId(userId) });
+    if (existingAnswer) {
+      return 응답.status(400).send('You have already answered this question');
+    }
 
-  // // 선택한 답변 저장 로직 추가
-  // await db.collection('answers').insertOne({
-  //   questionId: ObjectId(questionId),
-  //   userId: ObjectId(userId),
-  //   mbti: user_mbti,zzz
-  //   answer: parseInt(selectedAnswer),
-  //   createdAt: new Date()
-  // });
+    // 3. 데이터 수정 또는 삽입
+    if (existingAnswer) {
+      // 기존 답변 수정
+      await db.collection('answers').updateOne(
+        { questionId: new ObjectId(questionId), userId: new ObjectId(userId) },
+        { $set: { answer: parseInt(selectedAnswer), mbti: mbti, updatedAt: new Date() } }
+      );
+    } else {
+      // 새로운 답변 삽입
+      await db.collection('answers').insertOne({
+        questionId: new ObjectId(questionId),
+        userId: new ObjectId(userId),
+        question: question,
+        mbti: mbti,
+        answer: parseInt(selectedAnswer),
+        createdAt: new Date()
+      });
+    }
 
-  응답.redirect('/singleList/1')
+    // 리다이렉트 URL 설정
+    let result_url = '/singleList/' + 요청.body.questionIdx + '/result/' + questionId;
+    응답.redirect(result_url);
+
+  } catch (error) {
+    console.error(error);
+    응답.status(500).send('Internal Server Error');
+  }
+})
+
+app.get('/singleList/:num/result/:Id', async (요청, 응답) => {
+  let num = parseInt(요청.params.num)
+	let result = await db.collection('SYMBTI_Some').find().skip(num-1).limit(1).toArray()
+  let result2 = await db.collection('answers').find({
+    questionId : new ObjectId(요청.params.Id)
+  }).toArray()
+	응답.render('singleListResult.ejs', { DBList: result, num : num, answerList: result2 })
 })

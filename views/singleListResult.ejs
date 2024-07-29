@@ -18,29 +18,10 @@
         </div>
         <div id="container">
             <div class="main-content-wrap">
-                <div class="example_question">
-                    <div class="example_QTitle">질문 예시</div>
-                    <div class="questionContWrap">
-                        <div class="questionTitle">
-                            내가 상대방 SNS 스토리, 게시글에 좋아요를 누르는 것은 플러팅이다.
-                        </div>
-                        <ul class="answerList">
-                            <li>
-                                <span class="listNum">①</span> 맞다. 좋아요는 호감을 표현하기 위한 수단 중 하나이다.
-                            </li>
-                            <li>
-                                <span class="listNum">②</span> 모든 피드에 좋아요를 누르는 것만이 찐 플러팅이다.
-                            </li>
-                            <li>
-                                <span class="listNum">③</span> No, 암만 호감가는 상대여도 공감가는 피드에만 반응한다.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
                 <div class="contentsType mb-4">연애 / 썸 유형</div>
                 <% DBList.forEach(function(doc, index) { %>
                 <form id="answerForm" action="/submitAnswer" method="POST">
-                    <div class="contentsQBox">
+                    <div class="questionContWrap">
                         <div class="questionNum d-flex">
                             Question <%= num %>.
                                 <a href="/edit/<%= doc._id %>" data-id="<%=doc._id %>"
@@ -82,8 +63,6 @@
                         </ul>
 
                         <input type="hidden" name="questionId" value="<%= doc._id %>">
-                        <input type="hidden" name="question" value="<%= doc.question %>">
-                        <input type="hidden" name="questionIdx" value="<%= num %>">
                         <button type="submit" class="btn submitbtn btn-outline-secondary m-auto">
                             <span class="fs-xs fw-b">
                                 답변선택 완료 후 결과보기
@@ -99,6 +78,25 @@
                     </div>
                 </form>
                 <% }); %>
+                <div class="responseRateGrid">
+                    <div class="contentsQBox">
+                        <div class="responseRate_ISTJ">
+                            <span>유형 ISTJ</span>
+                            <% answerList.forEach(function(answer) { %>
+                                <span>답변 : <%= answer.answer %></span><br>
+                            <% }) %>
+                        </div>
+                        <div class="responseRate_ISTP">
+                            <span>2</span>
+                        </div>
+                        <div class="responseRate_ISFJ">
+                            <span>3</span>
+                        </div>
+                        <div class="responseRate_ISFP">
+                            <span>4</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="btn">
                 <button class="btn-primary">
