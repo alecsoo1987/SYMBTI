@@ -1,13 +1,13 @@
 const express = require('express')
 const app = express()
 const bcrypt = require('bcrypt')
-const { MongoClient,ObjectId } = require('mongodb') // ObjectId를 추가해야 게시물 ID값으로 리스팅 가능
+const { MongoClient, ObjectId } = require('mongodb') // ObjectId를 추가해야 게시물 ID값으로 리스팅 가능
 require('dotenv').config()
 
 app.use(express.static(__dirname + '/public'))
 app.set('view engine', 'ejs')
 app.use(express.json())
-app.use(express.urlencoded({extended : true}))
+app.use(express.urlencoded({ extended: true }))
 
 const session = require('express-session')
 const passport = require('passport')
@@ -17,25 +17,25 @@ const MongoStore = require('connect-mongo')
 app.use(passport.initialize())
 app.use(session({
   secret: '암호화에 쓸 비번',
-  resave : false,
-  saveUninitialized : false,
-  cookie : { maxAge : 60 * 60 * 1000},
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 60 * 60 * 1000 },
   store: MongoStore.create({
-    mongoUrl : process.env.DB_URL,
+    mongoUrl: process.env.DB_URL,
     dbName: 'SYMBTI',
   })
 }))
 
-app.use(passport.session()) 
+app.use(passport.session())
 
 const { S3Client } = require('@aws-sdk/client-s3')
 const multer = require('multer')
 const multerS3 = require('multer-s3')
 const s3 = new S3Client({
-  region : 'ap-northeast-2',
-  credentials : {
-      accessKeyId : process.env.S3_KEY,
-      secretAccessKey : process.env.S3_SECRET,
+  region: 'ap-northeast-2',
+  credentials: {
+    accessKeyId: process.env.S3_KEY,
+    secretAccessKey: process.env.S3_SECRET,
   }
 })
 
@@ -52,15 +52,15 @@ const upload = multer({
 let connectDB = require('./database.js')
 
 let db;
-connectDB.then((client)=>{
+connectDB.then((client) => {
   db = client.db('SYMBTI')
-}).catch((err)=>{
+}).catch((err) => {
   console.log(err)
 })
 
 /* 미들웨어 Start*/
-function loginCheck(요청, 응답, next){
-  if(!요청.user) {
+function loginCheck(요청, 응답, next) {
+  if (!요청.user) {
     return 응답.send('로그인이 필요한 기능입니다.')
   }
   next()
@@ -74,10 +74,10 @@ function ensureAuthenticated(req, res, next) {
 }
 
 function nullCheck(요청, 응답, next) {
-  if(요청.body.username == '' || 요청.body.password == '') {
-    응답.send ('아이디 또는 비번이 입력되지 않았습니다.')
+  if (요청.body.username == '' || 요청.body.password == '') {
+    응답.send('아이디 또는 비번이 입력되지 않았습니다.')
   } else {
-    next ()
+    next()
   }
 }
 
@@ -85,40 +85,49 @@ function nullCheck(요청, 응답, next) {
 // app.use('/URL', loginCheck)// /URL 을 포함한 그 이하의 모든 주소에서 로그인 체크가 발생함
 
 app.listen(8080, () => {
-    console.log('http://localhost:8080 에서 서버 실행중')
+  console.log('http://localhost:8080 에서 서버 실행중')
 })
 
 app.get('/', async (요청, 응답) => {
   let result = await db.collection('SYMBTI_Some').find().toArray()
-  응답.render('list.ejs', { DBList : result})
-}) 
+  응답.render('list.ejs', { DBList: result })
+})
 
 app.get('/list', async (요청, 응답) => {
   let result = await db.collection('SYMBTI_Some').find().toArray()
-  응답.render('list.ejs', { DBList : result})
-}) 
+  응답.render('list.ejs', { DBList: result })
+})
+
+app.get('/singleList/:num', async (요청, 응답) => {
+	let num = parseInt(요청.params.num)
+	let result = await db.collection('SYMBTI_Some').find().skip(num-1).limit(1).toArray()
+	응답.render('singleList.ejs', { DBList: result, num : num })
+})
 
 app.get('/edit/:Id', async (요청, 응답) => {
-  let result = await db.collection('SYMBTI_Some').findOne({ _id : new ObjectId(요청.params.Id)})
-	응답.render('edit.ejs',{바인딩 : result})
-}) 
+  let result = await db.collection('SYMBTI_Some').findOne({ _id: new ObjectId(요청.params.Id) })
+  응답.render('edit.ejs', { 바인딩: result })
+})
 
-app.get('/write', loginCheck, ensureAuthenticated,(요청, 응답) => { //loginCheck 라는 미들웨어를 사용하여 로그인 상황을 체크
+app.get('/write', loginCheck, ensureAuthenticated, (요청, 응답) => { //loginCheck 라는 미들웨어를 사용하여 로그인 상황을 체크
   응답.render('write.ejs')
-}) 
+})
 
 app.get('/list/:Id', async (요청, 응답) => {
-  let result = await db.collection('SYMBTI_Some').findOne({ _id : new ObjectId(요청.params.Id)})
-	응답.render('list.ejs',{DBList : result})
+  let result = await db.collection('SYMBTI_Some').findOne({ _id: new ObjectId(요청.params.Id) })
+  응답.render('list.ejs', { DBList: result })
 })
 
 app.get('/list/next/:Id', async (요청, 응답) => {
-  let result = await db.collection('SYMBTI_Some').find({ _id : {$gt : new ObjectId(요청.params.Id)}})
-	응답.render('list.ejs',{DBList : result})
+  let result = await db.collection('SYMBTI_Some').find({ _id: { $gt: new ObjectId(요청.params.Id) } })
+  응답.render('list.ejs', { DBList: result })
 })
 
 app.delete('/delete', async (요청, 응답) => {
-  let result = await db.collection('SYMBTI_Some').deleteOne( { _id : new ObjectId(요청.query.DBID) } )
+  let result = await db.collection('SYMBTI_Some').deleteOne({ 
+	_id: new ObjectId(요청.query.DBID), 
+	user : new ObjectId(요청.user._id) 
+})
   응답.send('삭제완료')
 })
 
@@ -129,41 +138,42 @@ app.get('list/1', async (요청, 응답) => {
 app.post('/edit', async (요청, 응답) => {
   let id = 요청.body.id
   await db.collection('SYMBTI_Some').updateOne(
-      { _id: new ObjectId(id) },
-      { $set: 
-        { question : 요청.body.question, 
-          answer1: 요청.body.answer1,
-          answer2: 요청.body.answer2,
-          answer3: 요청.body.answer3,
-          answer4: 요청.nombody.answer4
-        }
+    { _id: new ObjectId(id) },
+    {
+      $set:
+      {
+        question: 요청.body.question,
+        answer1: 요청.body.answer1,
+        answer2: 요청.body.answer2,
+        answer3: 요청.body.answer3,
+        answer4: 요청.nombody.answer4
+      }
     });
   응답.redirect('/list/' + id);
 });
 
-app.post('/add',  async (요청, 응답) =>{
-  
-  upload.single('upload_image')(요청, 응답, (err) => {
-    if(err) return 응답.send('업로드에러')
-        // upload 미들웨어 사용. single 또는 array로 단수 다수 결정, 괄호 안에는 input의 name을 불러옴. 콤마 찍고 최대갯수 설정도 가능
-  })
-
-
+app.post('/add', upload.single('upload_image'), async (요청, 응답) => {
+  if (요청.body.question == '') {
+    응답.send('제목안적었는데')
+  }
   try {
-    if (요청.body.title == '') {
-      응답.send('제목안적었는데')
-    } else {
-      await db.collection('SYMBTI_Some').insertOne({
-        title : 요청.body.title,
-        content : 요청.body.content,
-        img : 요청.file.location // 등록한 이미지의 url
-      })  
-      응답.redirect('/add_Some')
-    }
- } catch (e) {    
+    await db.collection('SYMBTI_Some').insertOne({
+      question: 요청.body.question,
+      answer1: 요청.body.answer1,
+      answer2: 요청.body.answer2,
+      answer3: 요청.body.answer3,
+      answer4: 요청.body.answer4,
+      answer5: 요청.body.answer5,
+      img: 요청.file ? 요청.file.location : '',
+      user: 요청.user._id,
+      username: 요청.user.username
+    })
+    응답.redirect('/list')
+
+  } catch (e) {
     console.log(e)
     응답.status(500).send('서버에러남')
- } 
+  }
 })
 
 
@@ -171,11 +181,11 @@ app.post('/add',  async (요청, 응답) =>{
 /* 로그인 관련 기능 */
 
 passport.use(new LocalStrategy(async (입력한아이디, 입력한비번, cb) => {
-  let result = await db.collection('user').findOne({ username : 입력한아이디})
+  let result = await db.collection('user').findOne({ username: 입력한아이디 })
   if (!result) {
     return cb(null, false, { message: '아이디 DB에 없음' })
   }
-  
+
   if (await bcrypt.compare(입력한비번, result.password)) {//입력한 비번과 result.password를 서로 비교해서 맞는지 확인해줌
     return cb(null, result)
   } else {
@@ -190,7 +200,7 @@ passport.serializeUser((user, done) => { //상단의 result (입력한 아이디
 })
 
 passport.deserializeUser(async (user, done) => {
-  let result = await db.collection('user').findOne({_id: new ObjectId(user.id)})
+  let result = await db.collection('user').findOne({ _id: new ObjectId(user.id) })
   delete result.password
   process.nextTick(() => {
     done(null, result) // result에 요청.user가 전송됨
@@ -199,40 +209,41 @@ passport.deserializeUser(async (user, done) => {
 
 app.get('/login', nullCheck, async (요청, 응답) => {
   응답.render('login.ejs')
-}) 
+})
 
 app.post('/login', nullCheck, (요청, 응답, next) => {
-  passport.authenticate('local',(error, user, info)=>{
+  passport.authenticate('local', (error, user, info) => {
     if (error) return 응답.status(500).json(error)
     if (!user) return 응답.status(401).json(info.message)// passport.use에서 설정한 'message'를 불러옴
-    요청.login(user, (err)=>{
-      if(err) return next(err)
-        응답.redirect('/list')
+    요청.login(user, (err) => {
+      if (err) return next(err)
+      응답.redirect('/list')
     })
-      
-  }) (요청, 응답, next)
-}) 
 
-/* 회원 가입 */ 
-app.get('/register', async (요청, 응답) => {  
+  })(요청, 응답, next)
+})
+
+/* 회원 가입 */
+app.get('/register', async (요청, 응답) => {
   응답.render('register.ejs')
-}) 
+})
 
-app.post('/register', nullCheck, async (요청, 응답)=> { // 버튼을 누르면 nullCheck부터 동작 후 요청기능 수행
+app.post('/register', nullCheck, async (요청, 응답) => { // 버튼을 누르면 nullCheck부터 동작 후 요청기능 수행
   let result = await db.collection('user').findOne({ username: 요청.body.username });
   if (result) {
     return 응답.status(400).json({ message: '중복 아이디입니다.' });
   }
 
-  if(요청.body.password !== 요청.body.confirmPassword) {
+  if (요청.body.password !== 요청.body.confirmPassword) {
     return 응답.status(400).json({ message: '재확인 비밀번호가 일치하지 않습니다.' });
-  }   
+  }
 
   let 해시 = await bcrypt.hash(요청.body.password, 10) // 암호를 여러번 꼰다는 의미로 정수 입력
-  
+
   await db.collection('user').insertOne({
-    username : 요청.body.username,
-    password : 해시,
+    username: 요청.body.username,
+    password: 해시,
+    mbti : 요청.body.selectMBTI
   })
   응답.redirect('/')
 })
@@ -265,15 +276,47 @@ app.get('/search', async (요청,응답) => {
 }) */
 
 
-app.get('/search', async (요청,응답) => {
-  let searchItem = 요청.query.val;
+//Memo : 비활성화 기능, but 사용한다면 예외사항 처리해야함. (최소 2글자 이상, 검색결과 없을 경우 등)
+app.get('/search', async (요청, 응답) => {
+  let searchItem = 요청.query.inputSearch
   let searchCondition = [
-    {$search : {
-      index : 'question_index',
-      text : { query : searchItem, path : 'question' }
-    }}
-  ]
+    {
+      $search: {
+        index: 'question_index',
+        text: {
+          query: searchItem,
+          path: 'question'
+        }
+      }
+    },
+    {
+      $limit: 1
+    },
+  ];
   let searchResults = await db.collection('SYMBTI_Some').aggregate(searchCondition).toArray();
-  
-  응답.render('searchResult.ejs', {바인딩 : searchResults})
+  응답.render('searchResult.ejs', { 바인딩: searchResults })
+})
+
+
+app.post('/submitAnswer', async(요청,응답)=>{  
+  let questionId = 요청.body.questionId;
+  let selectedAnswer = 요청.body.selectedAnswer;
+  let userId = 요청.user._id;
+  let mbti = 요청.user.mbti;
+
+  console.log(questionId);
+  console.log(selectedAnswer);  
+  console.log(userId);
+  console.log(mbti);
+
+  // // 선택한 답변 저장 로직 추가
+  // await db.collection('answers').insertOne({
+  //   questionId: ObjectId(questionId),
+  //   userId: ObjectId(userId),
+  //   mbti: user_mbti,zzz
+  //   answer: parseInt(selectedAnswer),
+  //   createdAt: new Date()
+  // });
+
+  응답.redirect('/singleList/1')
 })
