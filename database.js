@@ -1,6 +1,6 @@
 //mongoDB를 전체 영역에서 참조하기 위해 따로 빼는 과정
 
-const { MongoClient } = require("mongodb"); 
+const { MongoClient, ObjectId } = require("mongodb"); 
 
 const url = process.env.DB_URL;
 let connectDB = new MongoClient(url).connect()

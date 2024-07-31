@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="background"></div>
+        <div id="header" role="header">
+            <header>
+                <%- include('nav.ejs') %>
+            </header>
+        </div>
+        <div id="container">
+            <div class="main-content-wrap addQuestion">
+                <div class="contentsType mb-4">질문 상세</div>
+                    <form id="answerForm" action="/submitAnswer" method="POST">
+                        <div class="contentsQBox">
+                            <div class="questionNum d-flex">
+                                Question 1.
+                                <a href="/edit/<%= 바인딩._id %>" data-id="<%=바인딩._id %>"
+                                    class="btn btn-outline-secondary btn-edit ml-auto">
+                                    <span class="fs-xs fw-b">수정하기</span>
+                                </a>
+                                <span class="fs-xs fw-b btn btn-outline-secondary btn-edit delete" data-id="<%=바인딩._id %>">🗑️</span>                                    
+                                <a href="/chat/request" class="btn btn-outline-secondary">
+                                    채팅방
+                                </a>
+                            </div>
+                            <div class="questionTitle">
+                                <%= 바인딩.question %>
+                            </div>                            
+                            <ul class="answerList">
+                                <% Object.keys(바인딩).forEach(function(key) { %>
+                                  <% if (key.startsWith('answer')) { %>
+                                    <li>
+                                      <input type="radio" name="selectedAnswer" id="selectedAnswer<%= key.replace('answer', '') %>" value="<%= key.replace('answer', '') %>">
+                                      <label for="selectedAnswer<%= key.replace('answer', '') %>">
+                                        <span class="listNum">
+                                          <%= key.replace('answer', '' ) %>.
+                                        </span>
+                                        <%= 바인딩[key] %>
+                                      </label>
+                                    </li>
+                                  <% } %>
+                                <% }); %>
+                              </ul>
+                            <input type="hidden" name="questionId" value="<%= 바인딩._id %>">
+                            <input type="hidden" name="question" value="<%= 바인딩.question %>">
+                            <button type="submit" class="btn submitbtn btn-outline-secondary m-auto">
+                                <span class="fs-xs fw-b">
+                                    답변선택 완료 후 결과보기
+                                </span>
+                            </button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+        <div id="footer"></div>
+    </div>
+</body>
+</html>

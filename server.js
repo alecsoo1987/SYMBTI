@@ -109,32 +109,6 @@ app.get('/edit/:Id', async (요청, 응답) => {
   응답.render('edit.ejs', { 바인딩: result })
 })
 
-app.get('/write', loginCheck, ensureAuthenticated, (요청, 응답) => { //loginCheck 라는 미들웨어를 사용하여 로그인 상황을 체크
-  응답.render('write.ejs')
-})
-
-app.get('/list/:Id', async (요청, 응답) => {
-  let result = await db.collection('SYMBTI_Some').findOne({ _id: new ObjectId(요청.params.Id) })
-  응답.render('list.ejs', { DBList: result })
-})
-
-app.get('/list/next/:Id', async (요청, 응답) => {
-  let result = await db.collection('SYMBTI_Some').find({ _id: { $gt: new ObjectId(요청.params.Id) } })
-  응답.render('list.ejs', { DBList: result })
-})
-
-app.delete('/delete', async (요청, 응답) => {
-  let result = await db.collection('SYMBTI_Some').deleteOne({ 
-	_id: new ObjectId(요청.query.DBID), 
-	user : new ObjectId(요청.user._id) 
-})
-  응답.send('삭제완료')
-})
-
-app.get('list/1', async (요청, 응답) => {
-  let result = await db.collection('post')
-})
-
 app.post('/edit', async (요청, 응답) => {
   let id = 요청.body.id
   await db.collection('SYMBTI_Some').updateOne(
@@ -146,13 +120,42 @@ app.post('/edit', async (요청, 응답) => {
         answer1: 요청.body.answer1,
         answer2: 요청.body.answer2,
         answer3: 요청.body.answer3,
-        answer4: 요청.nombody.answer4
+        answer4: 요청.body.answer4
       }
     });
-  응답.redirect('/list/' + id);
+  응답.redirect('/list');
 });
 
-app.post('/add', upload.single('upload_image'), async (요청, 응답) => {
+app.get('/detail/:Id', async (요청, 응답) => {
+  let result = await db.collection('SYMBTI_Some').findOne({ _id: new ObjectId(요청.params.Id) })
+  응답.render('detail.ejs', { 바인딩: result })
+})
+
+app.get('/write', loginCheck, ensureAuthenticated, (요청, 응답) => { //loginCheck 라는 미들웨어를 사용하여 로그인 상황을 체크
+  응답.render('write.ejs')
+})
+
+// app.get('/list/:Id', async (요청, 응답) => {
+//   let result = await db.collection('SYMBTI_Some').findOne({ _id: new ObjectId(요청.params.Id) })
+//   응답.render('list.ejs', { DBList: result })
+// })
+
+// app.get('/list/next/:Id', async (요청, 응답) => {
+//   let result = await db.collection('SYMBTI_Some').find({ _id: { $gt: new ObjectId(요청.params.Id) } })
+//   응답.render('list.ejs', { DBList: result })
+// })
+
+app.delete('/delete', async (요청, 응답) => {
+  let result = await db.collection('SYMBTI_Some').deleteOne({ 
+	_id: new ObjectId(요청.query.DBID), 
+	user : new ObjectId(요청.user._id) 
+})
+  응답.send('삭제완료')
+})
+
+
+
+app.post('/add_question', upload.single('upload_image'), async (요청, 응답) => {
   if (요청.body.question == '') {
     응답.send('제목안적었는데')
   }
@@ -165,8 +168,8 @@ app.post('/add', upload.single('upload_image'), async (요청, 응답) => {
       answer4: 요청.body.answer4,
       answer5: 요청.body.answer5,
       img: 요청.file ? 요청.file.location : '',
-      user: 요청.user._id,
-      username: 요청.user.username
+      writerId: 요청.user._id,
+      writerName: 요청.user.username
     })
     응답.redirect('/list')
 
@@ -175,8 +178,6 @@ app.post('/add', upload.single('upload_image'), async (요청, 응답) => {
     응답.status(500).send('서버에러남')
   }
 })
-
-
 
 /* 로그인 관련 기능 */
 
@@ -301,34 +302,54 @@ app.get('/search', async (요청, 응답) => {
 app.post('/submitAnswer', loginCheck, async(요청,응답)=>{  
   let questionId = 요청.body.questionId;
   let question = 요청.body.question;
-  let selectedAnswer = 요청.body.selectedAnswer;
+  let selectedAnswerNum = 요청.body.selectedAnswer;
+  let selectedAnswerTxt = 요청.body.selectedAnswerText;
   let userId = 요청.user._id;
   let mbti = 요청.user.mbti;
-  console.log(question)
+  let userName = 요청.user.username;
+
+ 
 
   try {
-    // 2. 이미 참여한 적이 있는지 검사
-    let existingAnswer = await db.collection('answers').findOne({ questionId: new ObjectId(questionId), userId: new ObjectId(userId) });
-    if (existingAnswer) {
-      return 응답.status(400).send('You have already answered this question');
+    //현재 질문이 이미 존재하는지, 현재 유저가 참여한 이력이 있는지 확인하는 변수
+    let existingAnswer = await db.collection('answers').findOne({ questionId: new ObjectId(questionId),  "participants.participants_id": new ObjectId(userId)});
+    
+    //예외사항 처리 함수
+    function checkIfSameAnswer(existingAnswer, userId, selectedAnswerNum) { 
+      // 현재 질문과 참여이력 모두 없거나 or 해당 질문에 대한 참가자의 배열이 없는 경우 함수 탈출
+      if (!existingAnswer || !existingAnswer.participants) return false;
+
+      // 참여 이력이 있고 > participants 배열에서 현재 사용자의 id와 일치하는 참가자 객체를 찾음
+      let participant = existingAnswer.participants.find(p => p.participants_id.equals(userId));
+      // 만약 현재 사용자의 id와 일치하지 않으면 신규 유저이므로 함수 종료
+      if (!participant) return false;
+
+      // 위의 두 조건, 참여이력이 있고, id도 일치하는 경우 기존 답변과 현재 답변의 일치 여부를 판단하여 true/false를 반환
+      return participant.participants_answer === parseInt(selectedAnswerNum);
     }
 
-    // 3. 데이터 수정 또는 삽입
     if (existingAnswer) {
-      // 기존 답변 수정
-      await db.collection('answers').updateOne(
-        { questionId: new ObjectId(questionId), userId: new ObjectId(userId) },
-        { $set: { answer: parseInt(selectedAnswer), mbti: mbti, updatedAt: new Date() } }
-      );
+      if (checkIfSameAnswer(existingAnswer, userId, selectedAnswerNum)) {
+        return 응답.send('You have already answered this question with the same answer.');
+      } else {
+        // 기존 답변과 다르므로 답변 변경 가능
+        return 응답.send('답변을 변경하시겠습니까?');
+      }
     } else {
-      // 새로운 답변 삽입
+      // 참여한 적이 없는 경우 새로운 데이터 삽입
       await db.collection('answers').insertOne({
         questionId: new ObjectId(questionId),
-        userId: new ObjectId(userId),
-        question: question,
-        mbti: mbti,
-        answer: parseInt(selectedAnswer),
-        createdAt: new Date()
+        questionTitle: question,
+        participants: [
+          {
+            participants_id: new ObjectId(userId),
+            participants_answer: parseInt(selectedAnswerNum),
+            participants_answertxt: selectedAnswerTxt,
+            participants_mbti: mbti,
+            participants_name: userName,
+            createdAt: new Date(),
+          },
+        ],
       });
     }
 
@@ -349,4 +370,9 @@ app.get('/singleList/:num/result/:Id', async (요청, 응답) => {
     questionId : new ObjectId(요청.params.Id)
   }).toArray()
 	응답.render('singleListResult.ejs', { DBList: result, num : num, answerList: result2 })
+})
+
+app.get('/chat/request', async (요청, 응답) => {  
+	//let result = await db.collection('SYMBTI_Some').find().skip(num-1).limit(1).toArray()  
+	응답.render('chat.ejs')
 })

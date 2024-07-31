@@ -2,7 +2,7 @@
 
 const router = require('express').Router()
 
-let connectDB = require('./../database.js')
+let connectDB = require('../database.js')
 
 let db;
 connectDB.then((client)=>{
@@ -12,8 +12,8 @@ connectDB.then((client)=>{
 })
 
 router.get('/shirts', async (요청, 응답) => {
-   await db.collection('SYMBTI').find().toArray()
-   응답.send('셔츠 파는 페이지입니다')
+   let result = await db.collection('SYMBTI_Some').find().toArray()
+   응답.render('test.ejs', {DBList: result})
 })
 
 router.get('/pants', (요청, 응답) => {

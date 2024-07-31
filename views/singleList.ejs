@@ -80,7 +80,7 @@
                             <% } %> -->
                                         <% } %>
                         </ul>
-
+                        <input type="hidden" name="selectedAnswerText" id="selectedAnswerText">
                         <input type="hidden" name="questionId" value="<%= doc._id %>">
                         <input type="hidden" name="question" value="<%= doc.question %>">
                         <input type="hidden" name="questionIdx" value="<%= num %>">
@@ -130,6 +130,14 @@
                 })
         })
     }
+    document.querySelector('.submitbtn').addEventListener('click', function(event) {
+        var selectedRadio = document.querySelector('input[name="selectedAnswer"]:checked');
+        if (selectedRadio) {
+            var label = document.querySelector('label[for="' + selectedRadio.id + '"]');
+            var answerText = label.innerText.trim();
+            document.getElementById('selectedAnswerText').value = answerText;
+        }
+    });
     // document.querySelectorAll('.delete')[0].addEventListener('click', function(){
     //   fetch('/test') // /test?age=20 과 같이 테스트 이후에 서버로 전송할 데이터의 형태를 내맘대로 지정할 수 있다.
     // })
