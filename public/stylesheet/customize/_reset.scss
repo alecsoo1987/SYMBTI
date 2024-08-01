@@ -1,0 +1,225 @@
+// @ RESET
+
+// ELEMENT BASE SIZE
+$element10: 0.625rem;
+$element12: 0.750rem;
+$element14: 0.875rem;
+$element16: 1rem;
+$element20: 1.250rem;
+$element24: 1.5rem;
+$element28: 1.750rem;
+$element32: 2rem;
+$element36: 2.250rem;
+$element40: 2.5rem;
+$element44: 2.750rem;
+$element48: 3rem;
+$element52: 3.250rem;
+$element56: 3.5rem;
+$element60: 3.750rem;
+$element64: 4rem;
+$element68: 4.250rem;
+$element72: 4.5rem;
+
+// TEXT BASE SIZE
+$font-size36: 2.250rem;
+$font-size34: 2.125rem;
+$font-size32: 2.000rem;
+$font-size30: 1.875rem;
+$font-size28: 1.750rem;
+$font-size26: 1.625rem;
+$font-size24: 1.500rem;
+$font-size20: 1.250rem;
+$font-size18: 1.125rem;
+$font-size16: 1.000rem;
+$font-size15: 0.938rem;
+$font-size14: 0.875rem;
+$font-size13: 0.813rem;
+$font-size12: 0.750rem;
+$font-size11: 0.688rem;
+$font-size10: 0.625rem;
+
+// BASE
+html {
+    height: 100%;
+    box-sizing: border-box;
+    text-size-adjust: 100%;
+}
+
+*, :before, :after {
+    box-sizing: inherit;
+}
+
+::selection {
+    background-color: var(--background-primary);
+    color: var(--text-white);
+}
+
+// :disabled ~ button
+:disabled,
+:disabled ~ label {
+    border: 1px solid transparent !important;
+    background-color: var(--field-disabled) !important;
+    color: var(--text-disabled) !important;
+    transform: none !important;
+    box-shadow: none !important;
+    opacity: 0.7 !important;
+    cursor: not-allowed !important;
+
+    &:hover {
+        background-color: inherit;
+    }
+}
+:disabled ~ i {
+    color: var(--text-disabled) !important;
+    opacity: 0.7 !important;
+    cursor: not-allowed !important;
+}
+
+::placeholder {
+    color: var(--text-placeholder);
+}
+
+:focus {
+    outline: none;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+    font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    outline: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav,
+section, summary {
+    display: block;
+}
+
+body {
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+	scroll-behavior: smooth;
+}
+
+// TAG
+a {
+    text-decoration-skip-ink: none;
+	text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+button {
+    font-family: inherit;
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+input {
+    font-family: inherit;
+    font-weight: inherit;
+
+    &::-ms-reveal, &::-ms-clear {
+        display: none;
+    }
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+        display:none;
+    }
+
+    &[type="number"] {
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            margin: 0;
+            appearance: none!important;
+        }
+    }
+
+    &[type="file"] {
+        border: 0;
+    }
+}
+
+textarea {
+    font-family: inherit;
+    font-weight: inherit;
+}
+
+select {
+    font-family: inherit;
+    font-weight: inherit;
+	appearance: none;
+
+    &::-ms-expand {
+        display: none;
+    }
+
+    cursor: pointer;
+}
+
+
+// BOOTSTRAP COMPONENT BASE
+.fade {
+    transition: opacity 0.15s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fade {
+        transition: none;
+    }
+}
+
+.fade:not(.show) {
+    opacity: 0;
+}
+
+.collapse:not(.show) {
+    display: none;
+}
+
+.collapsing {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .collapsing {
+        transition: none;
+    }
+}
+
+.collapsing.collapse-horizontal {
+    width: 0;
+    height: auto;
+    transition: width 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .collapsing.collapse-horizontal {
+        transition: none;
+    }
+}

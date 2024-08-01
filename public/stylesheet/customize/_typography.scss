@@ -1,0 +1,265 @@
+// @TYPOGRAPHY
+
+// FONT IMPORT
+@import url('customize/fonts/SpoqaHanSansNeo/fonts.css');
+
+// FONT BASE
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: "Spoqa Han Sans Neo", sans-serif;
+    font-size: 1rem;
+    font-weight: 200;
+    line-height: 1;
+    color: var(--text-primary);
+}
+
+// FONT HEADING
+%headline10 {
+    display: flex;
+    align-items: center;
+    font-size: $font-size18;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: $font-size20;
+}
+%headline20 {
+    display: flex;
+    align-items: center;
+    font-size: $font-size24;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: $font-size28;
+}
+%headline30 {
+    display: flex;
+    align-items: center;
+    font-size: $font-size28;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: $font-size32;
+}
+
+.headline10 { @extend %headline10; }
+.headline20 { @extend %headline20; }
+.headline30 { @extend %headline30; }
+
+
+// FONT BODY
+%body-text10 {
+    font-size: $font-size14;
+    font-weight: 200;
+    color: var(--text-primary);
+    line-height: $font-size16;
+}
+%body-text20 {
+    font-size: $font-size15;
+    font-weight: 200;
+    color: var(--text-primary);
+    line-height: $font-size18;
+}
+%body-text30 {
+    font-size: $font-size16;
+    font-weight: 200;
+    color: var(--text-primary);
+    line-height: $font-size18;
+}
+
+.body-text10 { @extend %body-text10; }
+.body-text20 { @extend %body-text20; }
+.body-text30 { @extend %body-text30; }
+
+
+// FONT UTILITY
+%label-text10 {
+    font-size: $font-size14;
+    font-weight: 200;
+    color: var(--text-secondary);
+}
+%label-text20 {
+    font-size: $font-size14;
+    font-weight: 200;
+    color: var(--text-secondary);
+}
+
+.label-text10 { @extend %label-text10; }
+.label-text20 { @extend %label-text20; }
+.label-required {
+    margin-left: 0.250rem;
+    font-size: $font-size15;
+    color: var(--text-brand);
+}
+
+%helper-text {
+    display: inline-flex;
+    margin-top: 0.5rem;
+    margin-left: 0.25rem;
+    width: 100%;
+    font-size: $font-size13;
+    font-weight: 400;
+    color: var(--text-helper);
+}
+
+.helper-text { @extend %helper-text; }
+
+////////////////////
+////////////////////
+
+// FONT COLOR
+.fc {
+    &-brand { color: var(--text-brand)!important; }
+    &-primary { color: var(--text-primary)!important; }
+    &-secondary { color: var(--text-secondary)!important; }
+    &-sub10 { color: var(--text-sub10)!important; }
+    &-sub20 { color: var(--text-sub20)!important; }
+    &-sub30 { color: var(--text-sub30)!important; }
+    &-link { color: var(--text-link)!important; }
+    &-white { color: var(--text-white)!important; }
+    &-black { color: var(--text-black)!important; }
+    &-red { color: var(--system-red)!important; }
+    &-orange { color: var(--system-orange)!important; }
+    &-yellow { color: var(--system-yellow)!important; }
+    &-green { color: var(--system-green)!important; }
+    &-blue { color: var(--system-blue)!important; }
+}
+
+// FONT SIZE
+.fs {
+    &-36 {font-size: $font-size36;}
+    &-34 {font-size: $font-size34;}
+    &-32 {font-size: $font-size32;}
+    &-30 {font-size: $font-size30;}
+    &-28 {font-size: $font-size28;}
+    &-26 {font-size: $font-size26;}
+    &-24 {font-size: $font-size24;}
+    &-20 {font-size: $font-size20;}
+    &-18 {font-size: $font-size18;}
+    &-16 {font-size: $font-size16;}
+    &-15 {font-size: $font-size15;}
+    &-14 {font-size: $font-size14;}
+    &-13 {font-size: $font-size13;}
+    &-12 {font-size: $font-size12;}
+    &-11 {font-size: $font-size11;}
+    &-10 {font-size: $font-size10;}
+}
+
+// FONT WEIGHT
+.fw {
+    &-l {font-weight: 200;} // light
+    &-m {font-weight: 400;} // medium
+    &-b {font-weight: 600;} // bold
+}
+
+// LINE HEIGHT
+.lh {
+    &-1 {line-height: 1;}
+    &-125 {line-height: 1.25;}
+    &-15 {line-height: 1.5;}
+    &-2 {line-height: 2;}
+}
+
+// TEXT ALIGN
+.ta {
+    &-left {text-align: left!important;}
+    &-center {text-align: center!important;}
+    &-right {text-align: right!important;}
+}
+
+// TEXT DECORATION
+.td {
+    &-underline {text-decoration: underline;}
+    &-overline {text-decoration: overline;}
+    &-none {text-decoration: none;}
+
+    &-2 {text-decoration-thickness: 2px;}
+    &-3 {text-decoration-thickness: 3px;}
+}
+
+// WHITE SPACE
+.white {
+    &-normal {white-space: normal;}
+    &-nowrap {white-space: nowrap;}
+}
+
+// WORD WRAP
+.word {
+    &-wrap {word-break: break-all!important;}
+    &-word {word-break: break-word!important;}
+    &-keep {word-break: keep-all!important;}
+}
+
+// TEXT ELLIPSIS
+.ellipsis {
+    display: inline-block !important;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @mixin ellipsis-line {
+        display: -webkit-box;
+        width: 100%;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        word-break: break-all;
+        overflow: hidden;
+    }
+
+    &-line2 {
+        @include ellipsis-line;
+        max-height: 16px * 2;
+    }
+
+    &-line3 {
+        @include ellipsis-line;
+        max-height: 16px * 3;
+    }
+}
+
+// TEXT SR
+.sr-only {
+    position: absolute;
+    margin: -1px;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    border-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    clip-path: inset(50%);
+}
+
+
+// TEXT FORM
+.text-readonly {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.8rem;
+    width: 100%;
+    height: $element32;
+    border: 1px solid var(--field-border);
+    border-radius: 0.5rem;
+    background-color: var(--background-primary-secondary);
+    font-size: $font-size14;
+    color: var(--text-primary);
+
+    &.readonly {
+        &-cta {
+            height: $element48;
+        }
+
+        &-lg {
+            height: $element40;
+            border-radius: 0.375rem;
+        }
+
+        &-sm {
+            padding: 0 0.5rem;
+            height: $element24;
+            border-radius: 0.375rem;
+        }
+    }
+}
