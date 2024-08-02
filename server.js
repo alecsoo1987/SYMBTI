@@ -89,27 +89,31 @@ app.listen(8080, () => {
 })
 
 app.get('/', async (요청, 응답) => {
+  응답.render('main.ejs')
+})
+
+app.get('/home', async (요청, 응답) => {
+  응답.render('main.ejs')
+})
+
+/* 삭제해도 됨 */
+app.get('/theme/love/list', async (요청, 응답) => {
   let result = await db.collection('SYMBTI_Some').find().toArray()
   응답.render('list.ejs', { DBList: result })
 })
 
-app.get('/list', async (요청, 응답) => {
-  let result = await db.collection('SYMBTI_Some').find().toArray()
-  응답.render('list.ejs', { DBList: result })
-})
-
-app.get('/singleList/:num', async (요청, 응답) => {
+app.get('/theme/love/singleList/:num', async (요청, 응답) => {
 	let num = parseInt(요청.params.num)
 	let result = await db.collection('SYMBTI_Some').find().skip(num-1).limit(1).toArray()
 	응답.render('singleList.ejs', { DBList: result, num : num })
 })
 
-app.get('/edit/:Id', async (요청, 응답) => {
+app.get('/theme/love/edit/:Id', async (요청, 응답) => {
   let result = await db.collection('SYMBTI_Some').findOne({ _id: new ObjectId(요청.params.Id) })
   응답.render('edit.ejs', { 바인딩: result })
 })
 
-app.post('/edit', async (요청, 응답) => {
+app.post('/theme/love/edit', async (요청, 응답) => {
   let id = 요청.body.id
   await db.collection('SYMBTI_Some').updateOne(
     { _id: new ObjectId(id) },
@@ -126,12 +130,12 @@ app.post('/edit', async (요청, 응답) => {
   응답.redirect('/list');
 });
 
-app.get('/detail/:Id', async (요청, 응답) => {
+app.get('/theme/love/list/detail/:Id', async (요청, 응답) => {
   let result = await db.collection('SYMBTI_Some').findOne({ _id: new ObjectId(요청.params.Id) })
   응답.render('detail.ejs', { 바인딩: result })
 })
 
-app.get('/write', loginCheck, ensureAuthenticated, (요청, 응답) => { //loginCheck 라는 미들웨어를 사용하여 로그인 상황을 체크
+app.get('/theme/love/write', loginCheck, ensureAuthenticated, (요청, 응답) => { //loginCheck 라는 미들웨어를 사용하여 로그인 상황을 체크
   응답.render('write.ejs')
 })
 

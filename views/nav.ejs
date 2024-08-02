@@ -15,7 +15,7 @@
 		<header>
 			<nav class="navbar navbar-expand-lg">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="#"><b>SYMBTI</b></a>
+					<a class="navbar-brand" href="#"><b class="fw-bl">SYMBTI</b></a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 						data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 						aria-expanded="false" aria-label="Toggle navigation">
@@ -24,20 +24,43 @@
 					<div class="collapse navbar-collapse w-100p" id="navbarSupportedContent">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 							<li class="nav-item">
-								<a class="nav-link active" aria-current="page"
-									href="https://localhost:8080/list">메인화면</a>
+								<a class="nav-link" aria-current="page"
+									href="/home">메인화면</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/write">질문 등록</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/list">리스트</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/edit/65275a9db9bf6a15a8cf29f5">수정하기</a>
-							</li>
-
 						</ul>
+						<div class="dropdown profile ml-auto">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+								aria-expanded="false">
+								테마 선택
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" href="/theme/love/singleList/1">연애&썸</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="/theme/social_life/singleList/1">일상</a>
+								</li>
+							</ul>
+						</div>
+						<!--유저모드에선 삭제필요-->
+						<div class="dropdown profile ml-auto">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+								aria-expanded="false">
+								관리자 목록
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-itemk" href="/theme/love/write">질문 등록</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="/theme/love/list">연애&썸</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="/theme/social_life/list">일상</a>
+								</li>
+							</ul>
+						</div>
+						<!--여기까지 -->
 						<div class="dropdown profile ml-auto">
 							<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
 								aria-expanded="false">
