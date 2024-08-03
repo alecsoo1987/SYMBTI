@@ -22,13 +22,13 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse w-100p" id="navbarSupportedContent">
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<ul class="navbar-nav">
 							<li class="nav-item">
 								<a class="nav-link" aria-current="page"
 									href="/home">메인화면</a>
 							</li>
 						</ul>
-						<div class="dropdown profile ml-auto">
+						<div class="dropdown selectTheme">
 							<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
 								aria-expanded="false">
 								테마 선택
@@ -43,7 +43,7 @@
 							</ul>
 						</div>
 						<!--유저모드에선 삭제필요-->
-						<div class="dropdown profile ml-auto">
+						<div class="dropdown selectTheme adminMenu">
 							<button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
 								aria-expanded="false">
 								관리자 목록
@@ -78,10 +78,12 @@
 								</li>
 							</ul>
 						</div>
+						<!-- 검색 기능 불필요 // 기능만 구현 + 미사용
 						<form class="d-flex" role="search" action="/search" method="get">
 							<input class="form-control me-2" type="search" placeholder="제목 검색" aria-label="Search" name="inputSearch" id="inputSearch">
 							<button class="btn btn-outline-success" type="submit">Search</button>
 						</form>
+						-->
 					</div>
 				</div>
 			</nav>
