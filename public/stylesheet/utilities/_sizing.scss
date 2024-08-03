@@ -1,0 +1,58 @@
+// @UTILITIES
+// @SIZING - width, height
+
+// WIDTH
+.w {
+    &-fit {width: fit-content!important;}
+
+    &-16 {width: #{$element16}!important;}
+    &-20 {width: #{$element20}!important;}
+    &-24 {width: #{$element24}!important;}
+    &-28 {width: #{$element28}!important;}
+    &-32 {width: #{$element32}!important;}
+    &-36 {width: #{$element36}!important;}
+    &-40 {width: #{$element40}!important;}
+    &-44 {width: #{$element44}!important;}
+    &-48 {width: #{$element48}!important;}
+    &-52 {width: #{$element52}!important;}
+    &-56 {width: #{$element56}!important;}
+    &-60 {width: #{$element60}!important;}
+    &-64 {width: #{$element64}!important;}
+    &-68 {width: #{$element68}!important;}
+    &-72 {width: #{$element72}!important;}
+
+    &-5p {width: 5%!important;}
+}
+
+$width-w: 10;
+@while $width-w > 0 {
+    .w-#{10*$width-w}p {width: 10% * $width-w!important;}
+    .maxw-#{10*$width-w}p {max-width: 10% * $width-w!important;}
+    .minw-#{10*$width-w}p {min-width: 10% * $width-w!important;}
+
+    $width-w: $width-w - 1;
+}
+
+// HEIGHT
+.h {
+    &-fit {height: fit-content!important;}
+    &-100p {height: 100%;}
+    &-full {height: calc(100% - #{$element-header});}
+    &-480 {height: 480px;}
+
+    &-16 {height: #{$element16};}
+    &-20 {height: #{$element20};}
+    &-24 {height: #{$element24};}
+    &-28 {height: #{$element28};}
+    &-32 {height: #{$element32};}
+    &-36 {height: #{$element36};}
+    &-40 {height: #{$element40};}
+    &-44 {height: #{$element44};}
+    &-48 {height: #{$element48};}
+    &-52 {height: #{$element52};}
+    &-56 {height: #{$element56};}
+    &-60 {height: #{$element60};}
+    &-64 {height: #{$element64};}
+    &-68 {height: #{$element68};}
+    &-72 {height: #{$element72};}
+}

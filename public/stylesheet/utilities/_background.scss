@@ -1,0 +1,74 @@
+// @UTILITIES
+// @BACKGROUND
+
+.bg {
+    &-primary {
+        background-color: var(--background-primary);
+    }
+
+    &-system-red {
+        background-color: var(--system-red);
+    }
+
+    &-system-orange {
+        background-color: var(--system-orange);
+    }
+
+    &-system-yellow {
+        background-color: var(--system-yellow);
+    }
+
+    &-system-green {
+        background-color: var(--system-green);
+    }
+
+    &-system-blue {
+        background-color: var(--system-blue);
+    }
+
+    &-primary-secon {
+        background-color: var(--background-primary-secondary);
+    }
+
+    &-system-red-secon {
+        background-color: var(--system-red-secondary);
+    }
+
+    &-system-orange-secon {
+        background-color: var(--system-orange-secondary);
+    }
+
+    &-system-yellow-secon {
+        background-color: var(--system-yellow-secondary);
+    }
+
+    &-system-green-secon {
+        background-color: var(--system-green-secondary);
+    }
+
+    &-system-blue-secon {
+        background-color: var(--system-blue-secondary);
+    }
+
+    &-trans {
+        background-color: transparent;
+    }
+}
+
+.bg-panel {
+    &10 {
+        background-color: var(--panel10);
+    }
+
+    &20 {
+        background-color: var(--panel20);
+    }
+
+    &30 {
+        background-color: var(--panel30);
+    }
+
+    &40 {
+        background-color: var(--panel40);
+    }
+}

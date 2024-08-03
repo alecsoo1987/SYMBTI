@@ -1,0 +1,203 @@
+// @FORM
+// @COMPONENT
+
+.search-field {
+    display: flex;
+    align-items: center;
+    padding-left: 0.8rem;
+    min-width: $element72 + 5rem!important;
+    height: $element32;
+    border: 1px solid var(--border10);
+    border-radius: 0.5rem;
+    background-color: var(--field10);
+    transition: border-color .3s;
+    overflow: hidden;
+
+    &:hover {
+        border: 1px solid var(--field-select);
+
+        .btn {
+            background-color: var(--background-primary-secondary);
+        }
+    }
+
+    &.search-input {
+        position: relative;
+        padding-left: 0;
+
+        input[type="text"] {
+            &:disabled {
+                position: absolute;
+                padding-left: 0.8rem;
+                border-radius: 0.5rem 0 0 0.5rem;
+
+                &:hover {
+                    background-color: var(--field-disabled)!important;
+                }
+
+                + button {
+                    position: relative;
+                    z-index: 1;
+                }
+            }
+        }
+    }
+
+    input[type="text"] {
+        width: 100%;
+        height: 100%;
+        border: none!important;
+        background-color: transparent!important;
+        font-size: $font-size14;
+        box-shadow: none;
+        cursor: default;
+
+        &:focus,
+        &:hover {
+            border: none!important;
+            background-color: transparent!important;
+        }
+    }
+
+    span {
+        width: 100%;
+        font-size: $font-size14;
+    }
+
+    .btn {
+        flex-shrink: 0;
+        margin-left: auto;
+        width: $element36;
+        height: 100%;
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    // SIZE
+    &-cta {
+        height: $element48;
+    }
+
+    &-lg {
+        height: $element40;
+    }
+
+    &-sm {
+        padding: 0 0.5rem;
+        height: $element24;
+        border-radius: 0.375rem;
+    }
+
+    &.error {
+        border-color: var(--system-red);
+
+        ~ .helper-text {
+            @extend %state-error;
+        }
+    }
+
+    &.warning {
+        border-color: var(--system-orange);
+
+        ~ .helper-text {
+            @extend %state-warning;
+        }
+    }
+
+    &.success {
+        border-color: var(--system-green);
+
+        ~ .helper-text {
+            @extend %state-success;
+        }
+    }
+}
+
+
+// 검색 필터 서치
+.filter-search {
+    .text-field {
+        .input-box {
+            input {
+                padding-right: 2rem;
+            }
+
+            .btn {
+                position: absolute;
+                top: 50%;
+                right: 0.5rem;
+                padding: 0;
+                transform: translateY(-50%);
+                background: none;
+
+                &:hover {
+                    box-shadow: none;
+
+                    i {
+                        color: var(--icon-primary);
+                    }
+                }
+
+                i {
+                    position: static;
+                    font-size: $font-size16;
+                    color: var(--icon-secondary);
+                    transform: none;
+                    transition: color .3s;
+                }
+            }
+        }
+    }
+}
+
+//검색 자동완성
+.search-auto-frame {
+    width: 25rem;
+
+    .input-box {
+        position: relative;
+    }
+
+    .search-auto-frame-wrap {
+        position: absolute;
+        padding: 0.5rem;
+        width: 100%;
+        max-height: 16.25rem;
+        border-radius: 0.5rem;
+        background-color: var(--panel20);
+        box-shadow: var(--shadow06);
+        z-index: 10;
+        overflow-y: overlay;
+
+        @include scrollY;
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            width: 100%;
+
+            li {
+                width: 100%;
+
+                button {
+                    padding: 0.25rem 1rem;
+                    width: 100%;
+                    height: $element32;
+                    border-radius: 0.5rem;
+                    font-size: $font-size14;
+                    font-weight: 200;
+                    text-align: left;
+                    color: var(--text-primary);
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    transition: background-color .3s;
+
+                    &:hover {
+                        background-color: var(--panel30);
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,104 @@
+// @FORM
+// @FILE
+
+.field-file-custom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    .file-box {
+        flex: 0 1 100%;
+        display: flex;
+        align-items: stretch;
+        gap: 0.5rem;
+
+        input {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            width: 100%;
+            border: 1px dashed var(--border-primary);
+            border-radius: 0.5rem;
+            font-size: 0;
+            cursor: pointer;
+
+            &::file-selector-button {
+                display: none;
+            }
+
+            &::before {
+
+                content: "\e9ba";
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: auto;
+                padding: 0.5rem;
+                width: $element40;
+                height: $element40;
+                border-radius: 0.5rem;
+                background-color: var(--background-primary-secondary);
+                font-size: $font-size20;
+                text-align: center;
+                color: var(--text-secondary);
+            }
+
+            &::after {
+                content: "파일을 드래그 앤 드랍 해주세요.";
+                display: block;
+                margin-top: 0.75rem;
+                font-size: $font-size13;
+                text-align: center;
+                color: var(--text-secondary);
+            }
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 10rem;
+            border-radius: 0.5rem;
+            background-color: var(--background-primary);
+            color: var(--text-white);
+            font-size: $font-size14;
+            font-weight: 200;
+            cursor: pointer;
+        }
+    }
+
+    .file-info {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-left:0.25rem;
+        font-size: $font-size12;
+        color: var(--system-orange);
+
+        .chip {
+            span {
+                max-width: $element72 * 3;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: $font-size12;
+            }
+
+            button {
+                border-radius: 50%;
+
+                &:hover {
+                    background-color: var(--background-primary);
+
+                    i {
+                        color: var(--icon-white);
+                    }
+                }
+            }
+        }
+    }
+}

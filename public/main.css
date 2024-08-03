@@ -1,12 +1,4 @@
 @import url(/stylesheet/style.css);
-/* declair font */
-.fs-xs {
-  font-size: 0.8rem;
-}
-
-.fw-b {
-  font-weight: bold;
-}
 
 /* declair display */
 .d-flex {

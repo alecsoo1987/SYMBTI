@@ -1,0 +1,14 @@
+// @UTILITIES
+// @CURSOR
+
+.cursor {
+    &-auto {cursor: auto;}
+    &-p {cursor: pointer;}
+    &-help {cursor: help;}
+    &-not {cursor: not-allowed};
+
+    &-event {
+        &-none {pointer-events: none;}
+        &-auto {pointer-events: auto;}
+    }
+}

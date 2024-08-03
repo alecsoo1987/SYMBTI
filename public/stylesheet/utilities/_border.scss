@@ -1,0 +1,31 @@
+// @UTILITIES
+// @BORDER
+
+
+$bd: 2;
+@while $bd > 0 {
+    .bd-10-#{$bd} {border: $bd + px solid var(--border10)!important;}
+    .bd-top-10-#{$bd} {border-top: $bd + px solid var(--border10)!important;}
+    .bd-right-10-#{$bd} {border-right: $bd + px solid var(--border10)!important;}
+    .bd-bottom-10-#{$bd} {border-bottom: $bd + px solid var(--border10)!important;}
+    .bd-left-10-#{$bd} {border-left: $bd + px solid var(--border10)!important;}
+
+    .bd-20-#{$bd} {border: $bd + px solid var(--border20)!important;}
+    .bd-top-20-#{$bd} {border-top: $bd + px solid var(--border20)!important;}
+    .bd-right-20-#{$bd} {border-right: $bd + px solid var(--border20)!important;}
+    .bd-bottom-20-#{$bd} {border-bottom: $bd + px solid var(--border20)!important;}
+    .bd-left-20-#{$bd} {border-left: $bd + px solid var(--border20)!important;}
+
+    $bd: $bd - 1;
+}
+
+// BORDER RADIUS 
+.round-0 {border-radius: 0!important;}
+.round-50p {border-radius: 50%!important;}
+
+$bdra: 11;
+@while $bdra > 0 {
+    .round-#{2*$bdra} {border-radius: 2px * $bdra!important;}
+
+    $bdra: $bdra - 1;
+}

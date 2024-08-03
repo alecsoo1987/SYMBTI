@@ -1,0 +1,47 @@
+// @UTILITIES
+// @OVERFLOW
+
+.over {
+    &-hidden {
+        overflow: hidden!important;
+    }
+
+    &-visible {
+        overflow: visible!important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    &-auto {
+        overflow: auto!important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    &-scroll-x {
+        overflow-x: auto!important;
+        overflow-y: hidden!important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    &-scroll-y {
+        overflow-x: hidden!important;
+        overflow-y: auto!important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    &-lay {
+        overflow: overlay!important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    &-lay-x {
+        overflow-x: overlay!important;
+        overflow-y: hidden!important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    &-lay-y {
+        overflow-x: hidden!important;
+        overflow-y: overlay!important;
+        -webkit-overflow-scrolling: touch;
+    }
+}

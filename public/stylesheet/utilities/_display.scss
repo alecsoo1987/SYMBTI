@@ -1,0 +1,101 @@
+// @UTILITIES
+// @DISPLAY
+
+.d {
+    &-none {display: none!important;}
+    &-inline {display: inline!important;}
+    &-block {display: block!important;}
+    &-block-inline {display: inline-block!important;}
+    &-flex {display: flex!important;}
+    &-flex-inline {display: inline-flex!important;}
+}
+
+// FLEX ELEMENT
+.flex {
+    &-row {flex-direction: row!important;}
+    &-column {flex-direction: column!important;}
+    &-wrap {flex-wrap: wrap!important;}
+    &-nowrap {flex-wrap: nowrap!important;}
+
+    &-0 {flex: 0!important;}
+    &-1 {flex: 1!important;}
+    &-2 {flex: 2!important;}
+    &-3 {flex: 3!important;}
+    &-4 {flex: 4!important;}
+    &-5 {flex: 5!important;}
+    &-auto {flex: 1 1 auto;}
+    &-initial {flex: 0 1 auto;}
+    &-none {flex: none;}
+}
+
+.grow {
+    &-1 {flex-grow: 1!important;}
+    &-0 {flex-grow: 0!important;}
+}
+
+.shrink {
+    &-1 {flex-shrink: 1!important;}
+    &-0 {flex-shrink: 0!important;}
+}
+
+.order {
+    &-1 {order: 1!important;}
+    &-2 {order: 2!important;}
+    &-3 {order: 3!important;}
+    &-4 {order: 4!important;}
+    &-5 {order: 5!important;}
+}
+
+.justify {
+    &-start {justify-content: flex-start!important;}
+    &-center {justify-content: center!important;}
+    &-end {justify-content: end!important;}
+    &-space-b {justify-content: space-between!important;}
+    &-space-r {justify-content: space-around!important;}
+
+    &-items {
+        &-start {justify-items: flex-start!important;}
+        &-center {justify-items: center!important;}
+        &-end {justify-items: flex-end!important;}
+        &-stretch {justify-items: stretch!important;}
+    }
+
+    &-self {
+        &-auto {justify-self: auto!important;}
+        &-start	{justify-self: start!important;}
+        &-end {justify-self: end!important;}
+        &-center {justify-self: center!important;}
+        &-stretch {justify-self: stretch!important;}
+    }
+}
+
+.align {
+    &-start {align-content: flex-start!important;}
+    &-center {align-content: center!important;}
+    &-end {align-content: end!important;}
+    &-space-b {align-content: space-between!important;}
+    &-space-r {align-content: space-around!important;}
+
+    &-items {
+        &-start {align-items: flex-start!important;}
+        &-center {align-items: center!important;}
+        &-end {align-items: flex-end!important;}
+        &-stretch {align-items: stretch!important;}
+    }
+
+    &-self {
+        &-auto {align-self: auto!important;}
+        &-start	{align-self: start!important;}
+        &-end {align-self: end!important;}
+        &-center {align-self: center!important;}
+        &-stretch {align-self: stretch!important;}
+    }
+}
+
+// GAP
+$gap: 10;
+@while $gap > 0 {
+    .gap-#{4*$gap} {gap: 4 * $gap + px!important;}
+
+    $gap: $gap - 1;
+}

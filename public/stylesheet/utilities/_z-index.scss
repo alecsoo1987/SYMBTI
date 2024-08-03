@@ -1,0 +1,10 @@
+// @UTILITIES
+// @Z-INDEX
+
+$zindex: 10;
+
+@while $zindex > 0 {
+    .z-#{1000 * $zindex} {z-index: 1000 * $zindex;}
+
+    $zindex: $zindex - 1;
+}

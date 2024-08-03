@@ -1,0 +1,429 @@
+// @COLOR
+// BRAND COLOR #0064FF
+
+$theme: (
+    lighttheme: (
+        // Background
+        background-account: rgba(0, 100, 255, 1),
+        background: #{linear-gradient(180deg, rgba(234, 242, 255, 1) 0%, rgba(202, 217, 243, 1) 100%)},
+        background-primary: rgba(0, 100, 255, 1),
+        background-primary-secondary: rgba(0, 100, 255, 0.1),
+        background-header: rgba(255, 255, 255, 0.85),
+        background-footer: rgba(255, 255, 255, 0.85),
+        background-modal: rgba(255, 255, 255, 0.5),
+        background-tooltip: rgba(44, 44, 44, 1),
+
+        // Panel
+        panel10: rgba(255, 255, 255, 1),
+        panel20: rgba(250, 250, 250, 1),
+        panel30: rgba(245, 245, 245, 1),
+        panel40: rgba(234, 234, 234, 1),
+
+        // Field
+        field10: rgba(245, 245, 245, 1),
+        field10-hover: rgba(255, 255, 255, 1),
+        field-select: rgba(0, 100, 255, 1),
+        field-select-secondary: rgba(122,98,248, 1),
+        field-border: rgba(234, 234, 234, 0.5),
+        field-disabled: hsl(0, 0%, 88%),
+
+        // Border
+        border10: rgb(234, 234, 234),
+        border10-hover: rgb(202, 202, 202),
+        border20: rgba(179, 179, 179, 0.3),
+        border20-hover: rgb(142, 142, 142),
+        border-primary: rgba(0, 100, 255, 1),
+        border-primary-secondary: rgba(0, 100, 255, 0.1),
+
+        // Elevation
+        shadow01: #{0px 0px 1px rgba(40, 41, 61, 0.08), 0px 0.5px 2px rgba(96, 97, 112, 0.16)},
+        shadow02: #{0px 0px 1px rgba(40, 41, 61, 0.04), 0px 2px 4px rgba(96, 97, 112, 0.16)},
+        shadow03: #{0px 0px 2px rgba(40, 41, 61, 0.04), 0px 4px 8px rgba(96, 97, 112, 0.16)},
+        shadow04: #{0px 2px 4px rgba(40, 41, 61, 0.04), 0px 8px 16px rgba(96, 97, 112, 0.16)},
+        shadow05: #{0px 2px 8px rgba(40, 41, 61, 0.04), 0px 16px 24px rgba(96, 97, 112, 0.16)},
+        shadow06: #{0px 2px 8px rgba(40, 41, 61, 0.08), 0px 20px 32px rgba(96, 97, 112, 0.24)},
+
+        // Font color
+        text-brand: rgba(0, 100, 255, 1),
+        text-primary: rgb(44, 44, 44),
+        text-secondary: rgb(110, 110, 110),
+        text-sub10: rgb(179, 179, 179),
+        text-sub20: rgb(202, 202, 202),
+        text-sub30: rgb(225, 225, 225),
+        text-link: rgb(20, 115, 230),
+        text-helper: rgb(75, 75, 75),
+        text-placeholder: rgb(110, 110, 110),
+        text-disabled: rgb(142, 142, 142),
+
+
+        // Font color01
+        text-red01: rgb(255, 0, 0),
+        text-orange01: rgb(255, 153, 0),
+        text-yellow01: rgb(255, 251, 0),
+        text-green01: rgb(60, 255, 0),
+        text-blue01: rgb(0, 47, 255),
+        text-navy01: rgb(68, 0, 255),
+        text-purple01: rgb(140, 0, 255),        
+        text-white: rgb(250, 250, 250),
+        text-black: rgb(44, 44, 44),
+
+        // Font color02
+        text-red02: rgb(240, 38, 38),
+        text-orange02: rgb(250, 168, 46),
+        text-yellow02: rgb(248, 245, 50),
+        text-green02: rgb(77, 255, 86),
+        text-blue02: rgb(56, 92, 253),
+        text-navy02: rgb(91, 55, 255),
+        text-purple02: rgb(160, 44, 255),        
+
+        // Font color03
+        text-red03: rgb(255, 83, 83),
+        text-orange03: rgb(255, 194, 103),
+        text-yellow03: rgb(255, 252, 103),
+        text-green03: rgb(126, 255, 133),
+        text-blue03: rgb(152, 171, 255),
+        text-navy03: rgb(91, 55, 255),
+        text-purple03: rgb(190, 111, 255),        
+        
+        // Icon color
+        icon-brand: rgba(0, 100, 255, 1),
+        icon-primary: rgb(44, 44, 44),
+        icon-secondary: rgb(110, 110, 110),
+        icon-sub10: rgb(179, 179, 179),
+        icon-sub20: rgb(202, 202, 202),
+        icon-sub30: rgb(225, 225, 225),
+        icon-link: rgb(20, 115, 230),
+        icon-white: rgb(250, 250, 250),
+        icon-black: rgb(44, 44, 44),
+
+        // Support
+        system-red:rgb(201, 37, 45),
+        system-orange: rgb(203, 111, 16),
+        system-yellow: rgb(190, 167, 54),
+        system-green: rgb(18, 128, 92),
+        system-blue: rgb(13, 102, 208),
+
+        system-red-secondary:rgba(201, 37, 45, 0.2),
+        system-orange-secondary: rgba(203, 111, 16, 0.2),
+        system-yellow-secondary: rgba(190, 167, 54, 0.2),
+        system-green-secondary: rgba(18, 128, 92, 0.2),
+        system-blue-secondary: rgba(13, 102, 208, 0.2),
+
+        // Map
+        map-bg-h: 0,
+        map-bg-s: 0%,
+        map-bg-l: 98%,
+        map-fill: rgba(234, 234, 234, 1),
+        map-fill-hover: rgba(75, 42, 245, 0.6),
+        map-stroke: hsl(0, 0%, 52%),
+        map-stroke-hover: hsl(0, 0%, 32%),
+        map-text: rgb(44, 44, 44),
+
+        // Scroll
+        scroll-bar: hsl(0, 0%, 90%),
+        scroll-bar-hover: hsl(0, 0%, 88%),
+        scroll-bg: rgba(250, 250, 250, 1),
+
+        // Chart
+        chart-red30: #F69393,
+        chart-red20: #F36868,
+        chart-red10: #F03E3E,
+
+        chart-line-blue30: #719BCF,
+        chart-line-blue20: #467DC2,
+        chart-line-blue10:#2962A6,
+
+        chart-blue90: #1F4A7C,
+        chart-blue80: #245691,
+        chart-blue70:#2962A6,
+        chart-blue60: #2F6FBB,
+        chart-blue50: #467DC2,
+        chart-blue40: #5D8DC9,
+        chart-blue30: #719BCF,
+        chart-blue20: #86A9D6,
+        chart-blue10: #9AB7DC,
+
+        chart-green90: #547238,
+        chart-green80: #628542,
+        chart-green70: #70984B,
+        chart-green60: #7EAC55,
+        chart-green50: #8BB466,
+        chart-green40: #98BC76,
+        chart-green30: #B2CD99,
+        chart-green20: #BFD5AA,
+        chart-green10: #CDDEBC,
+
+        chart-yellow90: #A59150,
+        chart-yellow80: #C0A95D,
+        chart-yellow70: #DCC16A,
+        chart-yellow60: #F8DA78,
+        chart-yellow50: #F9DE85,
+        chart-yellow40: #FBE294,
+        chart-yellow30: #FBE5A0,
+        chart-yellow20: #FBE5A0,
+        chart-yellow10: #FCECBA,
+
+        chart-orange90: #94562C,
+        chart-orange80: #AC6534,
+        chart-orange70: #C5733B,
+        chart-orange60: #DE8243,
+        chart-orange50: #E28E55,
+        chart-orange40: #E59D6C,
+        chart-orange30: #E49C67,
+        chart-orange20: #EAB38B,
+        chart-orange10: #EDBF9E,
+
+        chart-violet90: #5f3dc4,
+        chart-violet80: #6741d9,
+        chart-violet70: #7048e8,
+        chart-violet60: #7950f2,
+        chart-violet50: #845ef7,
+        chart-violet40: #9775fa,
+        chart-violet30: #b197fc,
+        chart-violet20: #d0bfff,
+        chart-violet10: #e5dbff,
+        chart-violet00: #f3f0ff,
+
+        // hdc pick chart color
+        chart-2deps10: #9B19F5,
+        chart-2deps20: #FFA600,
+
+        chart-3deps10: #9B19F5,
+        chart-3deps20: #FF006C,
+        chart-3deps30: #FFA600,
+
+        chart-4deps10: #9B19F5,
+        chart-4deps20: #FF0099,
+        chart-4deps30: #FF4B45,
+        chart-4deps40: #FFA600,
+
+        chart-5deps10: #9B19F5,
+        chart-5deps20: #FF00B0,
+        chart-5deps30: #FF006C,
+        chart-5deps40: #FF6734,
+        chart-5deps50: #FFA600,
+
+        chart-7deps10: #9B19F5,
+        chart-7deps20: #E900C8,
+        chart-7deps30: #FF0099,
+        chart-7deps40: #FF006C,
+        chart-7deps50: #FF4B45,
+        chart-7deps60: #FF7F22,
+        chart-7deps70: #FFA600,
+    ),
+
+
+    darkbluetheme: (
+        // Background
+        background: #{radial-gradient(farthest-side ellipse at 10% 0, #333867 20%, #17193b)},
+        background-primary: rgba(0, 100, 255, 1),
+        background-primary-secondary: rgba(0, 100, 255, 0.6),
+        background-header: rgba(31, 34, 67, 0.85),
+        background-footer: rgba(31, 34, 67, 0.85),
+        background-modal: rgba(25, 27, 54, 0.5),
+        background-tooltip: rgba(37, 40, 81, 1),
+
+        // Panel
+        panel10: rgba(25, 27, 54, 1),
+        panel20: rgba(31, 34, 67, 1),
+        panel30: rgba(37, 40, 81, 1),
+        panel40: rgba(44, 47, 94, 1),
+
+        // Field
+        field10: rgba(37, 40, 81, 1),
+        field10-hover: rgba(25, 27, 54, 1),
+        field-select: rgba(0, 100, 255, 1),
+        field-border: rgba(57, 57, 57, 0.5),
+        field-disabled: hsl(236, 36%, 24%),
+
+        // Border
+        border10: rgb(57, 57, 57),
+        border10-hover: rgb(73, 73, 73),
+        border20: rgb(92, 92, 92),
+        border20-hover: rgb(124, 124, 124),
+        border-primary: rgba(0, 100, 255, 1),
+        border-primary-secondary: rgba(0, 100, 255, 0.6),
+
+        // Elevation
+        shadow01: #{0px 0px 1px rgba(40, 41, 61, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.32)},
+        shadow02: #{0px 0px 1px rgba(0, 0, 0, 0.04), 0px 2px 4px rgba(0, 0, 0, 0.32)},
+        shadow03: #{0px 0px 2px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.32)},
+        shadow04: #{0px 2px 4px rgba(0, 0, 0, 0.04), 0px 8px 16px rgba(0, 0, 0, 0.32)},
+        shadow05: #{0px 2px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.32)},
+        shadow06: #{0px 2px 8px rgba(0, 0, 0, 0.08), 0px 20px 32px rgba(0, 0, 0, 0.32)},
+
+        // Font color
+        text-brand: rgba(0, 100, 255, 1),
+        text-primary: rgb(242, 242, 249),
+        text-secondary: rgb(215,217,237),
+        text-sub10: rgb(188,191,224),
+        text-sub20: rgb(175,178,218),
+        text-sub30: rgb(162,165,212),
+        text-link: rgb(38, 128, 235),
+        text-helper: rgb(215,217,237),
+
+        text-placeholder: rgb(215,217,237),
+        text-disabled: rgb(162, 162, 162),
+        text-white: rgb(242, 242, 249),
+        text-black: rgb(13,14,27),
+
+        // Icon color
+        icon-brand: rgba(0, 100, 255, 1),
+        icon-primary: rgb(242, 242, 249),
+        icon-secondary: rgb(215,217,237),
+        icon-sub10: rgb(188,191,224),
+        icon-sub20: rgb(175,178,218),
+        icon-sub30: rgb(162,165,212),
+        icon-link: rgb(38, 128, 235),
+        icon-white: rgb(242, 242, 249),
+        icon-black: rgb(13,14,27),
+
+        // Support
+        system-red: rgb(215, 55, 63),
+        system-orange: rgb(218, 123, 17),
+        system-yellow: rgb(218, 192, 62),
+        system-green: rgb(38, 142, 108),
+        system-blue: rgb(20, 115, 230),
+
+        system-red-secondary: rgba(215, 55, 63, 0.3),
+        system-orange-secondary: rgba(218, 123, 17, 0.3),
+        system-yellow-secondary: rgba(218, 192, 62, 0.3),
+        system-green-secondary: rgba(38, 142, 108, 0.3),
+        system-blue-secondary: rgba(20, 115, 230, 0.3),
+
+        // Map
+        map-bg-h: 235,
+        map-bg-s: 37%,
+        map-bg-l: 19%,
+        map-fill: hsl(236, 36%, 67%),
+        map-fill-hover: rgba(75, 42, 245, 0.7),
+        map-stroke: hsl(236, 36%, 80%),
+        map-stroke-hover: hsl(236, 36%, 97%),
+        map-text: rgb(44, 44, 44),
+
+        // Scroll
+        scroll-bar: hsl(236, 36%, 30%),
+        scroll-bar-hover: hsl(236, 36%, 32%),
+        scroll-bg: rgba(31, 34, 67, 1),
+    ),
+
+
+    darktheme: (
+        // Background
+        background: rgb(8, 8, 8),
+        background-primary: rgba(0, 100, 255, 1),
+        background-primary-secondary: rgba(0, 100, 255, 0.8),
+        background-header: rgba(30, 30, 30, 0.85),
+        background-footer: rgba(30, 30, 30, 0.85),
+        background-modal: rgba(30, 30, 30, 0.5),
+        background-tooltip: rgba(44, 44, 44, 1),
+
+        // Panel
+        panel10: rgba(30, 30, 30, 1),
+        panel20: rgba(44, 44, 44, 1),
+        panel30: rgba(57, 57, 57, 1),
+        panel40: rgba(73, 73, 73, 1),
+
+        // Field
+        field10: rgba(57, 57, 57, 1),
+        field10-hover: rgba(30, 30, 30, 1),
+        field-select: rgba(0, 100, 255, 1),
+        field-border: rgba(57, 57, 57, 0.5),
+        field-disabled: hsl(0, 0%, 25%),
+
+        // Border
+        border10: rgb(57, 57, 57),
+        border10-hover: rgb(73, 73, 73),
+        border20: rgb(92, 92, 92),
+        border20-hover: rgb(124, 124, 124),
+        border-primary: rgba(0, 100, 255, 1),
+        border-primary-secondary: rgba(0, 100, 255, 0.8),
+
+        // Elevation
+        shadow01: #{0px 0px 1px rgba(40, 41, 61, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.32)},
+        shadow02: #{0px 0px 1px rgba(0, 0, 0, 0.04), 0px 2px 4px rgba(0, 0, 0, 0.32)},
+        shadow03: #{0px 0px 2px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.32)},
+        shadow04: #{0px 2px 4px rgba(0, 0, 0, 0.04), 0px 8px 16px rgba(0, 0, 0, 0.32)},
+        shadow05: #{0px 2px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.32)},
+        shadow06: #{0px 2px 8px rgba(0, 0, 0, 0.08), 0px 20px 32px rgba(0, 0, 0, 0.32)},
+
+        // Font color
+        text-brand: rgba(0, 100, 255, 1),
+        text-primary: rgb(239, 239, 239),
+        text-secondary: rgb(162, 162, 162),
+        text-sub10: rgb(124, 124, 124),
+        text-sub20: rgb(92, 92, 92),
+        text-sub30: rgb(73, 73, 73),
+        text-link: rgb(20, 115, 230),
+        text-helper: rgb(200, 200, 200),
+
+        text-placeholder: rgb(162, 162, 162),
+        text-disabled: rgb(162, 162, 162),
+        text-white: rgb(250, 250, 250),
+        text-black: rgb(44, 44, 44),
+
+        // Icon color
+        icon-brand: rgba(0, 100, 255, 1),
+        icon-primary: rgb(239, 239, 239),
+        icon-secondary: rgb(162, 162, 162),
+        icon-sub10: rgb(124, 124, 124),
+        icon-sub20: rgb(92, 92, 92),
+        icon-sub30: rgb(73, 73, 73),
+        icon-link: rgb(20, 115, 230),
+        icon-white: rgb(250, 250, 250),
+        icon-black: rgb(44, 44, 44),
+
+         // Support
+        system-red: rgb(215, 55, 63),
+        system-orange: rgb(218, 123, 17),
+        system-yellow: rgb(218, 192, 62),
+        system-green: rgb(38, 142, 108),
+        system-blue: rgb(20, 115, 230),
+
+        system-red-secondary: rgba(215, 55, 63, 0.3),
+        system-orange-secondary: rgba(218, 123, 17, 0.3),
+        system-yellow-secondary: rgba(218, 192, 62, 0.3),
+        system-green-secondary: rgba(38, 142, 108, 0.3),
+        system-blue-secondary: rgba(20, 115, 230, 0.3),
+
+        // Map
+        map-bg-h: 0,
+        map-bg-s: 0%,
+        map-bg-l: 17%,
+        map-background: hsl(0, 0%, 17%),
+        map-fill: hsl(0, 0%, 69%),
+        map-fill-hover: rgba(75, 42, 245, 0.7),
+        map-stroke: hsl(0, 0%, 80%),
+        map-stroke-hover: hsl(0, 0%, 97%),
+        map-text: rgb(44, 44, 44),
+
+        // Scroll
+        scroll-bar: hsl(0, 0%, 29%),
+        scroll-bar-hover: hsl(0, 0%, 27%),
+        scroll-bg: rgba(44, 44, 44, 1),
+    ),
+);
+
+
+// COLOR IMPORT
+@function compose-color-variable($color-key) {
+    @return '--#{$color-key}';
+}
+
+:root {
+    @each $key, $value in map-get($theme, 'lighttheme') {
+        #{compose-color-variable($key)}: #{$value};
+    }
+
+    &.darkblue-theme {
+        @each $key, $value in map-get($theme, 'darkbluetheme') {
+            #{compose-color-variable($key)}: #{$value};
+        }
+    }
+
+    &.dark-theme {
+        @each $key, $value in map-get($theme, 'darktheme') {
+            #{compose-color-variable($key)}: #{$value};
+        }
+    }
+}

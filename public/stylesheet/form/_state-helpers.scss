@@ -1,0 +1,49 @@
+// @COMPONENT
+// @STATE HELPERS
+
+%state-error {
+    color: var(--system-red);
+
+    &::before {
+        margin-top: 0px;
+        margin-right: 0.250rem;
+        content: "\e958";
+        color: var(--system-red);
+    }
+}
+
+%state-success {
+    color: var(--system-green);
+
+    &::before {
+        margin-top: 0px;
+        margin-right: 0.250rem;
+        content: "\e980";
+        color: var(--system-green);
+    }
+}
+
+%state-warning {
+    color: var(--system-orange);
+
+    &::before {
+        margin-top: 0px;
+        margin-right: 0.250rem;
+        content: "\e95a";
+        color: var(--system-orange);
+    }
+}
+
+.helper-text {
+    &.error {
+        @extend %state-error;
+    }
+
+    &.success {
+        @extend %state-error;
+    }
+
+    &.warning {
+        @extend %state-warning;
+    }
+}

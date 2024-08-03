@@ -1,0 +1,63 @@
+// @UTILITIES
+// @SPACING - margin, padding
+
+// MARGIN
+.ma {
+    &-0 {margin: 0!important;}
+    &-auto{margin: auto;}
+}
+
+.mx-auto {margin: 0 auto;}
+.my-auto {margin: 0 auto;}
+
+.mt {
+    &-0 {margin-top: 0!important;}
+    &-auto {margin-top: auto;}
+}
+
+.mb {
+    &-0 {margin-bottom: 0!important;}
+    &-auto {margin-bottom: auto;}
+}
+
+.ml {
+    &-0 {margin-left: 0!important;}
+    &-auto {margin-left: auto;}
+}
+
+.mr {
+    &-0 {margin-right: 0!important;}
+    &-auto {margin-right: auto;}
+}
+
+$margin: 10;
+@while $margin > 0 {
+    .mt-#{4*$margin} {margin-top: 4px * $margin !important;}
+    .mb-#{4*$margin} {margin-bottom: 4px * $margin !important;}
+    .ml-#{4*$margin} {margin-left: 4px * $margin !important;}
+    .mr-#{4*$margin} {margin-right: 4px * $margin !important;}
+    .mx-#{4*$margin} {margin-left: 4px * $margin !important; margin-right: 4px * $margin !important;}
+    .my-#{4*$margin} {margin-top: 4px * $margin !important; margin-bottom: 4px * $margin !important;}
+
+    $margin: $margin - 1;
+}
+
+
+// PADDING
+.pa-0 {padding: 0!important;}
+.pt-0 {padding-top: 0!important;}
+.pb-0 {padding-bottom: 0!important;}
+.pl-0 {padding-left: 0!important;}
+.pr-0 {padding-right: 0!important;}
+
+$padding: 10;
+@while $padding > 0 {
+    .pt-#{4*$padding} {padding-top: 4px * $padding !important;}
+    .pb-#{4*$padding} {padding-bottom: 4px * $padding !important;}
+    .pl-#{4*$padding} {padding-left: 4px * $padding !important;}
+    .pr-#{4*$padding} {padding-right: 4px * $padding !important;}
+    .px-#{4*$padding} {padding-left: 4px * $padding!important; padding-right: 4px * $padding!important;}
+    .py-#{4*$padding} {padding-top: 4px * $padding!important; padding-bottom: 4px * $padding!important;}
+
+    $padding: $padding - 1;
+}
