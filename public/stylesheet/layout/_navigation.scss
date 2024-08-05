@@ -53,3 +53,32 @@
         }
     }
 }
+
+/*nav custom*/
+.navbar {
+    flex-wrap: wrap !important;
+    .navbar-brand {
+        display: flex;
+        justify-content: center;
+        font-size: $font-size32;
+        width: 100%;
+        b {
+            font-weight: 900;
+        }
+    }
+
+    #navbarSupportedContent {
+        max-width: 1000px;
+        margin: 0 auto;
+        height: 100%;
+        justify-content: center;
+
+        .dropdownToggle {
+            width: 100%;
+            height: 100%;
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+    }
+
+}

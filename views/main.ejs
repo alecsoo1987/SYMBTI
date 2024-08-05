@@ -8,19 +8,18 @@
 </head>
 <body>
   <div id="wrap">
-        <div class="background"></div>
         <div id="header" role="header">
             <header>
               <%- include('nav.ejs') %>
             </header>
         </div>
         <div id="container">
-            <div class="main-content-wrap">
+            <div class="main-content-wrap gap-20">
                 <article>
                     <div class="title_style_01">
                         SYMBTI 설명
                     </div>
-                    <p class="fw-b fs-20 lh-sm mt-40">
+                    <p class="fw-b lh-sm pa-16">
                         Welcome To <span class="fc-purple03">S</span>how <span class="fc-purple03">Y</span>our <span class="fc-purple03">MBTI</span> <br/>
                         <br/>
                         이 사이트는 연애 또는 일상에서 발생하는 다양한 상황을 문항으로 제시합니다.<br/>
@@ -29,25 +28,30 @@
                         선택을 완료하면 문항에 답변한 모든 유형별 통계를 확인할 수 있습니다.<br/>
                         연애 또는 일상의 관계에서 상대를 좀 더 이해할 수 있는 계기가 되었으면 좋겠습니다.
                     </p>
+                    <button class="button button-green ma-auto w-20p">
+                        <span class="fs-16 fw-sb">
+                            5초 Tutorial 시작
+                        </span>                        
+                    </button>
                 </article>
 
                 <article>
                     <div class="title_style_01">
                         질문 예시
                     </div>
-                    <div class="questionContWrap">
+                    <div class="question_contbox">
                         <div class="questionTitle">
                             내가 상대방 SNS 스토리, 게시글에 좋아요를 누르는 것은 플러팅이다.
                         </div>
                         <ul class="answerList">
                             <li>
-                                <span class="listNum">①</span> 맞다. 좋아요는 호감을 표현하기 위한 수단 중 하나이다.
+                                <span class="dif_cc">1.</span> 맞다. 좋아요는 호감을 표현하기 위한 수단 중 하나이다.
                             </li>
                             <li>
-                                <span class="listNum">②</span> 모든 피드에 좋아요를 누르는 것만이 찐 플러팅이다.
+                                <span class="dif_cc">2.</span> 모든 피드에 좋아요를 누르는 것만이 찐 플러팅이다.
                             </li>
                             <li>
-                                <span class="listNum">③</span> No, 암만 호감가는 상대여도 공감가는 피드에만 반응한다.
+                                <span class="dif_cc">3.</span> No, 암만 호감가는 상대여도 공감가는 피드에만 반응한다.
                             </li>
                         </ul>
                     </div>
@@ -55,21 +59,111 @@
 
                 <article>                    
                     <div class="title_style_01">
-                        질문 예시
+                        응답 결과
                     </div>
-                    <div class="questionContWrap">
-                        <div class="questionTitle">
-                            내가 상대방 SNS 스토리, 게시글에 좋아요를 누르는 것은 플러팅이다.
-                        </div>
-                        <ul class="answerList">
-                            <li>
-                                <span class="listNum">①</span> 맞다. 좋아요는 호감을 표현하기 위한 수단 중 하나이다.
+                    <div class="question_contbox">
+                        <ul class="answerList d-flex flex-row gap-40 justify-space-b mb-20">
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">ISTJ</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
                             </li>
-                            <li>
-                                <span class="listNum">②</span> 모든 피드에 좋아요를 누르는 것만이 찐 플러팅이다.
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">ISTP</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
                             </li>
-                            <li>
-                                <span class="listNum">③</span> No, 암만 호감가는 상대여도 공감가는 피드에만 반응한다.
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">ISFJ</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">ISFP</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                        </ul>
+                        <ul class="answerList d-flex flex-row gap-40 justify-space-b mb-20">
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">INTJ</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">INTP</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">INFJ</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">INFP</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                        </ul>
+                        <ul class="answerList d-flex flex-row gap-40 justify-space-b mb-20">
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">ESTJ</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">ESTP</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">ESFJ</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">ESFP</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                        </ul>
+                        <ul class="answerList d-flex flex-row gap-40 justify-space-b mb-20">
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">ENTJ</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">ENTP</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">ENFJ</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="d-flex flex-column align-items-center gap-4">
+                                <span class="listNum">ENFP</span> 
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
                             </li>
                         </ul>
                     </div>

@@ -1,28 +1,4 @@
 @import url(/stylesheet/style.css);
-
-/* declair display */
-.d-flex {
-  display : flex;
-}
-
-/* 여백 */
-.m-auto {
-  margin: 0 auto;
-}
-
-.ml-auto {
-  margin-left: auto;
-}
-
-.ml-xs {
-  margin-left: 0.8rem;
-}
-
-/* width */
-.w-100p {
-  width: 100%;
-}
-
 .containerWrap {
   margin-top: 1.5rem;
 }

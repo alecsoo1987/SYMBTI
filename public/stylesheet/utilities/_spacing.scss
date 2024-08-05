@@ -32,6 +32,7 @@
 
 $margin: 10;
 @while $margin > 0 {
+    .ma-#{4*$margin} {margin: 4px * $margin !important;}
     .mt-#{4*$margin} {margin-top: 4px * $margin !important;}
     .mb-#{4*$margin} {margin-bottom: 4px * $margin !important;}
     .ml-#{4*$margin} {margin-left: 4px * $margin !important;}
@@ -52,12 +53,14 @@ $margin: 10;
 
 $padding: 10;
 @while $padding > 0 {
+    .pa-#{4*$padding} {padding: 4px * $padding !important;}
     .pt-#{4*$padding} {padding-top: 4px * $padding !important;}
     .pb-#{4*$padding} {padding-bottom: 4px * $padding !important;}
     .pl-#{4*$padding} {padding-left: 4px * $padding !important;}
     .pr-#{4*$padding} {padding-right: 4px * $padding !important;}
     .px-#{4*$padding} {padding-left: 4px * $padding!important; padding-right: 4px * $padding!important;}
     .py-#{4*$padding} {padding-top: 4px * $padding!important; padding-bottom: 4px * $padding!important;}
+    
 
     $padding: $padding - 1;
 }
