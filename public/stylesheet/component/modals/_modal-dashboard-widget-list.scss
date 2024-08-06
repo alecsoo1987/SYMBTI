@@ -1,0 +1,30 @@
+// @COMPONENT
+// @MODAL DASHBOARD WIDGET LIST
+
+.modal-dashboard-widget-list {
+    .content-list {
+        .list-panel > .list-wrap .list-body {
+            min-height: 20.250rem;
+
+            li {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .image-area {
+        height: 100%;
+
+        h3 {
+            flex-shrink: 0;
+            flex-grow: 0;
+        }
+
+        > div {
+            img {
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+}

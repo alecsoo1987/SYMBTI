@@ -1,0 +1,103 @@
+// @COMPONENT
+// @MODAL CLEANING
+
+.modal-cleaning {
+    .modal-content {
+        .modal-body {
+            @include scrollHidden;
+
+            .dhx-grid {
+                margin-bottom: 1rem;
+                // height: fit-content!important;
+                // min-height: 40rem!important;
+
+                .dhx_grid-content {
+                    border-color: var(--border10);
+                    border-radius: 0.5rem;
+                    overflow: hidden;
+
+                    .dhx_grid-body {
+                        overflow: overlay;
+                    }
+                }
+
+                .dhx_grid-footer-cell,
+                .dhx_grid-header-cell {
+                    border: none!important;
+                }
+
+                .dhx_data-wrap {
+                    margin: 0.5rem 0;
+
+                    .dhx_grid_data {
+                        margin: 0 0.5rem;
+
+                        .dhx_grid-row {
+                            margin: 0.125rem 0;
+                            border-radius: 0.5rem;
+                            transition: background-color .3s;
+                            cursor: pointer;
+
+                            &:hover {
+                                background-color: var(--background-primary);
+
+                                .dhx_tree-cell,
+                                .dhx_grid-cell {
+                                    color: var(--text-white)!important;
+                                    transition: color .3s;
+                                }
+                            }
+
+                            .dhx_grid-cell {
+                                border: none!important;
+
+                                .dhx_grid-expand-cell-icon {
+                                    color: var(--icon-sub10)!important;
+
+                                    &.dxi-chevron-up {
+                                        &::before {
+                                            content: "\F145"!important;
+                                        }
+
+                                        + .dhx_tree-cell {
+                                            &::before {
+                                                content: "\F12B"!important;
+                                            }
+                                        }
+                                    }
+
+                                    &.dxi-chevron-down {
+                                        &::before {
+                                            content: "\F147"!important;
+                                        }
+
+                                        + .dhx_tree-cell {
+                                            &::before {
+                                                content: "\F12C"!important;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                .dhx_tree-cell {
+                                    justify-content: flex-start!important;
+                                    padding: 0!important;
+                                    text-align: left!important;
+                                    color: var(--text-primary);
+
+                                    &::before {
+                                        font-family: dhxicons!important;
+                                        content: "\F129";
+                                        margin-right: 0.25rem;
+                                        font-size: $element20;
+                                        color: var(--icon-sub10);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

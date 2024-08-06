@@ -1,0 +1,65 @@
+// @COMPONENT
+// @MODAL ROLLING IMAGES
+
+.modal-rolling-image-view {
+    .modal-body {
+        .carousel {
+            .carousel-inner {
+                display: flex;
+                align-items: center;
+                height: calc(100vh - 19rem);
+
+                .carousel-item {
+                    text-align: center;
+
+                    img {
+                        margin: auto;
+                        width: fit-content;
+                        height: fit-content;
+                    }
+                }
+            }
+
+            .carousel-btn-group {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                padding: 1rem 0;
+
+                .carousel-control-prev,
+                .carousel-control-next {
+                    position: static;
+                    width: $element36;
+                    height: $element36;
+                    background-color: var(--panel40);
+
+                    i {
+                        color: var(--icon-primary);
+                    }
+
+                    &.carousel-control-prev {
+                        border-radius: 0;
+                    }
+
+                    &.carousel-control-next {
+                        border-radius: 0;
+                    }
+                }
+
+                span {
+                    font-size: $font-size14;
+                    color: var(--text-primary);
+                }
+
+                .btn-primary {
+                    position: absolute;
+                    right: 0;
+                    width: 8.5rem;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}

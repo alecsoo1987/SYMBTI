@@ -1,0 +1,20 @@
+// @COMPONENT
+// @MODAL CONFIG USER
+
+.modal-config-user {
+    .modal-body {
+        .content-list > div > .list-panel {
+            height: calc(100vh - 25rem);
+        }
+
+        .image-area {
+            > div {
+                img {
+                    &[src="/dist/image/no-image.svg"] {
+                        object-fit: none;
+                    }
+                }
+            }
+        }
+    }
+}

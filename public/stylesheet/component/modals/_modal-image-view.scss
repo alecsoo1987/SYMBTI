@@ -1,0 +1,16 @@
+// @COMPONENT
+// @MODAL IMAGE VIEW
+
+.modal-image-view {
+    .modal-body {
+        figure {
+            margin-bottom: 1rem;
+            height: calc(100vh - 19rem);
+
+            img {
+                margin: auto;
+                object-fit: contain;
+            }
+        }
+    }
+}

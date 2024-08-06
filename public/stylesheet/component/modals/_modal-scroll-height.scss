@@ -1,0 +1,49 @@
+// @COMPONENT
+// @MODAL SCROLL HEIGHTS
+
+.modal-check-user {
+    .modal-body {
+        .content-list .list-filter.filter-top+.list-panel {
+            height: calc(100vh - 60rem);
+        }
+    }
+}
+
+.modal-role-auth {
+    .modal-body {
+        .table-role-auth {
+            > div {
+                height: calc(100vh - 25rem);
+            }
+        }
+    }
+}
+
+.modal-content-list {
+    .modal-body {
+        .content-list {
+            margin-bottom: 1rem;
+
+            .list-filter.filter-top+.list-panel {
+                height: calc(100vh - 25rem);
+            }
+
+        }
+    }
+}
+
+.modal-config-floor-zone {
+    .modal-body {
+        .content-list .list-panel {
+            height: calc(100vh - 45rem);
+        }
+    }
+}
+
+.modal-user-group-add {
+    .modal-body {
+        .content-list .list-panel {
+            height: calc(100vh - 45rem);
+        }
+    }
+}

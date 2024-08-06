@@ -1,0 +1,12 @@
+// @COMPONENT
+// @MODAL PRINT
+
+.modal-print {
+    .modal-body {
+        iframe {
+            padding-bottom: 1rem;
+            width: 100%;
+            min-height: calc(100vh - 7rem);
+        }
+    }
+}

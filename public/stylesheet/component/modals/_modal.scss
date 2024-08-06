@@ -1,0 +1,132 @@
+// @COMPONENT
+// @MODAL BASE
+
+.modal-open {
+    .container {
+        overflow: hidden;
+    }
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--background-modal);
+    backdrop-filter: saturate(180%) blur(5px);
+    overflow: hidden;
+    outline: 0;
+    z-index: 9999;
+
+    .modal-dialog {
+        position: relative;
+        margin: auto;
+        width: 100%;
+        height: 100%;
+    }
+
+    .modal-content {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - 88px);
+        border-radius: 0.5rem;
+        background-color: var(--panel10);
+        box-shadow: var(--shadow06);
+        transform: translateX(-50%) translateY(-50%);
+        pointer-events: auto;
+
+        .modal-header {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+
+            .btn {
+                margin-left: auto;
+                padding: 0;
+                width: $element40;
+                height: $element40;
+
+                i {
+                    font-size: $font-size18;
+                    color: var(--icon-primary);
+                }
+            }
+        }
+
+        .modal-body {
+            padding: 0 1rem;
+            max-height: calc(100vh - 6rem);
+            font-size: $font-size14;
+            overflow: auto;
+
+            @include scrollAll;
+
+            .panel,
+            .list-filter,
+            .list-panel {
+                box-shadow: none;
+            }
+
+            .list-filter {
+                flex: 1 1 100%;
+            }
+
+            .list-panel {
+                max-height: calc(100vh - 17rem);
+                &.over-height {
+                    max-height: calc(100vh - 25rem);
+                }
+            }
+        }
+
+        .modal-footer {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 0;
+            border-radius: 0 0 0.5rem 0.5rem;
+
+            .btn {
+                width: $element72 + 4rem;
+                font-weight: 600;
+
+                i {
+                    margin-right: 0.5rem;
+                    font-size: $font-size14;
+                    font-weight: 600;
+                }
+            }
+        }
+        
+        &.modal {
+            &-lg {
+                width: calc(100% - 88px);
+            }
+
+            &-md {
+                width: calc(100% - 88px);
+            }
+
+            &-sm {
+                width: calc(100% - 88px);
+            }
+        }
+    }
+}
+
+
+@import "modal-image-view";
+@import "modal-scroll-height";
+@import "modal-config-user";
+@import "modal-editor-preview";
+@import "modal-rolling-images";
+@import "modal-cleaning";
+@import "modal-dashboard-widget-list";
+@import "modal-print";
