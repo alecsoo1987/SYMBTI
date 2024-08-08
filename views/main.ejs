@@ -28,22 +28,28 @@
                         선택을 완료하면 문항에 답변한 모든 유형별 통계를 확인할 수 있습니다.<br/>
                         연애 또는 일상의 관계에서 상대를 좀 더 이해할 수 있는 계기가 되었으면 좋겠습니다.
                     </p>
-                    <button class="button button-green ma-auto w-20p">
+                    <button class="button button-primary ma-auto w-20p tutorialBtn">
                         <span class="fs-16 fw-sb">
                             5초 Tutorial 시작
                         </span>                        
                     </button>
                 </article>
 
-                <article>
+                <article class="tutorial_question d-none">
                     <div class="title_style_01">
                         질문 예시
                     </div>
                     <div class="question_contbox">
-                        <div class="questionTitle">
+                        <div class="questionTitle first-tooltip pl-12"
+                            data-bs-toggle="tooltip" data-bs-placement="left"
+                            data-bs-custom-class="custom-tooltip"
+                            data-bs-title="해당 질문을 읽고나서">
                             내가 상대방 SNS 스토리, 게시글에 좋아요를 누르는 것은 플러팅이다.
                         </div>
-                        <ul class="answerList">
+                        <ul class="answerList second-tooltip pl-12"
+                            data-bs-toggle="tooltip" data-bs-placement="left"
+                            data-bs-custom-class="custom-tooltip"
+                            data-bs-title="보기 중에 본인의 생각과 일치하는 번호를 선택한 뒤">
                             <li>
                                 <span class="dif_cc">1.</span> 맞다. 좋아요는 호감을 표현하기 위한 수단 중 하나이다.
                             </li>
@@ -55,9 +61,17 @@
                             </li>
                         </ul>
                     </div>
+                    <button type="submit" class="btn submitbtn btn-outline-secondary m-auto third-tooltip"
+                            data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            data-bs-custom-class="custom-tooltip"
+                            data-bs-title="결과보기 버튼을 눌러주세요.">
+                        <span class="fs-xs fw-b">
+                            답변선택 완료 후 결과보기
+                        </span>
+                    </button>
                 </article>
 
-                <article>                    
+                <article class="tutorial_result d-none"> 
                     <div class="title_style_01">
                         응답 결과
                     </div>
@@ -173,4 +187,20 @@
         <div id="footer"></div>
   </div>
 </body>
+<script>
+document.querySelector('.tutorialBtn').addEventListener('click', () => {
+    const tutorialQ = document.querySelector('.tutorial_question');
+    tutorialQ.classList.remove('d-none');
+
+    const tooltips = [
+        new bootstrap.Tooltip(document.querySelector('.first-tooltip')),
+        new bootstrap.Tooltip(document.querySelector('.second-tooltip')),
+        new bootstrap.Tooltip(document.querySelector('.third-tooltip'))
+    ];
+
+    tooltips.forEach((tooltip, index) => {
+        setTimeout(() => tooltip.show(), 2000 * (index + 1));
+    });
+});
+</script>
 </html>

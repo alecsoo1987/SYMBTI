@@ -68,10 +68,14 @@
     }
 
     #navbarSupportedContent {
-        max-width: 1000px;
+        max-width: 800px;
         margin: 0 auto;
         height: 100%;
         justify-content: center;
+        
+        .navbar-nav {
+            gap: 8px;
+        }        
 
         .dropdownToggle {
             width: 100%;
@@ -79,6 +83,68 @@
             padding: 0.5rem;
             cursor: pointer;
         }
+
+        .dropdown{
+            &.selectTheme,
+            &.profile {
+                .dropdown-item {
+                    display: flex;
+                    align-items: center;
+                    padding: 0.5rem;
+                    gap: 12px;
+                }
+            }
+        }
     }
 
+}
+.icon {    
+    width: 24px;
+    height: 24px;
+    display: flex;
+    &.submenu {
+        background-size: 20px 20px;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    
+    &.home-icon {
+        background-image: url('../../../images/icons/home.png');
+    }
+
+    &.profile-icon {
+        background-image: url('../../../images/icons/user.png');
+    }
+
+    &.theme-icon {
+        background-image: url('../../../images/icons/list.png');
+    }
+    
+    &.register-icon {
+        background-image: url('../../../images/icons/user_add.png');
+    }
+    
+    &.signin-icon {
+        background-image: url('../../../images/icons/login.png');
+    }    
+
+    &.editProfile-icon {
+        background-image: url('../../../images/icons/refresh.png');
+    }
+
+    &.admin-icon {
+        background-image: url('../../../images/icons/admin.png');
+    }
+
+    &.love-icon {
+        background-image: url('../../../images/icons/heart.png');
+    }
+
+    &.building-icon {
+        background-image: url('../../../images/icons/world.png');
+    }
+
+    &.upload-icon {
+        background-image: url('../../../images/icons/upload.png');
+    }
 }
