@@ -1759,6 +1759,7 @@ body {
 #wrap {
   width: 100%;
   height: 100%;
+  overflow: auto;
 }
 #wrap .dif_cc {
   display: -moz-inline-flex;
@@ -1826,6 +1827,15 @@ body {
 #wrap #container article .question_contbox {
   padding: 1rem 1rem;
 }
+#wrap #container article.article_box_design01 {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+#wrap #container article .answerList li.active {
+  color: rgba(154, 47, 207, 0.6);
+  font-weight: bold;
+}
 
 .gnb ul {
   display: flex;
@@ -1877,11 +1887,15 @@ body {
 .navbar {
   flex-wrap: wrap !important;
 }
+.navbar .container-fluid {
+  flex-direction: column;
+}
 .navbar .navbar-brand {
   display: flex;
   justify-content: center;
   font-size: 2rem;
-  width: 100%;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 .navbar .navbar-brand b {
   font-weight: 900;

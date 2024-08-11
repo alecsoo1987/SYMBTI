@@ -57,11 +57,14 @@
 /*nav custom*/
 .navbar {
     flex-wrap: wrap !important;
+    .container-fluid {
+        flex-direction: column;
+    }
     .navbar-brand {
         display: flex;
         justify-content: center;
         font-size: $font-size32;
-        width: 100%;
+        width: fit-content;
         b {
             font-weight: 900;
         }

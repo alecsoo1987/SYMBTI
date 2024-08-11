@@ -14,7 +14,7 @@
             </header>
         </div>
         <div id="container">
-            <div class="main-content-wrap gap-20">
+            <div class="main-content-wrap gap-40">
                 <article>
                     <div class="title_style_01">
                         SYMBTI 설명
@@ -35,7 +35,7 @@
                     </button>
                 </article>
 
-                <article class="tutorial_question d-none">
+                <article class="tutorial_question d-none article_box_design01">
                     <div class="title_style_01">
                         질문 예시
                     </div>
@@ -49,22 +49,22 @@
                         <ul class="answerList second-tooltip pl-12"
                             data-bs-toggle="tooltip" data-bs-placement="left"
                             data-bs-custom-class="custom-tooltip"
-                            data-bs-title="보기 중에 본인의 생각과 일치하는 번호를 선택한 뒤">
+                            data-bs-title="본인의 생각과 일치하는 보기를 선택한 뒤">
                             <li>
-                                <span class="dif_cc">1.</span> 맞다. 좋아요는 호감을 표현하기 위한 수단 중 하나이다.
+                                <span class="dif_cc">1.</span> Yes, 좋아요는 호감을 표현하기 위한 수단 중 하나이다.
                             </li>
                             <li>
-                                <span class="dif_cc">2.</span> 모든 피드에 좋아요를 누르는 것만이 찐 플러팅이다.
+                                <span class="dif_cc">2.</span> 모든 피드에 좋아요를 누르는 것만이 나만의 플러팅이다.
                             </li>
                             <li>
                                 <span class="dif_cc">3.</span> No, 암만 호감가는 상대여도 공감가는 피드에만 반응한다.
                             </li>
                         </ul>
                     </div>
-                    <button type="submit" class="btn submitbtn btn-outline-secondary m-auto third-tooltip"
+                    <button type="submit" class="btn submitbtn resultBtn btn-outline-secondary m-auto third-tooltip"
                             data-bs-toggle="tooltip" data-bs-placement="bottom"
                             data-bs-custom-class="custom-tooltip"
-                            data-bs-title="결과보기 버튼을 눌러주세요.">
+                            data-bs-title="완료 버튼을 눌러 결과 확인">
                         <span class="fs-xs fw-b">
                             답변선택 완료 후 결과보기
                         </span>
@@ -76,7 +76,7 @@
                         응답 결과
                     </div>
                     <div class="question_contbox">
-                        <ul class="answerList d-flex flex-row gap-40 justify-space-b mb-20">
+                        <ul class="d-flex flex-row gap-40 justify-space-b mb-20">
                             <li class="d-flex flex-column align-items-center gap-4">
                                 <span class="listNum">ISTJ</span> 
                                 <span>1번 20%</span>
@@ -102,7 +102,7 @@
                                 <span>3번 50%</span>
                             </li>
                         </ul>
-                        <ul class="answerList d-flex flex-row gap-40 justify-space-b mb-20">
+                        <ul class="d-flex flex-row gap-40 justify-space-b mb-20">
                             <li class="d-flex flex-column align-items-center gap-4">
                                 <span class="listNum">INTJ</span> 
                                 <span>1번 20%</span>
@@ -128,7 +128,7 @@
                                 <span>3번 50%</span>
                             </li>
                         </ul>
-                        <ul class="answerList d-flex flex-row gap-40 justify-space-b mb-20">
+                        <ul class="d-flex flex-row gap-40 justify-space-b mb-20">
                             <li class="d-flex flex-column align-items-center gap-4">
                                 <span class="listNum">ESTJ</span> 
                                 <span>1번 20%</span>
@@ -154,7 +154,7 @@
                                 <span>3번 50%</span>
                             </li>
                         </ul>
-                        <ul class="answerList d-flex flex-row gap-40 justify-space-b mb-20">
+                        <ul class="d-flex flex-row gap-40 justify-space-b mb-20">
                             <li class="d-flex flex-column align-items-center gap-4">
                                 <span class="listNum">ENTJ</span> 
                                 <span>1번 20%</span>
@@ -188,6 +188,15 @@
   </div>
 </body>
 <script>
+
+const answer_list = document.querySelectorAll('.answerList li')
+
+answer_list.forEach(item => {
+    item.addEventListener('click', function(){
+        answer_list.forEach(li => li.classList.remove('active'));
+        this.classList.add('active');
+    })
+})
 document.querySelector('.tutorialBtn').addEventListener('click', () => {
     const tutorialQ = document.querySelector('.tutorial_question');
     tutorialQ.classList.remove('d-none');
@@ -201,6 +210,11 @@ document.querySelector('.tutorialBtn').addEventListener('click', () => {
     tooltips.forEach((tooltip, index) => {
         setTimeout(() => tooltip.show(), 2000 * (index + 1));
     });
+});
+
+document.querySelector('.resultBtn').addEventListener('click', () => {
+    const tutorialR = document.querySelector('.tutorial_result');
+    tutorialR.classList.remove('d-none');
 });
 </script>
 </html>
