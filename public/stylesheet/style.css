@@ -1803,7 +1803,7 @@ body {
   overflow-x: hidden;
   overflow-y: overlay;
 }
-#wrap #container .title_style_01 {
+#wrap #container .title-style-01 {
   width: 30%;
   padding: 10px 0px;
   font-weight: bold;
@@ -1820,21 +1820,104 @@ body {
   flex-flow: column nowrap;
   gap: 1.5rem;
   margin-top: 30px;
+  /* mbti box */
 }
 #wrap #container article p {
   font-size: 1.25rem;
 }
-#wrap #container article .question_contbox {
-  padding: 1rem 1rem;
+#wrap #container article .question-contbox {
+  padding: 1rem;
 }
-#wrap #container article.article_box_design01 {
+#wrap #container article .show-resultBtn {
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: #dc3545;
+  color: #fff;
+  border-color: #dc3545;
+}
+#wrap #container article .show-resultBtn:hover {
+  color: var(--bs-btn-hover-color);
+  background-color: var(--bs-btn-hover-bg);
+  border-color: var(--bs-btn-hover-border-color);
+}
+#wrap #container article.article-box-design01 {
   background: rgba(255, 255, 255, 0.5);
   border-radius: 8px;
-  padding: 0.5rem;
+  padding: 1.5rem 0rem;
 }
 #wrap #container article .answerList li.active {
   color: rgba(154, 47, 207, 0.6);
   font-weight: bold;
+}
+#wrap #container article .mbti-grid-box ul {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+#wrap #container article .mbti-grid-box ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+  gap: 4px;
+}
+#wrap #container article .mbti-grid-box ul li > div {
+  display: grid;
+  width: 100%;
+  height: auto;
+  padding-top: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+#wrap #container article .mbti-grid-box ul li > div.istj-image {
+  background-image: url(../../images/mbti/bear.png);
+}
+#wrap #container article .mbti-grid-box ul li > div.istp-image {
+  background-image: url(../../images/mbti/angmusae.png);
+}
+#wrap #container article .mbti-grid-box ul li > div.isfj-image {
+  background-image: url(../../images/mbti/daram.png);
+}
+#wrap #container article .mbti-grid-box ul li > div.isfp-image {
+  background-image: url(../../images/mbti/desert_fox.png);
+}
+#wrap #container article .mbti-grid-box ul li > div.intj-image {
+  background-image: url(../../images/mbti/dog.png);
+}
+#wrap #container article .mbti-grid-box ul li > div.intp-image {
+  background-image: url(../../images/mbti/eagle.png);
+}
+#wrap #container article .mbti-grid-box ul li > div.infj-image {
+  background-image: url(../../images/mbti/gosmdochi.png);
+}
+#wrap #container article .mbti-grid-box ul li > div.infp-image {
+  background-image: url(../../images/mbti/horse.png);
+}
+#wrap #container article .mbti-grid-box ul li > div.estj-image {
+  background-image: url(../../images/mbti/kangaroo.png);
+}
+#wrap #container article .mbti-grid-box ul li > div.estp-image {
+  background-image: url(../../images/mbti/lion.png);
+}
+#wrap #container article .mbti-grid-box ul li > div.esfj-image {
+  background-image: url(../../images/mbti/panda.png);
+}
+#wrap #container article .mbti-grid-box ul li > div.esfp-image {
+  background-image: url(../../images/mbti/tiger.png);
+}
+#wrap #container article .mbti-grid-box ul li > div.entj-image {
+  background-image: url(../../images/mbti/rabbit.png);
+}
+#wrap #container article .mbti-grid-box ul li > div.entp-image {
+  background-image: url(../../images/mbti/sasum.png);
+}
+#wrap #container article .mbti-grid-box ul li > div.enfj-image {
+  background-image: url(../../images/mbti/sudal.png);
+}
+#wrap #container article .mbti-grid-box ul li > div.enfp-image {
+  background-image: url(../../images/mbti/whale.png);
 }
 
 .gnb ul {

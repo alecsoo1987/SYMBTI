@@ -1,55 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/main.css">
 </head>
+
 <body>
-  <div id="wrap">
+    <div id="wrap">
         <div id="header" role="header">
             <header>
-              <%- include('nav.ejs') %>
+                <%- include('nav.ejs') %>
             </header>
         </div>
         <div id="container">
             <div class="main-content-wrap gap-40">
                 <article>
-                    <div class="title_style_01">
+                    <div class="title-style-01">
                         SYMBTI 설명
                     </div>
                     <p class="fw-b lh-sm pa-16">
-                        Welcome To <span class="fc-purple03">S</span>how <span class="fc-purple03">Y</span>our <span class="fc-purple03">MBTI</span> <br/>
-                        <br/>
-                        이 사이트는 연애 또는 일상에서 발생하는 다양한 상황을 문항으로 제시합니다.<br/>
-                        상황에 따라 MBTI 유형별로 어떤 행동을 할지 선택합니다.<br/>
-                        <br/>
-                        선택을 완료하면 문항에 답변한 모든 유형별 통계를 확인할 수 있습니다.<br/>
+                        Welcome To <span class="fc-purple03">S</span>how <span class="fc-purple03">Y</span>our <span
+                            class="fc-purple03">MBTI</span> <br />
+                        <br />
+                        이 사이트는 연애 또는 일상에서 발생하는 다양한 상황을 문항으로 제시합니다.<br />
+                        상황에 따라 MBTI 유형별로 어떤 행동을 할지 선택합니다.<br />
+                        <br />
+                        선택을 완료하면 문항에 답변한 모든 유형별 통계를 확인할 수 있습니다.<br />
                         연애 또는 일상의 관계에서 상대를 좀 더 이해할 수 있는 계기가 되었으면 좋겠습니다.
                     </p>
                     <button class="button button-primary ma-auto w-20p tutorialBtn">
                         <span class="fs-16 fw-sb">
                             5초 Tutorial 시작
-                        </span>                        
+                        </span>
                     </button>
                 </article>
 
-                <article class="tutorial_question d-none article_box_design01">
-                    <div class="title_style_01">
+                <article class="tutorial-question d-none article-box-design01">
+                    <div class="title-style-01">
                         질문 예시
                     </div>
-                    <div class="question_contbox">
-                        <div class="questionTitle first-tooltip pl-12"
-                            data-bs-toggle="tooltip" data-bs-placement="left"
-                            data-bs-custom-class="custom-tooltip"
-                            data-bs-title="해당 질문을 읽고나서">
+                    <div class="question-contbox">
+                        <div class="questionTitle first-tooltip pl-12" data-bs-toggle="tooltip" data-bs-placement="left"
+                            data-bs-custom-class="custom-tooltip" data-bs-title="해당 질문을 읽고나서">
                             내가 상대방 SNS 스토리, 게시글에 좋아요를 누르는 것은 플러팅이다.
                         </div>
-                        <ul class="answerList second-tooltip pl-12"
-                            data-bs-toggle="tooltip" data-bs-placement="left"
-                            data-bs-custom-class="custom-tooltip"
-                            data-bs-title="본인의 생각과 일치하는 보기를 선택한 뒤">
+                        <ul class="answerList second-tooltip pl-12" data-bs-toggle="tooltip" data-bs-placement="left"
+                            data-bs-custom-class="custom-tooltip" data-bs-title="본인의 생각과 일치하는 보기를 선택한 뒤">
                             <li>
                                 <span class="dif_cc">1.</span> Yes, 좋아요는 호감을 표현하기 위한 수단 중 하나이다.
                             </li>
@@ -61,120 +60,136 @@
                             </li>
                         </ul>
                     </div>
-                    <button type="submit" class="btn submitbtn resultBtn btn-outline-secondary m-auto third-tooltip"
-                            data-bs-toggle="tooltip" data-bs-placement="bottom"
-                            data-bs-custom-class="custom-tooltip"
-                            data-bs-title="완료 버튼을 눌러 결과 확인">
+                    <button type="submit" class="btn show-resultBtn resultBtn btn-primary m-auto third-tooltip"
+                        data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip"
+                        data-bs-title="완료 버튼을 눌러 결과 확인">
                         <span class="fs-xs fw-b">
                             답변선택 완료 후 결과보기
                         </span>
                     </button>
                 </article>
 
-                <article class="tutorial_result d-none"> 
-                    <div class="title_style_01">
+                <article class="tutorial-result d-none">
+                    <div class="title-style-01">
                         응답 결과
                     </div>
-                    <div class="question_contbox">
-                        <ul class="d-flex flex-row gap-40 justify-space-b mb-20">
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">ISTJ</span> 
+                    <div class="mbti-grid-box">
+                        <ul>
+                            <li class="grid-istj">
+                                <span class="mbti-title">[ISTJ]</span>
+                                <div class="istj-image">
+                                </div>                                
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">ISTP</span> 
+                            <li class="grid-istp">
+                                <span class="mbti-title">ISTP</span>
+                                <div class="istp-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">ISFJ</span> 
+                            <li class="grid-isfj">
+                                <span class="mbti-title">ISFJ</span>
+                                <div class="isfj-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">ISFP</span> 
-                                <span>1번 20%</span>
-                                <span>2번 30%</span>
-                                <span>3번 50%</span>
-                            </li>
-                        </ul>
-                        <ul class="d-flex flex-row gap-40 justify-space-b mb-20">
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">INTJ</span> 
-                                <span>1번 20%</span>
-                                <span>2번 30%</span>
-                                <span>3번 50%</span>
-                            </li>
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">INTP</span> 
-                                <span>1번 20%</span>
-                                <span>2번 30%</span>
-                                <span>3번 50%</span>
-                            </li>
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">INFJ</span> 
-                                <span>1번 20%</span>
-                                <span>2번 30%</span>
-                                <span>3번 50%</span>
-                            </li>
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">INFP</span> 
+                            <li class="grid-isfp">
+                                <span class="mbti-title">ISFP</span>
+                                <div class="isfp-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
                         </ul>
-                        <ul class="d-flex flex-row gap-40 justify-space-b mb-20">
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">ESTJ</span> 
+                        <ul>
+                            <li class="grid-intj">
+                                <span class="mbti-title">INTJ</span>
+                                <div class="intj-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">ESTP</span> 
+                            <li class="grid-intp">
+                                <span class="mbti-title">INTP</span>
+                                <div class="intp-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">ESFJ</span> 
+                            <li class="grid-infj">
+                                <span class="mbti-title">INFJ</span>
+                                <div class="infj-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">ESFP</span> 
+                            <li class="grid-infp">
+                                <span class="mbti-title">INFP</span>
+                                <div class="infp-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
                         </ul>
-                        <ul class="d-flex flex-row gap-40 justify-space-b mb-20">
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">ENTJ</span> 
+                        <ul>
+                            <li class="grid-estj">
+                                <span class="mbti-title">ESTJ</span>
+                                <div class="estj-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">ENTP</span> 
+                            <li class="grid-estp">
+                                <span class="mbti-title">ESTP</span>
+                                <div class="estp-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">ENFJ</span> 
+                            <li class="grid-esfj">
+                                <span class="mbti-title">ESFJ</span>
+                                <div class="esfj-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
-                            <li class="d-flex flex-column align-items-center gap-4">
-                                <span class="listNum">ENFP</span> 
+                            <li class="grid-esfp">
+                                <span class="mbti-title">ESFP</span>
+                                <div class="esfp-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li class="grid-entj">
+                                <span class="mbti-title">ENTJ</span>
+                                <div class="entj-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="grid-entp">
+                                <span class="mbti-title">ENTP</span>
+                                <div class="entp-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="grid-enfj">
+                                <span class="mbti-title">ENFJ</span>
+                                <div class="istp-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="grid-enfp">
+                                <span class="mbti-title">ENFP</span>
+                                <div class="enfp-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
@@ -185,36 +200,37 @@
             </div>
         </div>
         <div id="footer"></div>
-  </div>
+    </div>
 </body>
 <script>
 
-const answer_list = document.querySelectorAll('.answerList li')
+    const answer_list = document.querySelectorAll('.answerList li')
 
-answer_list.forEach(item => {
-    item.addEventListener('click', function(){
-        answer_list.forEach(li => li.classList.remove('active'));
-        this.classList.add('active');
+    answer_list.forEach(item => {
+        item.addEventListener('click', function () {
+            answer_list.forEach(li => li.classList.remove('active'));
+            this.classList.add('active');
+        })
     })
-})
-document.querySelector('.tutorialBtn').addEventListener('click', () => {
-    const tutorialQ = document.querySelector('.tutorial_question');
-    tutorialQ.classList.remove('d-none');
+    document.querySelector('.tutorialBtn').addEventListener('click', () => {
+        const tutorialQ = document.querySelector('.tutorial-question');
+        tutorialQ.classList.remove('d-none');
 
-    const tooltips = [
-        new bootstrap.Tooltip(document.querySelector('.first-tooltip')),
-        new bootstrap.Tooltip(document.querySelector('.second-tooltip')),
-        new bootstrap.Tooltip(document.querySelector('.third-tooltip'))
-    ];
+        const tooltips = [
+            new bootstrap.Tooltip(document.querySelector('.first-tooltip')),
+            new bootstrap.Tooltip(document.querySelector('.second-tooltip')),
+            new bootstrap.Tooltip(document.querySelector('.third-tooltip'))
+        ];
 
-    tooltips.forEach((tooltip, index) => {
-        setTimeout(() => tooltip.show(), 2000 * (index + 1));
+        tooltips.forEach((tooltip, index) => {
+            setTimeout(() => tooltip.show(), 2000 * (index + 1));
+        });
     });
-});
 
-document.querySelector('.resultBtn').addEventListener('click', () => {
-    const tutorialR = document.querySelector('.tutorial_result');
-    tutorialR.classList.remove('d-none');
-});
+    document.querySelector('.resultBtn').addEventListener('click', () => {
+        const tutorialR = document.querySelector('.tutorial-result');
+        tutorialR.classList.remove('d-none');
+    });
 </script>
+
 </html>

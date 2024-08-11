@@ -1,4 +1,4 @@
-@mixin dif_cc{    
+@mixin dif_cc {
     display: -webkit-inline-flex;
     display: -moz-inline-flex;
     display: -ms-inline-flex;
@@ -6,10 +6,11 @@
     justify-content: center;
     align-items: center;
 }
+
 body {
     position: relative;
     width: 100%;
-    height: 100%;    
+    height: 100%;
     //background: linear-gradient(180deg, rgb(222, 213, 254) 0%, rgb(244, 174, 172) 100%) no-repeat;
     background: var(--background);
     background-attachment: fixed;
@@ -36,6 +37,7 @@ body {
         z-index: 1;
 
         @include scrollAll;
+
         .main-content-wrap {
             display: flex;
             flex-direction: column;
@@ -45,8 +47,9 @@ body {
             overflow-x: hidden;
             overflow-y: overlay;
         }
+
         /* 타이틀 스타일 */
-        .title_style_01 {
+        .title-style-01 {
             width: 30%;
             padding: 10px 0px;
             font-weight: bold;
@@ -65,19 +68,35 @@ body {
             flex-flow: column nowrap;
             gap: $element24;
             margin-top: 30px;
+
             p {
                 font-size: $font-size20;
             }
-            .question_contbox {
-                padding: 1rem 1rem;
+
+            .question-contbox {
+                padding: 1rem;
             }
 
-            &.article_box_design01 {
-                background: rgba(255,255,255,0.5);
+            .show-resultBtn {
+                width: fit-content;
+                background-color: #dc3545;
+                color: #fff;
+                border-color: #dc3545;
+
+                &:hover {
+                    color: var(--bs-btn-hover-color);
+                    background-color: var(--bs-btn-hover-bg);
+                    border-color: var(--bs-btn-hover-border-color);
+                }
+            }
+
+            &.article-box-design01 {
+                background: rgba(255, 255, 255, 0.5);
                 border-radius: 8px;
-                padding: 0.5rem;
+                padding: 1.5rem 0rem;
 
             }
+
             .answerList {
                 li {
                     &.active {
@@ -86,17 +105,81 @@ body {
                     }
                 }
             }
+
+            /* mbti box */
+            .mbti-grid-box {
+                ul {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 40px;
+                    justify-content: space-between;
+                    margin-bottom: 20px;
+                    li {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        width: calc(100% / 4);
+                        gap: 4px;
+                        >div {
+                            display: grid;
+                            width: 100%;
+                            height: auto;
+                            padding-top: 100%;
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            &.istj-image {
+                                background-image: url(../../images/mbti/bear.png);
+                            }
+                            &.istp-image {
+                                background-image: url(../../images/mbti/angmusae.png);
+                            }
+                            &.isfj-image {
+                                background-image: url(../../images/mbti/daram.png);
+                            }
+                            &.isfp-image {
+                                background-image: url(../../images/mbti/desert_fox.png);
+                            }
+                            &.intj-image {
+                                background-image: url(../../images/mbti/dog.png);
+                            }
+                            &.intp-image {
+                                background-image: url(../../images/mbti/eagle.png);
+                            }
+                            &.infj-image {
+                                background-image: url(../../images/mbti/gosmdochi.png);
+                            }
+                            &.infp-image {
+                                background-image: url(../../images/mbti/horse.png);
+                            }
+                            &.estj-image {
+                                background-image: url(../../images/mbti/kangaroo.png);
+                            }
+                            &.estp-image {
+                                background-image: url(../../images/mbti/lion.png);
+                            }
+                            &.esfj-image {
+                                background-image: url(../../images/mbti/panda.png);
+                            }
+                            &.esfp-image {
+                                background-image: url(../../images/mbti/tiger.png);
+                            }
+                            &.entj-image {
+                                background-image: url(../../images/mbti/rabbit.png);
+                            }
+                            &.entp-image {
+                                background-image: url(../../images/mbti/sasum.png);
+                            }
+                            &.enfj-image {
+                                background-image: url(../../images/mbti/sudal.png);
+                            }
+                            &.enfp-image {
+                                background-image: url(../../images/mbti/whale.png);
+                            }
+                        }
+                        
+                    }            
+                }
+            }
         }
-
-
-        
-
-        
     }
 }
-
-
-
-
-
-
