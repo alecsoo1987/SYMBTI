@@ -31,6 +31,7 @@
         position: relative;
         top: 50%;
         left: 50%;
+        padding: 1rem;
         display: flex;
         flex-direction: column;
         width: calc(100% - 88px);
@@ -61,7 +62,6 @@
         }
 
         .modal-body {
-            padding: 0 1rem;
             max-height: calc(100vh - 6rem);
             font-size: $font-size14;
             overflow: auto;
@@ -80,6 +80,7 @@
 
             .list-panel {
                 max-height: calc(100vh - 17rem);
+
                 &.over-height {
                     max-height: calc(100vh - 25rem);
                 }
@@ -90,7 +91,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 1rem 0;
+            padding: 0rem 0;
             border-radius: 0 0 0.5rem 0.5rem;
 
             .btn {
@@ -104,29 +105,106 @@
                 }
             }
         }
-        
+
         &.modal {
             &-lg {
+                max-width: calc(#{$break-lg} - 88px);
                 width: calc(100% - 88px);
             }
 
             &-md {
+                max-width: calc(#{$break-md} - 88px);
                 width: calc(100% - 88px);
             }
 
             &-sm {
+                max-width: calc(640px - 88px);
                 width: calc(100% - 88px);
+            }
+
+            &-error {
+                max-width: 1000px;
+            }
+        }
+
+        &.error-modal {
+            background: var(--panel10);
+            .modal-body {
+                font-size: $font-size14;
+                overflow: auto;
+
+                @include scrollAll;
+
+                .title {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: $font-size24;
+                    font-weight: bold;
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+
+                    i {
+                        display: block;
+                        background-image:url(../../../images/icons/exclamation.png);
+                        width: 32px;
+                        height: 32px;
+                        margin-bottom:15px;
+                        background-size:contain;
+                        background-repeat: no-repeat;
+                    }
+                }
+
+                .content {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 1rem;
+                    font-size: $font-size18;
+                }
+            }
+
+            .modal-footer {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0rem 0;
+                justify-content: center;
+                border: none;
+
+                .btn {
+                    width: 100%;
+                    padding: 0.5rem;
+                    font-weight: 600;
+                    border-radius: 4px;
+                    width: 80%;
+                    background-color: #dc3545;
+                    border-color: #dc3545;
+                    color: #fff;
+                    font-size: $font-size18;
+
+                    &:hover {
+                        background-color: #085ED7 !important;
+                        border-color: #085ED7 !important;
+                    }
+
+                    i {
+                        margin-right: 0.5rem;
+                        font-size: $font-size14;
+                        font-weight: 600;
+                    }
+                }
             }
         }
     }
 }
 
 
-@import "modal-image-view";
-@import "modal-scroll-height";
-@import "modal-config-user";
-@import "modal-editor-preview";
-@import "modal-rolling-images";
-@import "modal-cleaning";
-@import "modal-dashboard-widget-list";
-@import "modal-print";
+    @import "modal-image-view";
+    @import "modal-scroll-height";
+    @import "modal-config-user";
+    @import "modal-editor-preview";
+    @import "modal-rolling-images";
+    @import "modal-cleaning";
+    @import "modal-dashboard-widget-list";
+    @import "modal-print";

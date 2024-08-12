@@ -91,8 +91,10 @@
         background-color: var(--system-red);
         color: var(--text-white);
 
-        &:hover {
-            opacity: 0.5;
+        &:hover,
+        &:active {
+            background-color: var(--chart-red20) !important;
+            color: var(--text-black) !important;
         }
 
         // TYPE

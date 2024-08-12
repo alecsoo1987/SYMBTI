@@ -120,6 +120,9 @@ body {
                         align-items: center;
                         width: calc(100% / 4);
                         gap: 4px;
+                        .mbti-title {
+                            font-weight: 700;
+                        }
                         >div {
                             display: grid;
                             width: 100%;
@@ -131,7 +134,7 @@ body {
                                 background-image: url(../../images/mbti/bear.png);
                             }
                             &.istp-image {
-                                background-image: url(../../images/mbti/angmusae.png);
+                                background-image: url(../../images/mbti/gosmdochi.png);
                             }
                             &.isfj-image {
                                 background-image: url(../../images/mbti/daram.png);
@@ -140,40 +143,40 @@ body {
                                 background-image: url(../../images/mbti/desert_fox.png);
                             }
                             &.intj-image {
-                                background-image: url(../../images/mbti/dog.png);
+                                background-image: url(../../images/mbti/wolf.png);
                             }
                             &.intp-image {
-                                background-image: url(../../images/mbti/eagle.png);
+                                background-image: url(../../images/mbti/whale.png);
                             }
                             &.infj-image {
-                                background-image: url(../../images/mbti/gosmdochi.png);
+                                background-image: url(../../images/mbti/sudal.png);
                             }
                             &.infp-image {
                                 background-image: url(../../images/mbti/horse.png);
                             }
                             &.estj-image {
-                                background-image: url(../../images/mbti/kangaroo.png);
+                                background-image: url(../../images/mbti/tiger.png);
                             }
                             &.estp-image {
                                 background-image: url(../../images/mbti/lion.png);
                             }
                             &.esfj-image {
-                                background-image: url(../../images/mbti/panda.png);
+                                background-image: url(../../images/mbti/kangaroo.png);
                             }
                             &.esfp-image {
-                                background-image: url(../../images/mbti/tiger.png);
+                                background-image: url(../../images/mbti/panda.png);
                             }
                             &.entj-image {
-                                background-image: url(../../images/mbti/rabbit.png);
+                                background-image: url(../../images/mbti/leopard.png);
                             }
                             &.entp-image {
-                                background-image: url(../../images/mbti/sasum.png);
+                                background-image: url(../../images/mbti/eagle.png);
                             }
                             &.enfj-image {
-                                background-image: url(../../images/mbti/sudal.png);
+                                background-image: url(../../images/mbti/angmusae.png);
                             }
                             &.enfp-image {
-                                background-image: url(../../images/mbti/whale.png);
+                                background-image: url(../../images/mbti/dog.png);
                             }
                         }
                         

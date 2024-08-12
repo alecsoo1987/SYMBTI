@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <%- include('modal/selectError') %>
     <div id="wrap">
         <div id="header" role="header">
             <header>
@@ -25,11 +26,11 @@
                         Welcome To <span class="fc-purple03">S</span>how <span class="fc-purple03">Y</span>our <span
                             class="fc-purple03">MBTI</span> <br />
                         <br />
-                        이 사이트는 연애 또는 일상에서 발생하는 다양한 상황을 문항으로 제시합니다.<br />
-                        상황에 따라 MBTI 유형별로 어떤 행동을 할지 선택합니다.<br />
+                        이 사이트는 연애 또는 일상에서 발생하는 다양한 상황을 제시합니다.<br />
+                        상황에 따라 MBTI 유형별로 어떤 행동을 할지 보기에서 선택합니다.<br />                        
+                        선택을 완료하면 질문에 대한 각 유형별 선택 결과를 확인할 수 있습니다.<br />
                         <br />
-                        선택을 완료하면 문항에 답변한 모든 유형별 통계를 확인할 수 있습니다.<br />
-                        연애 또는 일상의 관계에서 상대를 좀 더 이해할 수 있는 계기가 되었으면 좋겠습니다.
+                        연애 또는 일상에서 상대를 좀 더 이해할 수 있는 계기가 되었으면 좋겠습니다.
                     </p>
                     <button class="button button-primary ma-auto w-20p tutorialBtn">
                         <span class="fs-16 fw-sb">
@@ -71,7 +72,7 @@
 
                 <article class="tutorial-result d-none">
                     <div class="title-style-01">
-                        응답 결과
+                        유형별 결과
                     </div>
                     <div class="mbti-grid-box">
                         <ul>
@@ -84,21 +85,21 @@
                                 <span>3번 50%</span>
                             </li>
                             <li class="grid-istp">
-                                <span class="mbti-title">ISTP</span>
+                                <span class="mbti-title">[ISTP]</span>
                                 <div class="istp-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
                             <li class="grid-isfj">
-                                <span class="mbti-title">ISFJ</span>
+                                <span class="mbti-title">[ISFJ]</span>
                                 <div class="isfj-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
                             <li class="grid-isfp">
-                                <span class="mbti-title">ISFP</span>
+                                <span class="mbti-title">[ISFP]</span>
                                 <div class="isfp-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
@@ -107,28 +108,28 @@
                         </ul>
                         <ul>
                             <li class="grid-intj">
-                                <span class="mbti-title">INTJ</span>
+                                <span class="mbti-title">[INTJ]</span>
                                 <div class="intj-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
                             <li class="grid-intp">
-                                <span class="mbti-title">INTP</span>
+                                <span class="mbti-title">[INTP]</span>
                                 <div class="intp-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
                             <li class="grid-infj">
-                                <span class="mbti-title">INFJ</span>
+                                <span class="mbti-title">[INFJ]</span>
                                 <div class="infj-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
                             <li class="grid-infp">
-                                <span class="mbti-title">INFP</span>
+                                <span class="mbti-title">[INFP]</span>
                                 <div class="infp-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
@@ -137,28 +138,28 @@
                         </ul>
                         <ul>
                             <li class="grid-estj">
-                                <span class="mbti-title">ESTJ</span>
+                                <span class="mbti-title">[ESTJ]</span>
                                 <div class="estj-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
                             <li class="grid-estp">
-                                <span class="mbti-title">ESTP</span>
+                                <span class="mbti-title">[ESTP]</span>
                                 <div class="estp-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
                             <li class="grid-esfj">
-                                <span class="mbti-title">ESFJ</span>
+                                <span class="mbti-title">[ESFJ]</span>
                                 <div class="esfj-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
                             <li class="grid-esfp">
-                                <span class="mbti-title">ESFP</span>
+                                <span class="mbti-title">[ESFP]</span>
                                 <div class="esfp-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
@@ -167,28 +168,28 @@
                         </ul>
                         <ul>
                             <li class="grid-entj">
-                                <span class="mbti-title">ENTJ</span>
+                                <span class="mbti-title">[ENTJ]</span>
                                 <div class="entj-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
                             <li class="grid-entp">
-                                <span class="mbti-title">ENTP</span>
+                                <span class="mbti-title">[ENTP]</span>
                                 <div class="entp-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
                             <li class="grid-enfj">
-                                <span class="mbti-title">ENFJ</span>
-                                <div class="istp-image"></div>
+                                <span class="mbti-title">[ENFJ]</span>
+                                <div class="enfj-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
                                 <span>3번 50%</span>
                             </li>
                             <li class="grid-enfp">
-                                <span class="mbti-title">ENFP</span>
+                                <span class="mbti-title">[ENFP]</span>
                                 <div class="enfp-image"></div>
                                 <span>1번 20%</span>
                                 <span>2번 30%</span>
@@ -204,14 +205,16 @@
 </body>
 <script>
 
+    // 보기 클릭 이벤트
     const answer_list = document.querySelectorAll('.answerList li')
-
     answer_list.forEach(item => {
         item.addEventListener('click', function () {
             answer_list.forEach(li => li.classList.remove('active'));
             this.classList.add('active');
         })
     })
+
+    // 튜토리얼 시작 버튼
     document.querySelector('.tutorialBtn').addEventListener('click', () => {
         const tutorialQ = document.querySelector('.tutorial-question');
         tutorialQ.classList.remove('d-none');
@@ -227,10 +230,38 @@
         });
     });
 
+    // 결과보기 버튼 이벤트
     document.querySelector('.resultBtn').addEventListener('click', () => {
         const tutorialR = document.querySelector('.tutorial-result');
-        tutorialR.classList.remove('d-none');
+        answer_list.forEach(item => {
+            if(item.classList.contains('active')) {
+
+                tutorialR.classList.remove('d-none');    
+            } else {
+                openModal();
+            }
+            })        
     });
+
+    /* 모달 이벤트 */
+    var openModalBtn = document.getElementById("openModalBtn");
+    var modal = document.getElementById("selectError");
+    var closeModal = document.getElementById("closeModal");
+    function openModal() {
+      modal.style.display = "block";
+    }
+
+    closeModal.addEventListener('click',()=>{
+        modal.style.display = "none";
+    })
+
+    /* 모달 바깥 클릭시 닫기
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    */
 </script>
 
 </html>

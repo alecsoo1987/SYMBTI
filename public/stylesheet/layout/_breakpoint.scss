@@ -1,0 +1,42 @@
+// @BREAKPOINT
+
+$break-lg: 1920px;
+$break-md: 1440px;
+$break-sm: 1024px;
+$break-xs: 768px;
+$break-xxs: 640px;
+
+$break-symbti: 800px;
+
+
+.break {
+    &-lg {
+        max-width: $break-lg!important;
+        width: 100%;
+    }
+
+    &-md {
+        max-width: $break-md!important;
+        width: 100%;
+    }
+
+    &-sm {
+        max-width: $break-sm!important;
+        width: 100%;
+    }
+
+    &-xs {
+        max-width: $break-xs!important;
+        width: 100%;
+    }
+
+    &-xxs {
+        max-width: $break-xxs!important;
+        width: 100%;
+    }
+
+    &-symbti {
+        max-width: $break-symbti !important;
+        width: 100%;
+    }
+}

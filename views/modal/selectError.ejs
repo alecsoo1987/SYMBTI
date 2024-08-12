@@ -1,0 +1,24 @@
+<div id="selectError" class="modal">
+    <div class="modal-content error-modal modal-sm">
+      <div class="modal-body">
+        <h3 class="title">
+          <i class="exclamation"></i>
+            Error
+        </h3>
+        <p class="content">
+          번호를 선택해주세요.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-sm btn" id="closeModal">
+          닫기
+        </button>
+      </div>      
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('closeModal').addEventListener('click',()=>{
+      document.querySelector('modal').style.display="none";
+    })
+  </script>
