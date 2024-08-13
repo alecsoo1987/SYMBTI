@@ -18,7 +18,6 @@ input {
         height: $element32;
         border: 1px solid var(--field-border);
         border-radius: 0.5rem;
-        background-color: var(--field10);
         font-size: $font-size14;
         color: var(--text-primary);
         caret-color: var(--text-primary);
@@ -81,8 +80,8 @@ textarea {
         display: inline-flex;
         margin-bottom: 0.750rem;
         margin-left: 0.25rem;
-
-        @extend %label-text10;
+        display: flex;
+        align-items: center;
     }
 
     &.field {

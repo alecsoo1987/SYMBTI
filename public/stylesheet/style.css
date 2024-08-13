@@ -245,7 +245,7 @@ body {
   line-height: 1.125rem;
 }
 
-.selection-select > label, .text-field > label, .label-text10 {
+.label-text10 {
   font-size: 0.875rem;
   font-weight: 200;
   color: var(--text-secondary);
@@ -643,11 +643,11 @@ body {
   --system-yellow: rgb(190, 167, 54);
   --system-green: rgb(18, 128, 92);
   --system-blue: rgb(13, 102, 208);
-  --system-red-secondary: rgba(201, 37, 45, 0.2);
-  --system-orange-secondary: rgba(203, 111, 16, 0.2);
-  --system-yellow-secondary: rgba(190, 167, 54, 0.2);
-  --system-green-secondary: rgba(18, 128, 92, 0.2);
-  --system-blue-secondary: rgba(13, 102, 208, 0.2);
+  --system-red-secondary: rgba(201, 37, 45, 0.5);
+  --system-orange-secondary: rgba(203, 111, 16, 0.5);
+  --system-yellow-secondary: rgba(190, 167, 54, 0.5);
+  --system-green-secondary: rgba(18, 128, 92, 0.5);
+  --system-blue-secondary: rgba(13, 102, 208, 0.5);
   --map-bg-h: 0;
   --map-bg-s: 0%;
   --map-bg-l: 98%;
@@ -975,6 +975,24 @@ body {
 }
 .field-file-custom .file-info .chip button:hover i {
   color: var(--icon-white);
+}
+
+.register-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+.register-form .form-group label {
+  margin-top: 20px;
+}
+.register-form .form-group .help-message {
+  padding-left: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--system-orange);
+}
+.register-form .footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
 }
 
 .selection-select.error .helper-text, .selection-select.error .select-box + .helper-text, .text-field.error .helper-text, .search-field.error ~ .helper-text, .helper-text.success, .helper-text.error {
@@ -1434,7 +1452,6 @@ input[type=text], input[type=password], input[type=number], input[type=tel], inp
   height: 2rem;
   border: 1px solid var(--field-border);
   border-radius: 0.5rem;
-  background-color: var(--field10);
   font-size: 0.875rem;
   color: var(--text-primary);
   caret-color: var(--text-primary);
@@ -1512,6 +1529,8 @@ textarea:focus {
   display: inline-flex;
   margin-bottom: 0.75rem;
   margin-left: 0.25rem;
+  display: flex;
+  align-items: center;
 }
 .text-field.field-inline .input-box {
   display: flex;
@@ -1661,6 +1680,8 @@ textarea:focus {
   display: inline-flex;
   margin-bottom: 0.75rem;
   margin-left: 0.25rem;
+  display: flex;
+  align-items: center;
 }
 .selection-select .select-box {
   position: relative;
@@ -1668,7 +1689,7 @@ textarea:focus {
   height: fit-content;
 }
 .selection-select .select-box::after {
-  content: "\e983";
+  content: "↓";
   position: absolute;
   top: 50%;
   right: 0.8rem;
@@ -1687,8 +1708,6 @@ textarea:focus {
   height: 2rem;
   border: 1px solid var(--field-border);
   border-radius: 0.5rem;
-  background-color: var(--field10);
-  font-size: 0.875rem;
   color: var(--text-placeholder);
   transition: background-color 0.3s, color 0.3s, border 0.3s, box-shadow 0.3s, transform 0.3s;
   cursor: pointer;
@@ -3978,6 +3997,12 @@ body {
   background-color: var(--system-green);
   color: var(--text-white);
 }
+.button-green:hover {
+  background-color: var(--system-green-secondary) !important;
+  color: var(--text-white) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
 .button-green-line {
   border-color: var(--system-green-secondary);
   background: none;
@@ -3989,9 +4014,9 @@ body {
   color: var(--text-primary);
 }
 .button-green-text:hover {
-  background-color: var(--system-green-secondary);
-  box-shadow: none;
-  transform: none;
+  background-color: var(--system-green-secondary) !important;
+  box-shadow: none !important;
+  transform: none !important;
 }
 .button-blue {
   background-color: var(--system-blue);

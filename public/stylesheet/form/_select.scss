@@ -8,8 +8,9 @@
     > label {
         display: inline-flex;
         margin-bottom: 0.75rem;
-        margin-left: 0.25rem;
-        @extend %label-text10;
+        margin-left: 0.25rem;        
+        display: flex;
+        align-items: center;
     }
 
     .select-box {
@@ -17,7 +18,7 @@
         height: fit-content;
 
         &::after {
-            content: "\e983";
+            content: "\2193";
             position: absolute;
             top: 50%;
             right: 0.8rem;
@@ -38,8 +39,6 @@
         height: $element32;
         border: 1px solid var(--field-border);
         border-radius: 0.5rem;
-        background-color: var(--field10);
-        font-size: $font-size14;
         color: var(--text-placeholder);
         transition: background-color .3s, color .3s, border .3s, box-shadow .3s, transform .3s;
         cursor: pointer;

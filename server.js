@@ -320,15 +320,9 @@ app.post('/submitAnswer', loginCheck, async(요청,응답)=>{
     
     //예외사항 처리 함수
     function checkIfSameAnswer(existingAnswer, userId, selectedAnswerNum) { 
-      // 현재 질문과 참여이력 모두 없거나 or 해당 질문에 대한 참가자의 배열이 없는 경우 함수 탈출
       if (!existingAnswer || !existingAnswer.participants) return false;
-
-      // 참여 이력이 있고 > participants 배열에서 현재 사용자의 id와 일치하는 참가자 객체를 찾음
       let participant = existingAnswer.participants.find(p => p.participants_id.equals(userId));
-      // 만약 현재 사용자의 id와 일치하지 않으면 신규 유저이므로 함수 종료
       if (!participant) return false;
-
-      // 위의 두 조건, 참여이력이 있고, id도 일치하는 경우 기존 답변과 현재 답변의 일치 여부를 판단하여 true/false를 반환
       return participant.participants_answer === parseInt(selectedAnswerNum);
     }
 
@@ -336,11 +330,9 @@ app.post('/submitAnswer', loginCheck, async(요청,응답)=>{
       if (checkIfSameAnswer(existingAnswer, userId, selectedAnswerNum)) {
         return 응답.send('You have already answered this question with the same answer.');
       } else {
-        // 기존 답변과 다르므로 답변 변경 가능
         return 응답.send('답변을 변경하시겠습니까?');
       }
     } else {
-      // 참여한 적이 없는 경우 새로운 데이터 삽입
       await db.collection('answers').insertOne({
         questionId: new ObjectId(questionId),
         questionTitle: question,

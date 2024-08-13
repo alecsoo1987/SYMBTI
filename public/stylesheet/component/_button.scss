@@ -168,6 +168,12 @@
     &-green {
         background-color: var(--system-green);
         color: var(--text-white);
+        &:hover {
+            background-color: var(--system-green-secondary) !important;
+            color: var(--text-white) !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
 
         // TYPE
         &-line {
@@ -182,9 +188,9 @@
             color: var(--text-primary);
 
             &:hover {
-                background-color: var(--system-green-secondary);
-                box-shadow: none;
-                transform: none;
+                background-color: var(--system-green-secondary) !important;
+                box-shadow: none !important;
+                transform: none !important;
             }
         }
     }

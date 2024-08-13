@@ -1,0 +1,25 @@
+// @FORM Default
+.register-form {
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+
+        label {
+            margin-top: 20px;
+        }
+
+        .help-message {
+            padding-left: 0.5rem;
+            font-size: $font-size14;
+            color: var(--system-orange)
+        }
+
+    }
+
+    .footer {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+}
