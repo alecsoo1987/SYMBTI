@@ -10,146 +10,149 @@
 
 <body>
     <%- include('modal/registerError') %>
-    <div id="wrap">
-        <div id="header" role="header">
-            <header>
-                <%- include('nav.ejs') %>
-            </header>
-        </div>
-        <div id="container">
-            <div class="main-content-wrap addQuestion">
-                <div class="contentsType mb-4">회원가입</div>
-                <form action="/register" method="POST" class="register-form">
-                    <input type="hidden" name="id">
-                    <div class="form-group">
-                        <div class="text-field">
-                            <label for="username">아이디
-                                <span class="fc-red fs-14">
-                                    (*)
-                                </span>
-                                <span class="help-message">
-                                    6~12자, 특수문자를 제외한 영문 소문자 + 숫자로만 가입 가능합니다.
-                                </span>
-                            </label>
-                            <input type="text" class="form-control" id="username" name="username" minlength="6"
-                                maxlength="12">
-                            <label for="password">비밀번호
-                                <span class="fc-red fs-14">
-                                    (*)
-                                </span>
-                                <span class="help-message">
-                                    6~12자까지 입력 가능합니다.
-                                </span>
-                            </label>
-                            <input type="password" class="form-control" id="password" name="password" minlength="6"
-                                maxlength="12">
-                            <label for="confirmPassword">비밀번호 확인
-                                <span class="fc-red fs-14">
-                                    (*)
-                                </span>
-                            </label>
-                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
-                                minlength="6" maxlength="12">
-                        </div>
-                        <div class="selection-select">
-                            <label for="selectMBTI">MBTI를 선택하세요
-                                <span class="fc-red fs-14">
-                                    (*)
-                                </span>
-                            </label>
-                            <div class="select-box">
-                                <select id="selectMBTI" name="selectMBTI">
-                                    <option value="default">선택</option>
-                                    <option value="ISTJ">ISTJ</option>
-                                    <option value="ISTP">ISTP</option>
-                                    <option value="ISFJ">ISFJ</option>
-                                    <option value="ISFP">ISFP</option>
-                                    <option value="INTJ">INTJ</option>
-                                    <option value="INTP">INTP</option>
-                                    <option value="INFJ">INFJ</option>
-                                    <option value="INFP">INFP</option>
-                                    <option value="ESTJ">ESTJ</option>
-                                    <option value="ESTP">ESTP</option>
-                                    <option value="ESFJ">ESFJ</option>
-                                    <option value="ESFP">ESFP</option>
-                                    <option value="ENTJ">ENTJ</option>
-                                    <option value="ENTP">ENTP</option>
-                                    <option value="ENFJ">ENFJ</option>
-                                    <option value="ENFP">ENFP</option>
-                                </select>
+        <div id="wrap">
+            <div id="header" role="header">
+                <header>
+                    <%- include('nav.ejs') %>
+                </header>
+            </div>
+            <div id="container">
+                <div class="main-content-wrap addQuestion">
+                    <div class="contentsType mb-4">회원가입</div>
+                    <form action="/registers" method="POST" class="register-form" id="registerForm">
+                        <input type="hidden" name="id">
+                        <div class="form-group">
+                            <div class="text-field">
+                                <label for="username">아이디
+                                    <span class="fc-red fs-14">
+                                        (*)
+                                    </span>
+                                    <span class="help-message">
+                                        6~12자, 특수문자를 제외한 영문 소문자 + 숫자로만 가입 가능합니다.
+                                    </span>
+                                </label>
+                                <input type="text" class="form-control inputId" id="username" name="username"
+                                    minlength="6" maxlength="12">
+                                <label for="password">비밀번호
+                                    <span class="fc-red fs-14">
+                                        (*)
+                                    </span>
+                                    <span class="help-message">
+                                        6~12자까지 입력 가능합니다.
+                                    </span>
+                                </label>
+                                <input type="password" class="form-control inputPassword" id="password" name="password"
+                                    minlength="6" maxlength="12">
+                                <label for="confirmPassword">비밀번호 확인
+                                    <span class="fc-red fs-14">
+                                        (*)
+                                    </span>
+                                </label>
+                                <input type="password" class="form-control confirmPassword" id="confirmPassword"
+                                    name="confirmPassword" minlength="6" maxlength="12">
+                            </div>
+                            <div class="selection-select">
+                                <label for="selectMBTI">MBTI를 선택하세요
+                                    <span class="fc-red fs-14">
+                                        (*)
+                                    </span>
+                                </label>
+                                <div class="select-box">
+                                    <select id="selectMBTI" name="selectMBTI">
+                                        <option value="default">선택</option>
+                                        <option value="ISTJ">ISTJ</option>
+                                        <option value="ISTP">ISTP</option>
+                                        <option value="ISFJ">ISFJ</option>
+                                        <option value="ISFP">ISFP</option>
+                                        <option value="INTJ">INTJ</option>
+                                        <option value="INTP">INTP</option>
+                                        <option value="INFJ">INFJ</option>
+                                        <option value="INFP">INFP</option>
+                                        <option value="ESTJ">ESTJ</option>
+                                        <option value="ESTP">ESTP</option>
+                                        <option value="ESFJ">ESFJ</option>
+                                        <option value="ESFP">ESFP</option>
+                                        <option value="ENTJ">ENTJ</option>
+                                        <option value="ENTP">ENTP</option>
+                                        <option value="ENFJ">ENFJ</option>
+                                        <option value="ENFP">ENFP</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="footer">
-                        <button type="submit" class="btn button-green">
-                            가입하기
-                        </button>
-                    </div>
-                </form>
+                        <div class="footer">
+                            <button type="submit" class="btn button-green registerBtn">
+                                가입하기
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
+            <div id="footer"></div>
         </div>
-        <div id="footer"></div>
-    </div>
 </body>
 
 </html>
 <script>
-    document.getElementById('registerForm').addEventListener('submit', async (event) => {
+    /* 회원가입 유효성 검사 */
+    const inputId = document.getElementById('username');
+    const inputPw = document.getElementById('password');
+    const confirmPw = document.getElementById('confirmPassword');
+    const selectMBTI = document.getElementById('selectMBTI');
+
+    function idValid() {
+        const idPattern = /^[a-z][a-z0-9]*$/
+        if (inputId.value.length === 0) {
+            return '아이디를 입력해주세요.';
+        } else if (inputId.value.length < 6 || inputId.value.length > 12) {
+            return '아이디 길이는 4글자 이상, 12글자 이하로만 구성 가능합니다.';
+        } else if (!idPattern.test(inputId.value)) {
+            return "아이디는 영문소문자로 시작 해야하며 숫자만 포함 가능합니다.";
+        }
+    }
+
+    function pwValid() {
+        if (inputPw === 0 || confirmPw == 0) {
+            return '비밀번호를 입력해주세요.';
+        } else if (inputPw.value !== confirmPw.value) {
+            return '비밀번호가 일치하지 않습니다. 다시 확인해주세요.';
+        }
+    }
+
+    function mbtiValid() {
+        if (selectMBTI.value === 'default') {
+            return 'MBTI를 선택해주세요.';
+        }
+    }
+
+    document.querySelector('.registerBtn').addEventListener('click', (event) => {
         event.preventDefault();
-        const formData = new FormData(event.target);
-        console.log(formData)
 
-        try {            
-            const response = await fetch('/register', {
-                method: 'POST',
-                body: formData
-            });
+        // 모든 유효성 검사 결과를 저장할 변수
+        let errorMessages = [];
 
-            // 서버 응답을 JSON으로 파싱합니다.
-            const data = await response.json();
+        // 각 유효성 검사 함수 호출 및 오류 메시지 수집
+        const idError = idValid();
+        const pwError = pwValid();
+        const mbtiError = mbtiValid();
 
-            // 서버 응답 상태가 OK가 아닌 경우 (즉, 에러가 발생한 경우)
-            if (!response.ok) {
-                // 에러 메시지를 모달에 표시합니다.
-                showModal(data.message);
-            } else {
-                // 서버 응답이 성공적인 경우, 로그인 페이지로 리디렉션합니다.
-                window.location.href = '/login';
-            }
-        } catch (error) {
-            // 네트워크 오류 등 예외가 발생한 경우
-            console.error('Error:', error);
-            // 모달에 기본 에러 메시지를 표시합니다.
-            showModal('서버 오류가 발생했습니다.');
+        if (idError) errorMessages.push(idError);
+        if (pwError) errorMessages.push(pwError);
+        if (mbtiError) errorMessages.push(mbtiError);
+
+        // 오류 메시지가 있을 경우, 모달 표시
+        if (errorMessages.length > 0) {
+            showModal(errorMessages.join('\n'));
+        } else {
+            // 오류가 없으면 폼 제출
+            document.getElementById('registerForm').submit();
         }
     });
-
-    // 모달을 표시하는 함수입니다.
     function showModal(message) {
-        // 모달 요소를 가져옵니다.
         const modal = document.getElementById('registerError');
-        // 모달의 메시지 요소를 가져옵니다.
         const modalMessage = document.getElementById('modalMessage');
-        // 모달의 닫기 버튼을 가져옵니다.
         const closeButton = document.querySelector('.close-button');
-
-        // 모달 메시지에 전달된 메시지를 설정합니다.
         modalMessage.textContent = message;
-        // 모달을 화면에 표시합니다.
         modal.style.display = 'block';
-
-        // 닫기 버튼 클릭 시 모달을 닫습니다.
-        closeButton.onclick = function () {
-            modal.style.display = 'none';
-        };
-
-        // 모달 외부를 클릭 시 모달을 닫습니다.
-        window.onclick = function (event) {
-            // 클릭한 대상이 모달일 경우
-            if (event.target === modal) {
-                // 모달을 닫습니다.
-                modal.style.display = 'none';
-            }
-        };
     }
 </script>
