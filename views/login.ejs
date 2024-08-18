@@ -1,36 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/main.css">
 </head>
+
 <body>
-  <div id="wrap">
-      <div id="header" role="header">
-          <header>
-              <%- include('nav.ejs') %>
-          </header>
-      </div>
-      <div id="container">
+    <%- include('modal/registerError') %>
+    <div id="wrap">
+        <div id="header" role="header">
+            <header>
+                <%- include('nav.ejs') %>
+            </header>
+        </div>
+        <div id="container">
             <div class="main-content-wrap addQuestion">
                 <div class="contentsType mb-4">로그인</div>
-                <form action="/login" method="POST" class="loginForm">
+                <form action="/login" method="POST" class="login-form">
                     <input type="hidden" name="id">
-                    <div class="form-group inputQuestionWrap">
-                        <label for="username">아이디</label>
-                        <input type="text" class="form-control" id="username" name="username" class="mt-4">
-                        <label for="password">비밀번호</label>
-                        <input type="text" class="form-control" id="password" name="password" class="mt-4">
+                    <div class="form-group">
+                        <div class="text-field">
+                            <label for="username">아이디</label>
+                            <input type="text" class="form-control inputId" id="username" name="username" minlength="6"
+                                maxlength="12">
+                            <label for="password">비밀번호</label>
+                            <input type="password" class="form-control inputPassword" id="password" name="password"
+                                minlength="6" maxlength="12">
+                        </div>
                     </div>
-                    <button type="submit"class="btn btn-outline-secondary">
-                        로그인
-                    </button>
+                    <div class="footer">
+                        <button type="submit" class="btn button-green loginBtn">
+                            로그인
+                        </button>
+                    </div>
                 </form>
             </div>
-      </div>
-      <div id="footer"></div>
-  </div>
+        </div>
+    </div>
 </body>
+
 </html>
+<script>
+    /* 로그인 유효성 검사 */
+    const inputId = document.getElementById('username');
+    const inputPw = document.getElementById('password');
+
+    function idValid() {
+        const idPattern = /^[a-z][a-z0-9]*$/
+        if (inputId.value.length === 0) {
+            return '아이디를 입력해주세요.';
+        } else if (inputId.value.length < 6 || inputId.value.length > 12) {
+            return '아이디 길이는 6글자 이상, \n 12글자 이하로 구성되어 있습니다.';
+        } else if (!idPattern.test(inputId.value)) {
+            return "아이디는 영문소문자로 시작 해야하며 \n 숫자만 포함 가능합니다.";
+        }        
+        return null;
+    }
+
+    function pwValid() {
+        if (inputPw.value.length === 0) {
+            return '비밀번호를 입력해주세요.';
+        }
+        return null;
+    }
+
+    document.querySelector('.loginBtn').addEventListener('click', (event) => {
+        event.preventDefault();
+        let errorMessages = idValid();
+        if(!errorMessages) {
+            errorMessages = pwValid();
+        }
+
+        if(errorMessages) {
+            showModal(errorMessages)
+        } else {
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: inputId.value,
+                    password: inputPw.value,
+                }),
+            })
+            .then(response => {
+                const status = response.status;
+                return response.json().then(data => ({ status, data }));
+            })
+            .then(({ status, data }) => {
+                if (status === 401) {                    
+                    showModal(data);
+                } else {              
+                    window.location.href = data.redirect;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showModal(error.message);
+            });
+        }
+        
+    });
+    function showModal(message) {
+        const modal = document.getElementById('registerError');
+        const modalMessage = document.getElementById('modalMessage');
+        const closeButton = document.querySelector('.close-button');
+        modalMessage.textContent = message;
+        modal.style.display = 'block';
+    }
+</script>

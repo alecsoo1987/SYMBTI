@@ -977,19 +977,23 @@ body {
   color: var(--icon-white);
 }
 
-.register-form .form-group {
+.register-form .form-group,
+.login-form .form-group {
   display: flex;
   flex-direction: column;
 }
-.register-form .form-group label {
+.register-form .form-group label,
+.login-form .form-group label {
   margin-top: 20px;
 }
-.register-form .form-group .help-message {
+.register-form .form-group .help-message,
+.login-form .form-group .help-message {
   padding-left: 0.5rem;
   font-size: 0.875rem;
   color: var(--system-orange);
 }
-.register-form .footer {
+.register-form .footer,
+.login-form .footer {
   display: flex;
   justify-content: center;
   margin-top: 40px;
@@ -4210,6 +4214,9 @@ body {
   align-items: center;
   padding: 1rem;
   font-size: 1.125rem;
+  word-break: break-all;
+  text-align: center;
+  line-height: 1.5;
 }
 .modal .modal-content.error-modal .modal-footer {
   display: flex;

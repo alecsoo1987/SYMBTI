@@ -58,7 +58,7 @@ connectDB.then((client) => {
   console.log(err)
 })
 
-/* 미들웨어 Start*/
+/* 미들웨어 */
 function loginCheck(요청, 응답, next) {
   if (!요청.user) {
     return 응답.send('로그인이 필요한 기능입니다.')
@@ -72,6 +72,7 @@ function ensureAuthenticated(req, res, next) {
   }
   res.redirect('/login'); // 인증되지 않은 사용자는 로그인 페이지로 리디렉션
 }
+
 
 function nullCheck(요청, 응답, next) {
   if (요청.body.username == '' || 요청.body.password == '') {
@@ -103,9 +104,9 @@ app.get('/theme/love/list', async (요청, 응답) => {
 })
 
 app.get('/theme/love/singleList/:num', async (요청, 응답) => {
-	let num = parseInt(요청.params.num)
-	let result = await db.collection('SYMBTI_Some').find().skip(num-1).limit(1).toArray()
-	응답.render('singleList.ejs', { DBList: result, num : num })
+  let num = parseInt(요청.params.num)
+  let result = await db.collection('SYMBTI_Some').find().skip(num - 1).limit(1).toArray()
+  응답.render('singleList.ejs', { DBList: result, num: num })
 })
 
 app.get('/theme/love/edit/:Id', async (요청, 응답) => {
@@ -150,10 +151,10 @@ app.get('/theme/love/write', loginCheck, ensureAuthenticated, (요청, 응답) =
 // })
 
 app.delete('/delete', async (요청, 응답) => {
-  let result = await db.collection('SYMBTI_Some').deleteOne({ 
-	_id: new ObjectId(요청.query.DBID), 
-	user : new ObjectId(요청.user._id) 
-})
+  let result = await db.collection('SYMBTI_Some').deleteOne({
+    _id: new ObjectId(요청.query.DBID),
+    user: new ObjectId(요청.user._id)
+  })
   응답.send('삭제완료')
 })
 
@@ -188,13 +189,13 @@ app.post('/add_question', upload.single('upload_image'), async (요청, 응답) 
 passport.use(new LocalStrategy(async (입력한아이디, 입력한비번, cb) => {
   let result = await db.collection('user').findOne({ username: 입력한아이디 })
   if (!result) {
-    return cb(null, false, { message: '아이디 DB에 없음' })
+    return cb(null, false, { message: '존재하지 않는 ID입니다.' })
   }
 
   if (await bcrypt.compare(입력한비번, result.password)) {//입력한 비번과 result.password를 서로 비교해서 맞는지 확인해줌
     return cb(null, result)
   } else {
-    return cb(null, false, { message: '비번불일치' });
+    return cb(null, false, { message: '비밀번호가 일치하지 않습니다.' });
   }
 }))
 
@@ -216,15 +217,16 @@ app.get('/login', nullCheck, async (요청, 응답) => {
   응답.render('login.ejs')
 })
 
-app.post('/login', nullCheck, (요청, 응답, next) => {
+app.post('/login', (요청, 응답, next) => {
   passport.authenticate('local', (error, user, info) => {
     if (error) return 응답.status(500).json(error)
     if (!user) return 응답.status(401).json(info.message)// passport.use에서 설정한 'message'를 불러옴
     요청.login(user, (err) => {
-      if (err) return next(err)
-      응답.redirect('/list')
-    })
-
+      if (err) return next(err);
+      응답.status(200).json({
+         redirect: '/home'
+      });
+    });
   })(요청, 응답, next)
 })
 
@@ -233,7 +235,7 @@ app.get('/register', async (요청, 응답) => {
   응답.render('register.ejs')
 })
 
-app.post('/register', nullCheck, async (요청, 응답) => { // 버튼을 누르면 nullCheck부터 동작 후 요청기능 수행
+app.post('/register/check-id', async (요청, 응답) => { // 버튼을 누르면 nullCheck부터 동작 후 요청기능 수행
   let result = await db.collection('user').findOne({ username: 요청.body.username });
   if (result) {
     return 응답.status(400).json({ message: '중복 아이디입니다.' });
@@ -243,14 +245,28 @@ app.post('/register', nullCheck, async (요청, 응답) => { // 버튼을 누르
     return 응답.status(400).json({ message: '재확인 비밀번호가 일치하지 않습니다.' });
   }
 
-  let 해시 = await bcrypt.hash(요청.body.password, 10) // 암호를 여러번 꼰다는 의미로 정수 입력
+  try {
+    if (!요청.body.password) {
+      throw new Error('비밀번호가 전달되지 않았습니다.')
+    }
 
-  await db.collection('user').insertOne({
-    username: 요청.body.username,
-    password: 해시,
-    mbti : 요청.body.selectMBTI
-  })
-  응답.redirect('/login')
+    let 해시 = await bcrypt.hash(요청.body.password, 10) // 암호를 여러번 꼰다는 의미로 정수 입력
+
+    await db.collection('user').insertOne({
+      username: 요청.body.username,
+      password: 해시,
+      mbti: 요청.body.selectMBTI
+    })
+    
+    응답.status(200).json({ 
+      redirect: '/login',
+      message : '회원가입을 축하합니다. 로그인 페이지로 이동합니다.'
+    });
+
+    }catch (error) {
+      console.error(error);
+      응답.status(500).json({ message: '서버 오류가 발생했습니다.' });
+  }  
 })
 
 app.use('/shop', require('./routes/shop.js')) //routes/shop.js에 있는 겟 주소의 api를 전부 사용, / 또는 /shop처럼 중복되는 단어는 여기서 통합해서 사용할 수 있다.
@@ -303,7 +319,7 @@ app.get('/search', async (요청, 응답) => {
 })
 
 
-app.post('/submitAnswer', loginCheck, async(요청,응답)=>{  
+app.post('/submitAnswer', loginCheck, async (요청, 응답) => {
   let questionId = 요청.body.questionId;
   let question = 요청.body.question;
   let selectedAnswerNum = 요청.body.selectedAnswer;
@@ -312,14 +328,14 @@ app.post('/submitAnswer', loginCheck, async(요청,응답)=>{
   let mbti = 요청.user.mbti;
   let userName = 요청.user.username;
 
- 
+
 
   try {
     //현재 질문이 이미 존재하는지, 현재 유저가 참여한 이력이 있는지 확인하는 변수
-    let existingAnswer = await db.collection('answers').findOne({ questionId: new ObjectId(questionId),  "participants.participants_id": new ObjectId(userId)});
-    
+    let existingAnswer = await db.collection('answers').findOne({ questionId: new ObjectId(questionId), "participants.participants_id": new ObjectId(userId) });
+
     //예외사항 처리 함수
-    function checkIfSameAnswer(existingAnswer, userId, selectedAnswerNum) { 
+    function checkIfSameAnswer(existingAnswer, userId, selectedAnswerNum) {
       if (!existingAnswer || !existingAnswer.participants) return false;
       let participant = existingAnswer.participants.find(p => p.participants_id.equals(userId));
       if (!participant) return false;
@@ -361,14 +377,14 @@ app.post('/submitAnswer', loginCheck, async(요청,응답)=>{
 
 app.get('/singleList/:num/result/:Id', async (요청, 응답) => {
   let num = parseInt(요청.params.num)
-	let result = await db.collection('SYMBTI_Some').find().skip(num-1).limit(1).toArray()
+  let result = await db.collection('SYMBTI_Some').find().skip(num - 1).limit(1).toArray()
   let result2 = await db.collection('answers').find({
-    questionId : new ObjectId(요청.params.Id)
+    questionId: new ObjectId(요청.params.Id)
   }).toArray()
-	응답.render('singleListResult.ejs', { DBList: result, num : num, answerList: result2 })
+  응답.render('singleListResult.ejs', { DBList: result, num: num, answerList: result2 })
 })
 
-app.get('/chat/request', async (요청, 응답) => {  
-	//let result = await db.collection('SYMBTI_Some').find().skip(num-1).limit(1).toArray()  
-	응답.render('chat.ejs')
+app.get('/chat/request', async (요청, 응답) => {
+  //let result = await db.collection('SYMBTI_Some').find().skip(num-1).limit(1).toArray()  
+  응답.render('chat.ejs')
 })
