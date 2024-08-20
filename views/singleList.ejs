@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <%- include('modal/selectError') %>
+    <%- include('modal/answerSelectError') %>
     <div id="wrap">
         <div id="header" role="header">
             <header>
@@ -17,8 +17,7 @@
             </header>
         </div>
         <div id="container">
-            <div class="main-content-wrap">
-                
+            <div class="main-content-wrap">                
                 <% DBList.forEach(function(doc, index) { %>
                 <form id="answerForm" action="/submitAnswer" method="POST">
                     <article class="article-box-design01">
@@ -26,12 +25,6 @@
                         <div class="question-contbox">
                             <div class="questionNum d-flex pl-12">
                                 Question <%= num %>.
-                                    <a href="/theme/love/edit/<%= doc._id %>" data-id="<%=doc._id %>"
-                                        class="btn btn-outline-secondary btn-edit ml-auto">
-                                        <span class="fs-xs fw-b">수정하기</span>
-                                    </a>
-                                    <span class="fs-xs fw-b btn btn-outline-secondary btn-edit delete"
-                                        data-id="<%=doc._id %>">🗑️</span>
                             </div>
                             <div class="questionTitle pl-12">
                                 <!-- <% if (doc.question) { %> -->
@@ -87,10 +80,10 @@
             </div>
             <div class="btn">
                 <button class="btn-primary">
-                    <a href="/singleList/<%= num > 1 ? num - 1 : 1 %>">이전</a>
+                    <a href="/theme/love/singleList/<%= num > 1 ? num - 1 : 1 %>">이전</a>
                 </button>
                 <button class="btn-primary">
-                    <a href="/singleList/<%= num + 1 %>">다음</a>
+                    <a href="/theme/love/singleList/<%= num + 1 %>">다음</a>
                 </button>
             </div>
         </div>
@@ -124,30 +117,36 @@
         })
     })
 
-    document.querySelector('.resultBtn').addEventListener('click', () => {
-        const tutorialR = document.querySelector('.tutorial-result');
+    document.querySelector('.resultBtn').addEventListener('click', (event) => {
+        event.preventDefault();
         const isAnyActive = answer_list.some(item => item.classList.contains('active'));
-
+        const selectedRadio = document.querySelector('input[name="selectedAnswer"]:checked');
+        
+        const errorMessage = '번호를 선택해주세요.'
         if (!isAnyActive) {
-            console.log('번호선택안함');
-            openModal();
-        } else {
-            console.log('번호선택함');
-            tutorialR.classList.remove('d-none');
-        } 
-    });
-
-    //아래 함수를 위의 함수랑 합쳐야함
-
-    document.querySelector('.submitbtn').addEventListener('click', function(event) {
-        var selectedRadio = document.querySelector('input[name="selectedAnswer"]:checked');
-        if (selectedRadio) {
+            showModal(errorMessage)
+        } else if (selectedRadio){
             var label = document.querySelector('label[for="' + selectedRadio.id + '"]');
-            var answerText = label.innerText.trim();
-            document.getElementById('selectedAnswerText').value = answerText;
-        }
+             var answerText = label.innerText.trim();
+             document.getElementById('selectedAnswerText').value = answerText;
+
+             console.log(answerText)
+
+            /*fetch('',{
+                method: post,
+                headers : '',
+                body: '',
+            })*/
+        }         
     });
-    
+
+    function showModal(message) {
+        const modal = document.getElementById('answerSelectError');
+        const modalMessage = document.getElementById('modalMessage');
+        const closeButton = document.querySelector('.close-button');
+        modalMessage.textContent = message;
+        modal.style.display = 'block';
+    }
     // document.querySelectorAll('.delete')[0].addEventListener('click', function(){
     //   fetch('/test') // /test?age=20 과 같이 테스트 이후에 서버로 전송할 데이터의 형태를 내맘대로 지정할 수 있다.
     // })

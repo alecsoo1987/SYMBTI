@@ -1,0 +1,31 @@
+<div id="answerSelect" class="modal">
+    <div class="modal-content error-modal modal-sm">
+      <div class="modal-body">
+        <h3 class="title">
+          <i class="exclamation"></i>
+            주의
+        </h3>
+        <p class="content" id="modalMessage"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-sm btn" id="closeModal">
+          닫기
+        </button>
+      </div>      
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('closeModal').addEventListener('click',()=>{
+      var modal = document.querySelector('.modal');
+        modal.style.display="none";
+    })
+    
+    /* 모달 바깥 클릭시 닫기
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    */
+  </script>
