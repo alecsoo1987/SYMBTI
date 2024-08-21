@@ -122,6 +122,11 @@
                 width: calc(100% - 88px);
             }
 
+            &-xs {
+                width: 100%;
+                max-width: 450px;
+            }
+
             &-error {
                 max-width: 1000px;
             }

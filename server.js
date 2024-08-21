@@ -103,10 +103,19 @@ app.get('/theme/love/list', async (요청, 응답) => {
   응답.render('list.ejs', { DBList: result })
 })
 
-app.get('/theme/love/singleList/:num', async (요청, 응답) => {
-  let num = parseInt(요청.params.num)
+app.get('/theme/love/singleList/:num', loginCheck, async (요청, 응답) => {
+  let num = parseInt(요청.params.num);    
+  let selectedNum = null;
   let result = await db.collection('SYMBTI_Some').find().skip(num - 1).limit(1).toArray()
-  응답.render('singleList.ejs', { DBList: result, num: num })
+  if (result.length > 0) {
+    let questionId = result[0]._id; // 여기서 _id를 추출합니다.
+    let userId = 요청.user._id;
+    let existingAnswer = await db.collection('answers').findOne({ questionId: new ObjectId(questionId), "participants.participants_id": new ObjectId(userId)});    
+    if(existingAnswer) {
+      selectedNum = existingAnswer.participants[0].participants_answer;
+    }    
+  }  
+  응답.render('singleList.ejs', { DBList: result, num: num, selectedNum : selectedNum });
 })
 
 app.get('/theme/love/edit/:Id', async (요청, 응답) => {
@@ -255,7 +264,8 @@ app.post('/register/check-id', async (요청, 응답) => { // 버튼을 누르�
     await db.collection('user').insertOne({
       username: 요청.body.username,
       password: 해시,
-      mbti: 요청.body.selectMBTI
+      mbti: 요청.body.selectMBTI,
+      createdAt: new Date(),
     })
     
     응답.status(200).json({ 
@@ -324,11 +334,10 @@ app.post('/submitAnswer', loginCheck, async (요청, 응답) => {
   let question = 요청.body.question;
   let selectedAnswerNum = 요청.body.selectedAnswer;
   let selectedAnswerTxt = 요청.body.selectedAnswerText;
+  let questionIdx = 요청.body.questionIdx;
   let userId = 요청.user._id;
   let mbti = 요청.user.mbti;
   let userName = 요청.user.username;
-
-
 
   try {
     //현재 질문이 이미 존재하는지, 현재 유저가 참여한 이력이 있는지 확인하는 변수
@@ -344,9 +353,13 @@ app.post('/submitAnswer', loginCheck, async (요청, 응답) => {
 
     if (existingAnswer) {
       if (checkIfSameAnswer(existingAnswer, userId, selectedAnswerNum)) {
-        return 응답.send('You have already answered this question with the same answer.');
+        return 응답.status(400).json({
+          aleadyAnswer:  'You have already answered this question with the same answer.'
+        })
       } else {
-        return 응답.send('답변을 변경하시겠습니까?');
+        return 응답.status(401).json({
+          changeSelect : '기존에 답변한 번호와 다릅니다. 답변을 변경하시겠습니까?'
+        })
       }
     } else {
       await db.collection('answers').insertOne({
@@ -366,8 +379,10 @@ app.post('/submitAnswer', loginCheck, async (요청, 응답) => {
     }
 
     // 리다이렉트 URL 설정
-    let result_url = '/singleList/' + 요청.body.questionIdx + '/result/' + questionId;
-    응답.redirect(result_url);
+    let result_url = '/singleList/' + questionIdx + '/result/' + questionId;
+    응답.status(200).json({
+      redirect : result_url
+    })
 
   } catch (error) {
     console.error(error);

@@ -36,10 +36,10 @@
                             <ul class="answerList pl-12">
                                 <% for (var key in doc) { %>
                                     <% if (key.startsWith('answer') && doc[key]) { %>
-                                        <li>
+                                        <li class="<%= (selectedNum == key.replace('answer', '')) ? 'active' : '' %>">
                                             <input type="radio" name="selectedAnswer"
                                                 id="selectedAnswer<%= key.replace('answer', '') %>"
-                                                value="<%= key.replace('answer', '') %>">
+                                                value="<%= key.replace('answer', '') %>">                                                
                                             <label for="selectedAnswer<%= key.replace('answer', '') %>">
                                                 <span  class="dif_cc">
                                                     <%= key.replace('answer', '' ) %>.
@@ -66,14 +66,14 @@
                             -->
                         </div>
                         <input type="hidden" name="selectedAnswerText" id="selectedAnswerText">
-                            <input type="hidden" name="questionId" value="<%= doc._id %>">
-                            <input type="hidden" name="question" value="<%= doc.question %>">
-                            <input type="hidden" name="questionIdx" value="<%= num %>">
-                            <button type="submit" class="btn show-resultBtn resultBtn btn-primary m-auto">
-                                <span class="fs-xs fw-b">
-                                    답변선택 완료 후 결과보기
-                                </span>
-                            </button>
+                        <input type="hidden" name="questionId" id="questionId" value="<%= doc._id %>">
+                        <input type="hidden" name="question" id="question" value="<%= doc.question %>">
+                        <input type="hidden" name="questionIdx" id="questionIdx" value="<%= num %>">
+                        <button type="submit" class="btn show-resultBtn resultBtn btn-primary m-auto">
+                            <span class="fs-xs fw-b">
+                                답변선택 완료 후 결과보기
+                            </span>
+                        </button>
                     </article>
                 </form>
                 <% }); %>
@@ -97,6 +97,9 @@
 
 <script>
     var deleteLinks = document.getElementsByClassName('delete');
+    var questionId = document.getElementById('questionId')
+    var question = document.getElementById('question')
+    var questionIdx = document.getElementById('questionIdx')
     for (var i = 0; i < deleteLinks.length; i++) {
         deleteLinks[i].addEventListener('click', function (event) {
             fetch('/delete?DBID=' + event.target.dataset.id, {
@@ -130,13 +133,33 @@
              var answerText = label.innerText.trim();
              document.getElementById('selectedAnswerText').value = answerText;
 
-             console.log(answerText)
-
-            /*fetch('',{
-                method: post,
-                headers : '',
-                body: '',
-            })*/
+            fetch('/submitAnswer',{
+                method: 'post',
+                headers : {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    question: question.value,
+                    questionId: questionId.value,
+                    questionIdx : questionIdx.value,
+                    selectedAnswer : selectedRadio.value,
+                    selectedAnswerText : answerText,
+                }),
+            })
+            .then(response => {
+                const status = response.status; 
+                return response.json().then(data => ({ status, data }));
+            })
+            .then(({ status, data }) => {
+                if (status === 400) {
+                    showModal(data.aleadyAnswer);
+                }if (status === 401) {
+                    showModal(data.changeSelect);
+                }
+                 else {              
+                    window.location.href = data.redirect;
+                }
+            })
         }         
     });
 

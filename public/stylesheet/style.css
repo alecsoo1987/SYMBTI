@@ -380,52 +380,52 @@ body {
 }
 
 .fs-36 {
-  font-size: 2.25rem;
+  font-size: 2.25rem !important;
 }
 .fs-34 {
-  font-size: 2.125rem;
+  font-size: 2.125rem !important;
 }
 .fs-32 {
-  font-size: 2rem;
+  font-size: 2rem !important;
 }
 .fs-30 {
-  font-size: 1.875rem;
+  font-size: 1.875rem !important;
 }
 .fs-28 {
-  font-size: 1.75rem;
+  font-size: 1.75rem !important;
 }
 .fs-26 {
-  font-size: 1.625rem;
+  font-size: 1.625rem !important;
 }
 .fs-24 {
-  font-size: 1.5rem;
+  font-size: 1.5rem !important;
 }
 .fs-20 {
-  font-size: 1.25rem;
+  font-size: 1.25rem !important;
 }
 .fs-18 {
-  font-size: 1.125rem;
+  font-size: 1.125rem !important;
 }
 .fs-16 {
-  font-size: 1rem;
+  font-size: 1rem !important;
 }
 .fs-15 {
-  font-size: 0.938rem;
+  font-size: 0.938rem !important;
 }
 .fs-14 {
-  font-size: 0.875rem;
+  font-size: 0.875rem !important;
 }
 .fs-13 {
-  font-size: 0.813rem;
+  font-size: 0.813rem !important;
 }
 .fs-12 {
-  font-size: 0.75rem;
+  font-size: 0.75rem !important;
 }
 .fs-11 {
-  font-size: 0.688rem;
+  font-size: 0.688rem !important;
 }
 .fs-10 {
-  font-size: 0.625rem;
+  font-size: 0.625rem !important;
 }
 
 .fw-l {
@@ -4163,6 +4163,10 @@ body {
 .modal .modal-content.modal-sm {
   max-width: 552px;
   width: calc(100% - 88px);
+}
+.modal .modal-content.modal-xs {
+  width: 100%;
+  max-width: 450px;
 }
 .modal .modal-content.modal-error {
   max-width: 1000px;
