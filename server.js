@@ -104,18 +104,18 @@ app.get('/theme/love/list', async (요청, 응답) => {
 })
 
 app.get('/theme/love/singleList/:num', loginCheck, async (요청, 응답) => {
-  let num = parseInt(요청.params.num);    
+  let num = parseInt(요청.params.num);
   let selectedNum = null;
   let result = await db.collection('SYMBTI_Some').find().skip(num - 1).limit(1).toArray()
   if (result.length > 0) {
     let questionId = result[0]._id; // 여기서 _id를 추출합니다.
     let userId = 요청.user._id;
-    let existingAnswer = await db.collection('answers').findOne({ questionId: new ObjectId(questionId), "participants.participants_id": new ObjectId(userId)});    
-    if(existingAnswer) {
+    let existingAnswer = await db.collection('answers').findOne({ questionId: new ObjectId(questionId), "participants.participants_id": new ObjectId(userId) });
+    if (existingAnswer) {
       selectedNum = existingAnswer.participants[0].participants_answer;
-    }    
-  }  
-  응답.render('singleList.ejs', { DBList: result, num: num, selectedNum : selectedNum });
+    }
+  }
+  응답.render('singleList.ejs', { DBList: result, num: num, selectedNum: selectedNum });
 })
 
 app.get('/theme/love/edit/:Id', async (요청, 응답) => {
@@ -233,7 +233,7 @@ app.post('/login', (요청, 응답, next) => {
     요청.login(user, (err) => {
       if (err) return next(err);
       응답.status(200).json({
-         redirect: '/home'
+        redirect: '/home'
       });
     });
   })(요청, 응답, next)
@@ -267,16 +267,16 @@ app.post('/register/check-id', async (요청, 응답) => { // 버튼을 누르�
       mbti: 요청.body.selectMBTI,
       createdAt: new Date(),
     })
-    
-    응답.status(200).json({ 
+
+    응답.status(200).json({
       redirect: '/login',
-      message : '회원가입을 축하합니다. 로그인 페이지로 이동합니다.'
+      message: '회원가입을 축하합니다. 로그인 페이지로 이동합니다.'
     });
 
-    }catch (error) {
-      console.error(error);
-      응답.status(500).json({ message: '서버 오류가 발생했습니다.' });
-  }  
+  } catch (error) {
+    console.error(error);
+    응답.status(500).json({ message: '서버 오류가 발생했습니다.' });
+  }
 })
 
 app.use('/shop', require('./routes/shop.js')) //routes/shop.js에 있는 겟 주소의 api를 전부 사용, / 또는 /shop처럼 중복되는 단어는 여기서 통합해서 사용할 수 있다.
@@ -344,44 +344,51 @@ app.post('/submitAnswer', loginCheck, async (요청, 응답) => {
     let existingAnswer = await db.collection('answers').findOne({ questionId: new ObjectId(questionId), "participants.participants_id": new ObjectId(userId) });
 
     //예외사항 처리 함수
-    function checkIfSameAnswer(existingAnswer, userId, selectedAnswerNum) {
-      if (!existingAnswer || !existingAnswer.participants) return false;
-      let participant = existingAnswer.participants.find(p => p.participants_id.equals(userId));
-      if (!participant) return false;
-      return participant.participants_answer === parseInt(selectedAnswerNum);
-    }
+	if (existingAnswer) {
 
+		function checkIfSameAnswer(existingAnswer, userId, selectedAnswerNum) {
+		  if (!existingAnswer || !existingAnswer.participants) return false;
+		  let participant = existingAnswer.participants.find(p => p.participants_id.equals(userId));
+		  if (!participant) return false;
+		  return participant.participants_answer === parseInt(selectedAnswerNum);
+		}
+		checkIfSameAnswer();
+	} else {
+		await db.collection('answers').insertOne({
+			questionId: new ObjectId(questionId),
+			questionTitle: question,
+			participants: [
+			  {
+				participants_id: new ObjectId(userId),
+				participants_answer: parseInt(selectedAnswerNum),
+				participants_answertxt: selectedAnswerTxt,
+				participants_mbti: mbti,
+				participants_name: userName,
+				createdAt: new Date(),
+			  },
+			],
+		  });
+	  
+	}
+
+    /* 이미 존재할 경우 답변 유지/변경 시 토스트 메시지 (현재 모달이라 추후 개발 필요)
     if (existingAnswer) {
-      if (checkIfSameAnswer(existingAnswer, userId, selectedAnswerNum)) {
-        return 응답.status(400).json({
+      if (!checkIfSameAnswer(existingAnswer, userId, selectedAnswerNum)) {
+        eturn 응답.status(400).json({
           aleadyAnswer:  'You have already answered this question with the same answer.'
         })
-      } else {
+        await db.collection('answers').updateOne({
+          
+        })
         return 응답.status(401).json({
-          changeSelect : '기존에 답변한 번호와 다릅니다. 답변을 변경하시겠습니까?'
+          changeSelect : '기존 답변이 변경되었습니다.'
         })
       }
-    } else {
-      await db.collection('answers').insertOne({
-        questionId: new ObjectId(questionId),
-        questionTitle: question,
-        participants: [
-          {
-            participants_id: new ObjectId(userId),
-            participants_answer: parseInt(selectedAnswerNum),
-            participants_answertxt: selectedAnswerTxt,
-            participants_mbti: mbti,
-            participants_name: userName,
-            createdAt: new Date(),
-          },
-        ],
-      });
-    }
-
+    }*/    
     // 리다이렉트 URL 설정
     let result_url = '/singleList/' + questionIdx + '/result/' + questionId;
     응답.status(200).json({
-      redirect : result_url
+      redirect: result_url
     })
 
   } catch (error) {

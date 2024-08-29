@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <%- include('modal/answerSelectError') %>
+    <%- include('modal/answerSelectModal') %>
     <div id="wrap">
         <div id="header" role="header">
             <header>
@@ -39,7 +39,7 @@
                                         <li class="<%= (selectedNum == key.replace('answer', '')) ? 'active' : '' %>">
                                             <input type="radio" name="selectedAnswer"
                                                 id="selectedAnswer<%= key.replace('answer', '') %>"
-                                                value="<%= key.replace('answer', '') %>">                                                
+                                                value="<%= key.replace('answer', '') %>">
                                             <label for="selectedAnswer<%= key.replace('answer', '') %>">
                                                 <span  class="dif_cc">
                                                     <%= key.replace('answer', '' ) %>.
@@ -71,7 +71,7 @@
                         <input type="hidden" name="questionIdx" id="questionIdx" value="<%= num %>">
                         <button type="submit" class="btn show-resultBtn resultBtn btn-primary m-auto">
                             <span class="fs-xs fw-b">
-                                답변선택 완료 후 결과보기
+                                결과보기
                             </span>
                         </button>
                     </article>
@@ -123,13 +123,13 @@
     document.querySelector('.resultBtn').addEventListener('click', (event) => {
         event.preventDefault();
         const isAnyActive = answer_list.some(item => item.classList.contains('active'));
-        const selectedRadio = document.querySelector('input[name="selectedAnswer"]:checked');
-        
+        const selectedRadio = document.querySelector('.active input');        
         const errorMessage = '번호를 선택해주세요.'
+        
         if (!isAnyActive) {
             showModal(errorMessage)
         } else if (selectedRadio){
-            var label = document.querySelector('label[for="' + selectedRadio.id + '"]');
+             var label = document.querySelector('.active label');
              var answerText = label.innerText.trim();
              document.getElementById('selectedAnswerText').value = answerText;
 
@@ -146,6 +146,21 @@
                     selectedAnswerText : answerText,
                 }),
             })
+
+            .then(response => response.json())
+            .then(data => {
+            // 성공 시 리다이렉트 처리
+            if (data.redirect) {
+                window.location.href = data.redirect;
+            }
+                })
+                .catch(error => {
+                    // 에러 처리: 예를 들어 모달 창을 띄우는 방식
+                    showModal('오류가 발생했습니다. 다시 시도해주세요.');
+                    console.error('Error:', error);
+                });
+
+            /*
             .then(response => {
                 const status = response.status; 
                 return response.json().then(data => ({ status, data }));
@@ -160,11 +175,12 @@
                     window.location.href = data.redirect;
                 }
             })
+                */
         }         
     });
 
     function showModal(message) {
-        const modal = document.getElementById('answerSelectError');
+        const modal = document.getElementById('answerSelectModal');
         const modalMessage = document.getElementById('modalMessage');
         const closeButton = document.querySelector('.close-button');
         modalMessage.textContent = message;

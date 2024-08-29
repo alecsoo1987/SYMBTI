@@ -17,27 +17,18 @@
         </div>
         <div id="container">
             <div class="main-content-wrap">
-                <div class="contentsType mb-4">연애 / 썸 유형</div>
-                <% DBList.forEach(function(doc, index) { %>
                 <form id="answerForm" action="/submitAnswer" method="POST">
-                    <div class="questionContWrap">
-                        <div class="questionNum d-flex">
+                <article class="article-box-design01">
+                    <% DBList.forEach(function(doc, index) { %>                        
+                    <div class="contentsType mb-4">연애 / 썸 유형</div>
+                    <div class="question-contbox">
+                        <div class="questionNum d-flex pl-12">
                             Question <%= num %>.
-                                <a href="/edit/<%= doc._id %>" data-id="<%=doc._id %>"
-                                    class="btn btn-outline-secondary btn-edit ml-auto">
-                                    <span class="fs-xs fw-b">수정하기</span>
-                                </a>
-                                <span class="fs-xs fw-b btn btn-outline-secondary btn-edit delete"
-                                    data-id="<%=doc._id %>">🗑️</span>
                         </div>
-                        <div class="questionTitle">
-                            <!-- <% if (doc.question) { %> -->
+                        <div class="questionTitle pl-12">
                             <%= doc.question %>
-                                <!-- <% } else if (doc.title) { %>
-                            <%= doc.title %>
-                        <% } %> -->
                         </div>
-                        <ul class="answerList">
+                        <ul class="answerList pl-12">
                             <% for (var key in doc) { %>
                                 <% if (key.startsWith('answer') && doc[key]) { %>
                                     <li>
@@ -52,57 +43,44 @@
                                         </label>
                                     </li>
                                     <% } %>
-                                        <!-- <% if (key.startsWith('content') && doc[key]) { %>
-                                <li>
-                                    <span class="listNum"><%= key.replace('content', '') %></span>
-                                    <%= doc[key] %>
-                                </li>
-                            <% } %> -->
-                            <% } %>
+                                        <% } %>
                         </ul>
-
-                        <input type="hidden" name="questionId" value="<%= doc._id %>">
-                        <button type="submit" class="btn submitbtn btn-outline-secondary m-auto">
-                            <span class="fs-xs fw-b">
-                                답변선택 완료 후 결과보기
-                            </span>
-                        </button>
-                        <!--
-                            <a href="/list/next/<%= doc._id %>" data-id="<%=doc._id %>" class="btn submitbtn btn-outline-secondary m-auto">
-                                <span class="fs-xs fw-b">
-                                    답변선택 완료 후 결과보기
-                                </span>
-                            </a>
-                        -->
                     </div>
+
+                    <input type="hidden" name="questionId" value="<%= doc._id %>">
+                    <button type="submit" class="btn show-resultBtn resultBtn btn-primary m-auto">
+                        <span class="fs-xs fw-b">
+                            결과보기
+                        </span>
+                    </button>
+                </article>
                 </form>
                 <% }); %>
-                <div class="responseRateGrid">
-                    <div class="contentsQBox">
-                        <div class="responseRate_ISTJ">
-                            <span>유형 ISTJ</span>
-                            <% answerList.forEach(function(answer) { %>
-                                <span>답변 : <%= answer.answer %></span><br>
+            <div class="responseRateGrid">
+                <div class="contentsQBox">
+                    <div class="responseRate_ISTJ">
+                        <span>유형 ISTJ</span>
+                        <% answerList.forEach(function(answer) { %>
+                            <span>답변 : <%= answer.answer %></span><br>
                             <% }) %>
-                        </div>
-                        <div class="responseRate_ISTP">
-                            <span>2</span>
-                        </div>
-                        <div class="responseRate_ISFJ">
-                            <span>3</span>
-                        </div>
-                        <div class="responseRate_ISFP">
-                            <span>4</span>
-                        </div>
+                    </div>
+                    <div class="responseRate_ISTP">
+                        <span>2</span>
+                    </div>
+                    <div class="responseRate_ISFJ">
+                        <span>3</span>
+                    </div>
+                    <div class="responseRate_ISFP">
+                        <span>4</span>
                     </div>
                 </div>
             </div>
             <div class="btn">
                 <button class="btn-primary">
-                    <a href="/singleList/<%= num > 1 ? num - 1 : 1 %>">이전</a>
+                    <a href="/theme/love/singleList/<%= num > 1 ? num - 1 : 1 %>">이전</a>
                 </button>
                 <button class="btn-primary">
-                    <a href="/singleList/<%= num + 1 %>">다음</a>
+                    <a href="/theme/love/singleList/<%= num + 1 %>">다음</a>
                 </button>
             </div>
         </div>
