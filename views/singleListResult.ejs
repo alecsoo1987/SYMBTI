@@ -18,70 +18,181 @@
         <div id="container">
             <div class="main-content-wrap">
                 <form id="answerForm" action="/submitAnswer" method="POST">
-                <article class="article-box-design01">
-                    <% DBList.forEach(function(doc, index) { %>                        
-                    <div class="contentsType mb-4">연애 / 썸 유형</div>
-                    <div class="question-contbox">
-                        <div class="questionNum d-flex pl-12">
-                            Question <%= num %>.
-                        </div>
-                        <div class="questionTitle pl-12">
-                            <%= doc.question %>
-                        </div>
-                        <ul class="answerList pl-12">
-                            <% for (var key in doc) { %>
-                                <% if (key.startsWith('answer') && doc[key]) { %>
-                                    <li>
-                                        <input type="radio" name="selectedAnswer"
-                                            id="selectedAnswer<%= key.replace('answer', '') %>"
-                                            value="<%= key.replace('answer', '') %>">
-                                        <label for="selectedAnswer<%= key.replace('answer', '') %>">
-                                            <span class="listNum">
-                                                <%= key.replace('answer', '' ) %>.
-                                            </span>
-                                            <%= doc[key] %>
-                                        </label>
-                                    </li>
+                    <article class="article-box-design01">
+                        <% DBList.forEach(function(doc, index) { %>                        
+                        <div class="contentsType mb-4">연애 / 썸 유형</div>
+                        <div class="question-contbox">
+                            <div class="questionNum d-flex pl-12">
+                                Question <%= num %>.
+                            </div>
+                            <div class="questionTitle pl-12">
+                                <%= doc.question %>
+                            </div>
+                            <ul class="answerList pl-12">
+                                <% for (var key in doc) { %>
+                                    <% if (key.startsWith('answer') && doc[key]) { %>
+                                        <li>
+                                            <input type="radio" name="selectedAnswer"
+                                                id="selectedAnswer<%= key.replace('answer', '') %>"
+                                                value="<%= key.replace('answer', '') %>">
+                                            <label for="selectedAnswer<%= key.replace('answer', '') %>">
+                                                <span class="listNum">
+                                                    <%= key.replace('answer', '' ) %>.
+                                                </span>
+                                                <%= doc[key] %>
+                                            </label>
+                                        </li>
                                     <% } %>
-                                        <% } %>
-                        </ul>
-                    </div>
+                                <% } %>
+                            </ul>
+                        </div>
 
-                    <input type="hidden" name="questionId" value="<%= doc._id %>">
-                    <button type="submit" class="btn show-resultBtn resultBtn btn-primary m-auto">
-                        <span class="fs-xs fw-b">
-                            결과보기
-                        </span>
-                    </button>
-                </article>
+                        <input type="hidden" name="questionId" value="<%= doc._id %>">
+                        <button type="submit" class="btn show-resultBtn resultBtn btn-primary m-auto">
+                            <span class="fs-xs fw-b">
+                                결과보기
+                            </span>
+                        </button>
+                    </article>
                 </form>
                 <% }); %>
-            <div class="responseRateGrid">
-                <div class="contentsQBox">
-                    <div class="responseRate_ISTJ">
-                        <span>유형 ISTJ</span>
-                        <% answerList.forEach(function(answer) { %>
-                            <span>답변 : <%= answer.answer %></span><br>
-                            <% }) %>
+                
+                <article class="tutorial-result">
+                    <div class="title-style-01">
+                        유형별 선택 결과
                     </div>
-                    <div class="responseRate_ISTP">
-                        <span>2</span>
+                    <div class="mbti-grid-box">
+                        <ul>
+                            <li class="grid-istj">
+                                <span class="mbti-title">[ISTJ]</span>
+                                <div class="istj-image">
+                                </div>                                
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="grid-istp">
+                                <span class="mbti-title">[ISTP]</span>
+                                <div class="istp-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="grid-isfj">
+                                <span class="mbti-title">[ISFJ]</span>
+                                <div class="isfj-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="grid-isfp">
+                                <span class="mbti-title">[ISFP]</span>
+                                <div class="isfp-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li class="grid-intj">
+                                <span class="mbti-title">[INTJ]</span>
+                                <div class="intj-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="grid-intp">
+                                <span class="mbti-title">[INTP]</span>
+                                <div class="intp-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="grid-infj">
+                                <span class="mbti-title">[INFJ]</span>
+                                <div class="infj-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="grid-infp">
+                                <span class="mbti-title">[INFP]</span>
+                                <div class="infp-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li class="grid-estj">
+                                <span class="mbti-title">[ESTJ]</span>
+                                <div class="estj-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="grid-estp">
+                                <span class="mbti-title">[ESTP]</span>
+                                <div class="estp-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="grid-esfj">
+                                <span class="mbti-title">[ESFJ]</span>
+                                <div class="esfj-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="grid-esfp">
+                                <span class="mbti-title">[ESFP]</span>
+                                <div class="esfp-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li class="grid-entj">
+                                <span class="mbti-title">[ENTJ]</span>
+                                <div class="entj-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="grid-entp">
+                                <span class="mbti-title">[ENTP]</span>
+                                <div class="entp-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="grid-enfj">
+                                <span class="mbti-title">[ENFJ]</span>
+                                <div class="enfj-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                            <li class="grid-enfp">
+                                <span class="mbti-title">[ENFP]</span>
+                                <div class="enfp-image"></div>
+                                <span>1번 20%</span>
+                                <span>2번 30%</span>
+                                <span>3번 50%</span>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="responseRate_ISFJ">
-                        <span>3</span>
-                    </div>
-                    <div class="responseRate_ISFP">
-                        <span>4</span>
-                    </div>
+                </article>
+                <div class="btn">
+                    <button class="btn-primary">
+                        <a href="/theme/love/singleList/<%= num > 1 ? num - 1 : 1 %>">이전</a>
+                    </button>
+                    <button class="btn-primary">
+                        <a href="/theme/love/singleList/<%= num + 1 %>">다음</a>
+                    </button>
                 </div>
-            </div>
-            <div class="btn">
-                <button class="btn-primary">
-                    <a href="/theme/love/singleList/<%= num > 1 ? num - 1 : 1 %>">이전</a>
-                </button>
-                <button class="btn-primary">
-                    <a href="/theme/love/singleList/<%= num + 1 %>">다음</a>
-                </button>
             </div>
         </div>
         <div id="footer">

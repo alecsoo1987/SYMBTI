@@ -99,6 +99,10 @@ body {
 
             .answerList {
                 li {
+                    cursor: pointer;
+                    label {
+                        cursor: pointer;
+                    }
                     &.active {
                         color: #9a2fcf99;
                         font-weight: bold;

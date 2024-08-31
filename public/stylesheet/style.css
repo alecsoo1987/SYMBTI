@@ -1868,6 +1868,12 @@ body {
   border-radius: 8px;
   padding: 1.5rem 0rem;
 }
+#wrap #container article .answerList li {
+  cursor: pointer;
+}
+#wrap #container article .answerList li label {
+  cursor: pointer;
+}
 #wrap #container article .answerList li.active {
   color: rgba(154, 47, 207, 0.6);
   font-weight: bold;
