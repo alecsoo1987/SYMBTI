@@ -1,0 +1,84 @@
+/* medium size */
+@media (max-width: #{$break-symbti}) {
+    html {
+        font-size: 15px !important;
+    }   
+    /*container*/
+    #wrap {
+        #container {
+            /* article 기본 정의 */
+            article {
+                width: 90%;
+                margin: 0 auto;
+    
+                p {
+                    padding: 0px;
+                    text-align: center;
+                    .main-cont-text {
+                        display: block;
+                        word-break: keep-all;
+                        margin-top: 20px;
+                    }
+                }
+    
+                .question-contbox {
+                    padding: 1rem;
+                    .answerList {
+                        li {
+                            cursor: pointer;
+                            label {
+                                cursor: pointer;
+                            }
+                            &.active {
+                                color: #9a2fcf99;
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                }
+    
+                /* mbti box */
+                .mbti-grid-box {
+                    ul {
+                        flex-wrap: wrap;
+                        li {
+                            width: calc(50% - 20px);
+                        }            
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* mobile size */
+
+@media (max-width: #{$break-symbtiMobile}) {
+    html {
+        font-size: 14px !important;
+    }
+    /*navigation*/
+    .navbar {
+        margin-bottom: 20px;
+        .container-fluid {
+            flex-direction: row;
+        }
+    }
+
+    #wrap {
+        #container {
+            .title-style-01 {
+                width: 50%;
+            }
+            
+            .question-contbox {
+                .questionTitle {
+                    margin-bottom: 40px;
+                }
+                .answerList {
+                    gap: 16px;
+                }
+            }
+        }
+    }
+}
