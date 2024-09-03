@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const { MongoClient, ObjectId } = require('mongodb') // ObjectId를 추가해야 게시물 ID값으로 리스팅 가능
 require('dotenv').config()
 
