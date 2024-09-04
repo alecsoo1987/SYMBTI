@@ -20,7 +20,7 @@
                 <form id="answerForm" action="/submitAnswer" method="POST">
                     <article class="article-box-design01">
                         <% DBList.forEach(function(doc, index) { %>                        
-                        <div class="contentsType mb-4">연애 / 썸 유형</div>
+                        <div class="title-style-01 mb-4">연애 / 썸 유형</div>
                         <div class="question-contbox">
                             <div class="questionNum d-flex pl-12">
                                 Question <%= num %>.
@@ -56,8 +56,17 @@
                     </article>
                 </form>
                 <% }); %>
+
+                <div class="article-footer">
+                    <button>
+                        <a href="/theme/love/singleList/<%= num > 1 ? num - 1 : 1 %>">이전</a>
+                    </button>
+                    <button>
+                        <a href="/theme/love/singleList/<%= num + 1 %>">다음</a>
+                    </button>
+                </div>
                 
-                <article class="tutorial-result">
+                <article class="mbti-result">
                     <div class="title-style-01">
                         유형별 선택 결과
                     </div>
@@ -185,14 +194,6 @@
                         </ul>
                     </div>
                 </article>
-                <div class="btn">
-                    <button class="btn-primary">
-                        <a href="/theme/love/singleList/<%= num > 1 ? num - 1 : 1 %>">이전</a>
-                    </button>
-                    <button class="btn-primary">
-                        <a href="/theme/love/singleList/<%= num + 1 %>">다음</a>
-                    </button>
-                </div>
             </div>
         </div>
         <div id="footer">
@@ -216,7 +217,4 @@
                 })
         })
     }
-    // document.querySelectorAll('.delete')[0].addEventListener('click', function(){
-    //   fetch('/test') // /test?age=20 과 같이 테스트 이후에 서버로 전송할 데이터의 형태를 내맘대로 지정할 수 있다.
-    // })
 </script>

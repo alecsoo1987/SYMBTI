@@ -17,29 +17,34 @@
                 </header>
             </div>
             <div id="container">
-                <div class="main-content-wrap addQuestion">
-                    <div class="contentsType mb-4">회원가입</div>
+                <div class="main-content-wrap register">
+                    <div class="title-style-01 mb-4">회원가입</div>
                     <form action="/register/check-id" method="POST" class="register-form" id="registerForm">
                         <input type="hidden" name="id">
                         <div class="form-group">
                             <div class="text-field">
-                                <label for="username">아이디
-                                    <span class="fc-red fs-14">
-                                        (*)
-                                    </span>
-                                    <span class="help-message">
-                                        6~12자, 특수문자를 제외한 영문 소문자 + 숫자로만 가입 가능합니다.
-                                    </span>
+                                <label for="username">
+                                    아이디
+                                    <div>
+                                        <span class="fc-red fs-14">
+                                            (*)
+                                        </span>
+                                        <span class="help-message">
+                                            6~12자, 특수문자를 제외한 영문 소문자 + 숫자로만 가입 가능합니다.
+                                        </span>
+                                    </div>
                                 </label>
                                 <input type="text" class="form-control inputId" id="username" name="username"
                                     minlength="6" maxlength="12">
                                 <label for="password">비밀번호
-                                    <span class="fc-red fs-14">
-                                        (*)
-                                    </span>
-                                    <span class="help-message">
-                                        6~12자까지 입력 가능합니다.
-                                    </span>
+                                    <div>                                        
+                                        <span class="fc-red fs-14">
+                                            (*)
+                                        </span>
+                                        <span class="help-message">
+                                            6~12자까지 입력 가능합니다.
+                                        </span>
+                                    </div>
                                 </label>
                                 <input type="password" class="form-control inputPassword" id="password" name="password"
                                     minlength="6" maxlength="12">

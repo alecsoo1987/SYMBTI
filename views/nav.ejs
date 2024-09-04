@@ -39,7 +39,7 @@
 											연애&썸
 										</a>
 									</li>
-									<li>
+									<li class="d-none">
 										<a class="dropdown-item" href="/theme/social_life/singleList/1">
 											<i class="icon submenu building-icon"></i>
 											일상
@@ -75,30 +75,46 @@
 							</li>							
 							<!--여기까지 -->
 						</ul>
-						<div class="dropdown profile ml-auto">
+						<div class="dropdown nav-item profile ml-auto">
+							<% if (loginedCheck) { %>
+							<span class="dropdownToggle dif_cc" data-bs-toggle="dropdown" aria-expanded="false">								
+								<i class="icon logined-icon"></i>
+							</span>
+							<form action="/logout" method="post">
+								<ul class="dropdown-menu">
+									<li>									
+										<button class="submit dropdown-item">
+											<i class="icon submenu logout-icon"></i>
+											로그아웃
+										</a>
+									</li>
+								</ul>
+							</form>
+							<% } else { %>
 							<span class="dropdownToggle dif_cc" data-bs-toggle="dropdown" aria-expanded="false">								
 								<i class="icon profile-icon"></i>
 							</span>
-							<ul class="dropdown-menu">
+							<ul class="dropdown-menu nav-item ">
 								<li>									
-									<a class="dropdown-item w-auto" href="/register">
+									<a class="dropdown-item" href="/register">
 										<i class="icon submenu register-icon"></i>
 										회원가입
 									</a>
 								</li>
 								<li>
-									<a class="dropdown-item w-auto" href="/login">
+									<a class="dropdown-item" href="/login">
 										<i class="icon submenu signin-icon"></i>
 										로그인
 									</a>
 								</li>
-								<li>									
-									<a class="dropdown-item w-auto" href="/porifle">
+								<li class="d-none">									
+									<a class="dropdown-item" href="/porifle">
 										<i class="icon submenu editProfile-icon"></i>
 										회원정보 수정
 									</a>
 								</li>
 							</ul>
+							<% } %>
 						</div>
 						<!-- 검색 기능 불필요 // 기능만 구현 + 미사용
 						<form class="d-flex" role="search" action="/search" method="get">

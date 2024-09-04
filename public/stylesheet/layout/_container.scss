@@ -45,7 +45,32 @@ body {
             width: 100%;
             margin: 0 auto;
             overflow-x: hidden;
-            overflow-y: overlay;
+            overflow-y: clip;
+
+            .article-footer {
+                display: flex;
+                flex-flow: row nowrap;
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+                background-color: var(--background-modal);
+                border-radius: 12px;
+                padding: 0.5rem;
+                button {
+                    a {
+                        font-weight:600;
+                        &:hover {
+                            opacity: 0.8;
+                        }
+                        &:active {
+                            opacity: 0.5;
+                        }
+                    }
+                }
+            }
+            .mbti-result {
+                margin-top: 50px;
+            }
         }
 
         /* 타이틀 스타일 */

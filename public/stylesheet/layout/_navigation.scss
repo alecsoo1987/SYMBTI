@@ -91,6 +91,7 @@
             &.selectTheme,
             &.profile {
                 .dropdown-item {
+                    width: 100% I !important;
                     display: flex;
                     align-items: center;
                     padding: 0.5rem;
@@ -129,6 +130,13 @@
     
     &.signin-icon {
         background-image: url('../../../images/icons/login.png');
+    }    
+
+    &.logout-icon {
+        background-image: url('../../../images/icons/logout.png');
+    }    
+    &.logined-icon {
+        background-image: url('../../../images/icons/logined_user.png');
     }    
 
     &.editProfile-icon {

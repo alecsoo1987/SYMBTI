@@ -34,7 +34,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="contentsType mb-4">연애 / 썸 유형</div>                
+                <div class="title-style-01 mb-4">연애 / 썸 유형</div>                
                 <% DBList.forEach(function(doc, index) { %>
                     <div class="contentsQBox">
                         <div class="questionNum d-flex">
@@ -48,11 +48,7 @@
                             <span class="fs-xs fw-b btn btn-outline-secondary btn-edit delete" data-id="<%=doc._id %>">🗑️</span>
                         </div>
                         <div class="questionTitle">
-                            <!-- <% if (doc.question) { %> -->
                                 <%= doc.question %>
-                            <!-- <% } else if (doc.title) { %>
-                                <%= doc.title %>
-                            <% } %> -->
                         </div>
                         <ul class="answerList">
                             <% for (var key in doc) { %>
@@ -62,12 +58,6 @@
                                         <%= doc[key] %>
                                     </li>
                                 <% } %>
-                                <!-- <% if (key.startsWith('content') && doc[key]) { %>
-                                    <li>
-                                        <span class="listNum"><%= key.replace('content', '') %></span>
-                                        <%= doc[key] %>
-                                    </li>
-                                <% } %> -->
                             <% } %>
                         </ul>
                         <a href="/list/next/<%= doc._id %>" data-id="<%=doc._id %>" class="btn submitbtn btn-outline-secondary m-auto">
@@ -97,7 +87,4 @@
             })
         })
     }
-    // document.querySelectorAll('.delete')[0].addEventListener('click', function(){
-    //   fetch('/test') // /test?age=20 과 같이 테스트 이후에 서버로 전송할 데이터의 형태를 내맘대로 지정할 수 있다.
-    // })
 </script>

@@ -1824,7 +1824,29 @@ body {
   width: 100%;
   margin: 0 auto;
   overflow-x: hidden;
-  overflow-y: overlay;
+  overflow-y: clip;
+}
+#wrap #container .main-content-wrap .article-footer {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+  background-color: var(--background-modal);
+  border-radius: 12px;
+  padding: 0.5rem;
+}
+#wrap #container .main-content-wrap .article-footer button a {
+  font-weight: 600;
+}
+#wrap #container .main-content-wrap .article-footer button a:hover {
+  opacity: 0.8;
+}
+#wrap #container .main-content-wrap .article-footer button a:active {
+  opacity: 0.5;
+}
+#wrap #container .main-content-wrap .mbti-result {
+  margin-top: 50px;
 }
 #wrap #container .title-style-01 {
   width: 30%;
@@ -2050,6 +2072,7 @@ body {
   cursor: pointer;
 }
 .navbar #navbarSupportedContent .dropdown.selectTheme .dropdown-item, .navbar #navbarSupportedContent .dropdown.profile .dropdown-item {
+  width: 100% I !important;
   display: flex;
   align-items: center;
   padding: 0.5rem;
@@ -2080,6 +2103,12 @@ body {
 }
 .icon.signin-icon {
   background-image: url("../../../images/icons/login.png");
+}
+.icon.logout-icon {
+  background-image: url("../../../images/icons/logout.png");
+}
+.icon.logined-icon {
+  background-image: url("../../../images/icons/logined_user.png");
 }
 .icon.editProfile-icon {
   background-image: url("../../../images/icons/refresh.png");
@@ -4489,8 +4518,10 @@ body {
   #wrap #container {
     /* article 기본 정의 */
   }
-  #wrap #container article {
+  #wrap #container .main-content-wrap {
     width: 90%;
+  }
+  #wrap #container article {
     margin: 0 auto;
     /* mbti box */
   }
@@ -4534,6 +4565,22 @@ body {
   }
   .navbar .container-fluid {
     flex-direction: row;
+  }
+  .navbar .container-fluid #navbarSupportedContent .nav-item {
+    margin: 0 auto;
+  }
+  .navbar .container-fluid #navbarSupportedContent .nav-item.profile .nav-item {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  #wrap #container .main-content-wrap {
+    width: 90%;
+  }
+  #wrap #container .main-content-wrap.register .text-field label:nth-of-type(1),
+  #wrap #container .main-content-wrap.register .text-field label:nth-of-type(2) {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
   #wrap #container .title-style-01 {
     width: 50%;

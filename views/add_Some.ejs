@@ -15,7 +15,7 @@
         </div>
         <div id="container">
             <div class="main-content-wrap">
-                <div class="contentsType mb-4">연애 / 썸 유형</div>
+                <div class="title-style-01 mb-4">연애 / 썸 유형</div>
                 <% DBList.forEach(function(doc, index) { %>
                     <div class="contentsQBox">
                         <div class="questionNum d-flex">
@@ -25,11 +25,7 @@
                             </a>
                         </div>
                         <div class="questionTitle">
-                            <!-- <% if (doc.question) { %> -->
                                 <%= doc.question %>
-                            <!-- <% } else if (doc.title) { %>
-                                <%= doc.title %>
-                            <% } %> -->
                         </div>
                         <ul class="answerList">
                             <% for (var key in doc) { %>
@@ -39,12 +35,6 @@
                                         <%= doc[key] %>
                                     </li>
                                 <% } %>
-                                <!-- <% if (key.startsWith('content') && doc[key]) { %>
-                                    <li>
-                                        <span class="listNum"><%= key.replace('content', '') %></span>
-                                        <%= doc[key] %>
-                                    </li>
-                                <% } %> -->
                             <% } %>
                         </ul>                
                         <button type="submit" class="btn submitbtn btn-outline-secondary m-auto">답변선택 완료 후 결과보기</button>

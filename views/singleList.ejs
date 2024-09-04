@@ -21,17 +21,13 @@
                 <% DBList.forEach(function(doc, index) { %>
                 <form id="answerForm" action="/submitAnswer" method="POST">
                     <article class="article-box-design01">
-                        <div class="contentsType mb-4">연애 / 썸 유형</div>
+                        <div class="title-style-01 mb-4">연애 / 썸 유형</div>
                         <div class="question-contbox">
                             <div class="questionNum d-flex pl-12">
                                 Question <%= num %>.
                             </div>
                             <div class="questionTitle pl-12">
-                                <!-- <% if (doc.question) { %> -->
                                 <%= doc.question %>
-                                    <!-- <% } else if (doc.title) { %>
-                                <%= doc.title %>
-                            <% } %> -->
                             </div>
                             <ul class="answerList pl-12">
                                 <% for (var key in doc) { %>
@@ -48,22 +44,8 @@
                                             </label>
                                         </li>
                                         <% } %>
-                                            <!-- <% if (key.startsWith('content') && doc[key]) { %>
-                                    <li>
-                                        <span class="listNum"><%= key.replace('content', '') %></span>
-                                        <%= doc[key] %>
-                                    </li>
-                                <% } %> -->
                                             <% } %>
                             </ul>
-                            
-                            <!--
-                                <a href="/list/next/<%= doc._id %>" data-id="<%=doc._id %>" class="btn submitbtn btn-outline-secondary m-auto">
-                                    <span class="fs-xs fw-b">
-                                        답변선택 완료 후 결과보기
-                                    </span>
-                                </a>
-                            -->
                         </div>
                         <input type="hidden" name="selectedAnswerText" id="selectedAnswerText">
                         <input type="hidden" name="questionId" id="questionId" value="<%= doc._id %>">
@@ -77,15 +59,16 @@
                     </article>
                 </form>
                 <% }); %>
+                <div class="article-footer">
+                    <button>
+                        <a href="/theme/love/singleList/<%= num > 1 ? num - 1 : 1 %>">이전</a>
+                    </button>
+                    <button>
+                        <a href="/theme/love/singleList/<%= num + 1 %>">다음</a>
+                    </button>
+                </div>
             </div>
-            <div class="btn">
-                <button class="btn-primary">
-                    <a href="/theme/love/singleList/<%= num > 1 ? num - 1 : 1 %>">이전</a>
-                </button>
-                <button class="btn-primary">
-                    <a href="/theme/love/singleList/<%= num + 1 %>">다음</a>
-                </button>
-            </div>
+            
         </div>
         <div id="footer">
 
@@ -149,33 +132,14 @@
 
             .then(response => response.json())
             .then(data => {
-            // 성공 시 리다이렉트 처리
             if (data.redirect) {
                 window.location.href = data.redirect;
             }
                 })
                 .catch(error => {
-                    // 에러 처리: 예를 들어 모달 창을 띄우는 방식
                     showModal('오류가 발생했습니다. 다시 시도해주세요.');
                     console.error('Error:', error);
                 });
-
-            /*
-            .then(response => {
-                const status = response.status; 
-                return response.json().then(data => ({ status, data }));
-            })
-            .then(({ status, data }) => {
-                if (status === 400) {
-                    showModal(data.aleadyAnswer);
-                }if (status === 401) {
-                    showModal(data.changeSelect);
-                }
-                 else {              
-                    window.location.href = data.redirect;
-                }
-            })
-                */
         }         
     });
 
@@ -186,7 +150,4 @@
         modalMessage.textContent = message;
         modal.style.display = 'block';
     }
-    // document.querySelectorAll('.delete')[0].addEventListener('click', function(){
-    //   fetch('/test') // /test?age=20 과 같이 테스트 이후에 서버로 전송할 데이터의 형태를 내맘대로 지정할 수 있다.
-    // })
 </script>

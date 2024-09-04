@@ -43,7 +43,7 @@ const upload = multer({
   storage: multerS3({
     s3: s3,
     bucket: 'alecsoo1987',
-    key: function (요청, file, cb) {
+    key: function (req, file, cb) {
       cb(null, Date.now().toString()) //업로드시 파일명 변경가능
     }
   })
@@ -59,9 +59,9 @@ connectDB.then((client) => {
 })
 
 /* 미들웨어 */
-function loginCheck(요청, 응답, next) {
-  if (!요청.user) {
-    return 응답.send('로그인이 필요한 기능입니다.')
+function loginCheck(req, res, next) {
+  if (!req.user) {
+    return res.send('로그인이 필요한 기능입니다.')
   }
   next()
 }
@@ -74,122 +74,131 @@ function ensureAuthenticated(req, res, next) {
 }
 
 
-function nullCheck(요청, 응답, next) {
-  if (요청.body.username == '' || 요청.body.password == '') {
-    응답.send('아이디 또는 비번이 입력되지 않았습니다.')
+function nullCheck(req, res, next) {
+  if (req.body.username == '' || req.body.password == '') {
+    res.send('아이디 또는 비번이 입력되지 않았습니다.')
   } else {
     next()
   }
 }
 
-// app.use(loginCheck)// 이 하단에 있는 모든 api의 미들웨어에 해당 함수를 동작 = 로그인 체크가 전역에서 발생
-// app.use('/URL', loginCheck)// /URL 을 포함한 그 이하의 모든 주소에서 로그인 체크가 발생함
-
 app.listen(8080, () => {
   console.log('http://localhost:8080 에서 서버 실행중')
 })
 
-app.get('/', async (요청, 응답) => {
-  응답.render('main.ejs')
+app.get('/', async (req, res) => {
+  let loginedCheck = false;
+  if (req.isAuthenticated()) {
+    loginedCheck = true;
+  }
+  res.render('main.ejs', { loginedCheck: loginedCheck });
 })
 
-app.get('/home', async (요청, 응답) => {
-  응답.render('main.ejs')
+app.get('/home', async (req, res) => {
+  let loginedCheck = false;
+  if (req.isAuthenticated()) {
+    loginedCheck = true;
+  }
+  res.render('main.ejs', { loginedCheck: loginedCheck })
 })
 
-/* 삭제해도 됨 */
-app.get('/theme/love/list', async (요청, 응답) => {
-  let result = await db.collection('SYMBTI_Some').find().toArray()
-  응답.render('list.ejs', { DBList: result })
-})
 
-app.get('/theme/love/singleList/:num', loginCheck, async (요청, 응답) => {
-  let num = parseInt(요청.params.num);
+
+app.get('/theme/love/singleList/:num', loginCheck, async (req, res) => {
+  let loginedCheck = false;
+  if (req.isAuthenticated()) {
+    loginedCheck = true;
+  }
+  let num = parseInt(req.params.num);
   let selectedNum = null;
   let result = await db.collection('SYMBTI_Some').find().skip(num - 1).limit(1).toArray()
   if (result.length > 0) {
     let questionId = result[0]._id; // 여기서 _id를 추출합니다.
-    let userId = 요청.user._id;
+    let userId = req.user._id;
     let existingAnswer = await db.collection('answers').findOne({ questionId: new ObjectId(questionId), "participants.participants_id": new ObjectId(userId) });
     if (existingAnswer) {
       selectedNum = existingAnswer.participants[0].participants_answer;
     }
   }
-  응답.render('singleList.ejs', { DBList: result, num: num, selectedNum: selectedNum });
+  res.render('singleList.ejs', { DBList: result, num: num, selectedNum: selectedNum, loginedCheck: loginedCheck });
 })
 
-app.get('/theme/love/edit/:Id', async (요청, 응답) => {
-  let result = await db.collection('SYMBTI_Some').findOne({ _id: new ObjectId(요청.params.Id) })
-  응답.render('edit.ejs', { 바인딩: result })
+app.get('/theme/love/edit/:Id', async (req, res) => {
+  let loginedCheck = false;
+  if (req.isAuthenticated()) {
+    loginedCheck = true;
+  }
+  let result = await db.collection('SYMBTI_Some').findOne({ _id: new ObjectId(req.params.Id) })
+  res.render('edit.ejs', { 바인딩: result, loginedCheck: loginedCheck })
 })
 
-app.post('/theme/love/edit', async (요청, 응답) => {
-  let id = 요청.body.id
+app.post('/theme/love/edit', async (req, res) => {  
+  let loginedCheck = false;
+  if (req.isAuthenticated()) {
+    loginedCheck = true;
+  }
+  let id = req.body.id
   await db.collection('SYMBTI_Some').updateOne(
     { _id: new ObjectId(id) },
     {
       $set:
       {
-        question: 요청.body.question,
-        answer1: 요청.body.answer1,
-        answer2: 요청.body.answer2,
-        answer3: 요청.body.answer3,
-        answer4: 요청.body.answer4
+        question: req.body.question,
+        answer1: req.body.answer1,
+        answer2: req.body.answer2,
+        answer3: req.body.answer3,
+        answer4: req.body.answer4
       }
     });
-  응답.redirect('/list');
+  res.redirect('/list', {loginedCheck: loginedCheck});
 });
 
-app.get('/theme/love/list/detail/:Id', async (요청, 응답) => {
-  let result = await db.collection('SYMBTI_Some').findOne({ _id: new ObjectId(요청.params.Id) })
-  응답.render('detail.ejs', { 바인딩: result })
+app.get('/theme/love/list/detail/:Id', async (req, res) => {
+  let loginedCheck = false;  
+  let result = await db.collection('SYMBTI_Some').findOne({ _id: new ObjectId(req.params.Id) })
+  if (req.isAuthenticated()) {
+    loginedCheck = true;
+  }
+  res.render('detail.ejs', { 바인딩: result, loginedCheck : loginedCheck })
 })
 
-app.get('/theme/love/write', loginCheck, ensureAuthenticated, (요청, 응답) => { //loginCheck 라는 미들웨어를 사용하여 로그인 상황을 체크
-  응답.render('write.ejs')
+app.get('/theme/love/write', (req, res) => { //loginCheck 라는 미들웨어를 사용하여 로그인 상황을 체크
+  let loginedCheck = false;
+  if (req.isAuthenticated()) {
+    loginedCheck = true;
+  }
+  res.render('write.ejs',{loginedCheck: loginedCheck})
 })
 
-// app.get('/list/:Id', async (요청, 응답) => {
-//   let result = await db.collection('SYMBTI_Some').findOne({ _id: new ObjectId(요청.params.Id) })
-//   응답.render('list.ejs', { DBList: result })
-// })
-
-// app.get('/list/next/:Id', async (요청, 응답) => {
-//   let result = await db.collection('SYMBTI_Some').find({ _id: { $gt: new ObjectId(요청.params.Id) } })
-//   응답.render('list.ejs', { DBList: result })
-// })
-
-app.delete('/delete', async (요청, 응답) => {
+app.delete('/delete', async (req, res) => {
   let result = await db.collection('SYMBTI_Some').deleteOne({
-    _id: new ObjectId(요청.query.DBID),
-    user: new ObjectId(요청.user._id)
+    _id: new ObjectId(req.query.DBID),
+    user: new ObjectId(req.user._id)
   })
-  응답.send('삭제완료')
+  res.send('삭제완료')
 })
 
 
-
-app.post('/add_question', upload.single('upload_image'), async (요청, 응답) => {
-  if (요청.body.question == '') {
-    응답.send('제목안적었는데')
+app.post('/add_question', upload.single('upload_image'), async (req, res) => {
+  if (req.body.question == '') {
+    res.send('제목을 입력해주세요.')
   }
   try {
     await db.collection('SYMBTI_Some').insertOne({
-      question: 요청.body.question,
-      answer1: 요청.body.answer1,
-      answer2: 요청.body.answer2,
-      answer3: 요청.body.answer3,
-      answer4: 요청.body.answer4,
-      answer5: 요청.body.answer5,
-      img: 요청.file ? 요청.file.location : '',
-      writerId: 요청.user._id,
-      writerName: 요청.user.username
+      question: req.body.question,
+      answer1: req.body.answer1,
+      answer2: req.body.answer2,
+      answer3: req.body.answer3,
+      answer4: req.body.answer4,
+      answer5: req.body.answer5,
+      writerId: req.user._id,
+      writerName: req.user.username
     })
-    응답.redirect('/list')
+    res.redirect('/list')
 
   } catch (e) {
     console.log(e)
-    응답.status(500).send('서버에러남')
+    res.status(500).send('서버에러남')
   }
 })
 
@@ -218,126 +227,97 @@ passport.deserializeUser(async (user, done) => {
   let result = await db.collection('user').findOne({ _id: new ObjectId(user.id) })
   delete result.password
   process.nextTick(() => {
-    done(null, result) // result에 요청.user가 전송됨
+    done(null, result) // result에 req.user가 전송됨
   })
 })
 
-app.get('/login', nullCheck, async (요청, 응답) => {
-  응답.render('login.ejs')
+app.get('/login', nullCheck, async (req, res) => {
+  let loginedCheck = false;
+  if (req.isAuthenticated()) {
+    loginedCheck = true;
+  }
+  res.render('login.ejs', { loginedCheck: loginedCheck });
 })
 
-app.post('/login', (요청, 응답, next) => {
+app.post('/login', (req, res, next) => {
   passport.authenticate('local', (error, user, info) => {
-    if (error) return 응답.status(500).json(error)
-    if (!user) return 응답.status(401).json(info.message)// passport.use에서 설정한 'message'를 불러옴
-    요청.login(user, (err) => {
+    if (error) return res.status(500).json(error)
+    if (!user) return res.status(401).json(info.message)// passport.use에서 설정한 'message'를 불러옴
+    req.login(user, (err) => {
       if (err) return next(err);
-      응답.status(200).json({
+      res.status(200).json({
         redirect: '/home'
       });
     });
-  })(요청, 응답, next)
+  })(req, res, next)
 })
+
+app.post('/logout', (req, res) => {
+  req.logout(err => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('로그아웃 중 오류가 발생했습니다.');
+    }
+    req.session.destroy(() => {
+      res.clearCookie('connect.sid'); // 세션 쿠키 삭제
+      res.redirect('/home'); // 로그아웃 후 리디렉션할 페이지
+    });
+  });
+});
 
 /* 회원 가입 */
-app.get('/register', async (요청, 응답) => {
-  응답.render('register.ejs')
+app.get('/register', async (req, res) => {
+  let loginedCheck = false;
+  if (req.isAuthenticated()) {
+    loginedCheck = true;
+  }
+  res.render('register.ejs', { loginedCheck: loginedCheck })
 })
 
-app.post('/register/check-id', async (요청, 응답) => { // 버튼을 누르면 nullCheck부터 동작 후 요청기능 수행
-  let result = await db.collection('user').findOne({ username: 요청.body.username });
+app.post('/register/check-id', async (req, res) => { // 버튼을 누르면 nullCheck부터 동작 후 req기능 수행
+  let result = await db.collection('user').findOne({ username: req.body.username });
   if (result) {
-    return 응답.status(400).json({ message: '중복 아이디입니다.' });
+    return res.status(400).json({ message: '중복 아이디입니다.' });
   }
 
-  if (요청.body.password !== 요청.body.confirmPassword) {
-    return 응답.status(400).json({ message: '재확인 비밀번호가 일치하지 않습니다.' });
+  if (req.body.password !== req.body.confirmPassword) {
+    return res.status(400).json({ message: '재확인 비밀번호가 일치하지 않습니다.' });
   }
 
   try {
-    if (!요청.body.password) {
+    if (!req.body.password) {
       throw new Error('비밀번호가 전달되지 않았습니다.')
     }
 
-    let 해시 = await bcrypt.hash(요청.body.password, 10) // 암호를 여러번 꼰다는 의미로 정수 입력
+    let 해시 = await bcrypt.hash(req.body.password, 10)
 
     await db.collection('user').insertOne({
-      username: 요청.body.username,
+      username: req.body.username,
       password: 해시,
-      mbti: 요청.body.selectMBTI,
+      mbti: req.body.selectMBTI,
       createdAt: new Date(),
     })
 
-    응답.status(200).json({
+    res.status(200).json({
       redirect: '/login',
       message: '회원가입을 축하합니다. 로그인 페이지로 이동합니다.'
     });
 
   } catch (error) {
     console.error(error);
-    응답.status(500).json({ message: '서버 오류가 발생했습니다.' });
+    res.status(500).json({ message: '서버 오류가 발생했습니다.' });
   }
 })
 
-app.use('/shop', require('./routes/shop.js')) //routes/shop.js에 있는 겟 주소의 api를 전부 사용, / 또는 /shop처럼 중복되는 단어는 여기서 통합해서 사용할 수 있다.
-app.use('/board/sub', loginCheck, require('./routes/sports.js'))
-// boare/sub로 시작하는 페이지에 접속하면, loginCheck 미들웨어를 실행하고, next를 통해 routes/sports.js에 있는 api를 찾아서 실행한다.
-
-
-/* index 없이 단어가 포함된 질문을 모두 검색 결과로 불러올 때 사용 
-
-app.get('/search', async (요청,응답) => {
-  let inputSearch = 요청.query.inputSearch
-  let searchResults = await db.collection('SYMBTI_Some').find({
-    $or: [
-      { question: { $regex: inputSearch, $options: 'i' } },
-      { answer1: { $regex: inputSearch, $options: 'i' } },   
-      { answer2: { $regex: inputSearch, $options: 'i' } }, 
-      { answer3: { $regex: inputSearch, $options: 'i' } }   
-    ]
-  }).toArray();
-
-  let ids = searchResults.map(doc => doc._id);
-
-  let result = await db.collection('SYMBTI_Some').find({
-    _id: { $in: ids }
-  }).toArray()
-  
-  응답.render('searchResult.ejs', {바인딩 : result})
-}) */
-
-
-//Memo : 비활성화 기능, but 사용한다면 예외사항 처리해야함. (최소 2글자 이상, 검색결과 없을 경우 등)
-app.get('/search', async (요청, 응답) => {
-  let searchItem = 요청.query.inputSearch
-  let searchCondition = [
-    {
-      $search: {
-        index: 'question_index',
-        text: {
-          query: searchItem,
-          path: 'question'
-        }
-      }
-    },
-    {
-      $limit: 1
-    },
-  ];
-  let searchResults = await db.collection('SYMBTI_Some').aggregate(searchCondition).toArray();
-  응답.render('searchResult.ejs', { 바인딩: searchResults })
-})
-
-
-app.post('/submitAnswer', loginCheck, async (요청, 응답) => {
-  let questionId = 요청.body.questionId;
-  let question = 요청.body.question;
-  let selectedAnswerNum = 요청.body.selectedAnswer;
-  let selectedAnswerTxt = 요청.body.selectedAnswerText;
-  let questionIdx = 요청.body.questionIdx;
-  let userId = 요청.user._id;
-  let mbti = 요청.user.mbti;
-  let userName = 요청.user.username;
+app.post('/submitAnswer', loginCheck, async (req, res) => {
+  let questionId = req.body.questionId;
+  let question = req.body.question;
+  let selectedAnswerNum = req.body.selectedAnswer;
+  let selectedAnswerTxt = req.body.selectedAnswerText;
+  let questionIdx = req.body.questionIdx;
+  let userId = req.user._id;
+  let mbti = req.user.mbti;
+  let userName = req.user.username;
 
   try {
     //현재 질문이 이미 존재하는지, 현재 유저가 참여한 이력이 있는지 확인하는 변수
@@ -369,44 +349,58 @@ app.post('/submitAnswer', loginCheck, async (요청, 응답) => {
 			],
 		  });
 	  
-	}
-
-    /* 이미 존재할 경우 답변 유지/변경 시 토스트 메시지 (현재 모달이라 추후 개발 필요)
-    if (existingAnswer) {
-      if (!checkIfSameAnswer(existingAnswer, userId, selectedAnswerNum)) {
-        eturn 응답.status(400).json({
-          aleadyAnswer:  'You have already answered this question with the same answer.'
-        })
-        await db.collection('answers').updateOne({
-          
-        })
-        return 응답.status(401).json({
-          changeSelect : '기존 답변이 변경되었습니다.'
-        })
-      }
-    }*/    
+	} 
     // 리다이렉트 URL 설정
     let result_url = '/singleList/' + questionIdx + '/result/' + questionId;
-    응답.status(200).json({
+    res.status(200).json({
       redirect: result_url
     })
 
   } catch (error) {
     console.error(error);
-    응답.status(500).send('Internal Server Error');
+    res.status(500).send('Internal Server Error');
   }
 })
 
-app.get('/singleList/:num/result/:Id', async (요청, 응답) => {
-  let num = parseInt(요청.params.num)
+app.get('/singleList/:num/result/:Id', async (req, res) => {
+  let loginedCheck = false;
+  if (req.isAuthenticated()) {
+    loginedCheck = true;
+  }
+  let num = parseInt(req.params.num)
   let result = await db.collection('SYMBTI_Some').find().skip(num - 1).limit(1).toArray()
   let result2 = await db.collection('answers').find({
-    questionId: new ObjectId(요청.params.Id)
+    questionId: new ObjectId(req.params.Id)
   }).toArray()
-  응답.render('singleListResult.ejs', { DBList: result, num: num, answerList: result2 })
+  res.render('singleListResult.ejs', { DBList: result, num: num, answerList: result2, loginedCheck: loginedCheck  })
 })
 
-app.get('/chat/request', async (요청, 응답) => {
-  //let result = await db.collection('SYMBTI_Some').find().skip(num-1).limit(1).toArray()  
-  응답.render('chat.ejs')
+
+/* 미사용 */
+
+//Memo : 비활성화 기능, but 사용한다면 예외사항 처리해야함. (최소 2글자 이상, 검색결과 없을 경우 등)
+app.get('/search', async (req, res) => {
+  let searchItem = req.query.inputSearch
+  let searchCondition = [
+    {
+      $search: {
+        index: 'question_index',
+        text: {
+          query: searchItem,
+          path: 'question'
+        }
+      }
+    },
+    {
+      $limit: 1
+    },
+  ];
+  let searchResults = await db.collection('SYMBTI_Some').aggregate(searchCondition).toArray();
+  res.render('searchResult.ejs', { 바인딩: searchResults })
+})
+
+/* 삭제해도 됨 */
+app.get('/theme/love/list', async (req, res) => {
+  let result = await db.collection('SYMBTI_Some').find().toArray()
+  res.render('list.ejs', { DBList: result })
 })
