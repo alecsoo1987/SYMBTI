@@ -10,7 +10,7 @@
         </p>
       </div>
       <div class="modal-footer">
-        <button class="btn-sm btn" id="closeModal">
+        <button class="btn-sm btn modal-footer close-selectError-modal" id="closeModal">
           닫기
         </button>
       </div>      
@@ -18,8 +18,8 @@
   </div>
 
   <script>
-    document.getElementById('closeModal').addEventListener('click',()=>{
-      var modal = document.querySelector('.modal');
+    document.getElementsByClassName('close-selectError-modal')[0].addEventListener('click',()=>{
+      var modal = document.getElementById('selectError');
         modal.style.display="none";
     })
     

@@ -250,10 +250,8 @@
         const isAnyActive = answer_list.some(item => item.classList.contains('active'));
 
         if (!isAnyActive) {
-            console.log('번호선택안함');
             openModal();
         } else {
-            console.log('번호선택함');
             tutorialR.classList.remove('d-none');
         } 
     });

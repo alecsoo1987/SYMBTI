@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="/main.css">
 </head>
 <body>
+	<%- include('modal/loginError') %>
 	<div id="header" role="header">
 		<header>
 			<nav class="navbar navbar-expand-sm">
@@ -33,12 +34,21 @@
 									<i class="icon theme-icon"></i>
 								</span>
 								<ul class="dropdown-menu">
+									<% if (loginedCheck) { %>
 									<li>
 										<a class="dropdown-item" href="/theme/love/singleList/1">
 											<i class="icon submenu love-icon"></i>
 											연애&썸
 										</a>
 									</li>
+									<% } else { %>
+									<li>
+										<button class="dropdown-item" id="loveThemeBtn">
+											<i class="icon submenu love-icon"></i>
+											연애&썸
+										</a>
+									</li>
+									<% } %>
 									<li class="d-none">
 										<a class="dropdown-item" href="/theme/social_life/singleList/1">
 											<i class="icon submenu building-icon"></i>
@@ -95,7 +105,7 @@
 								<i class="icon profile-icon"></i>
 							</span>
 							<ul class="dropdown-menu nav-item ">
-								<li>									
+								<li>
 									<a class="dropdown-item" href="/register">
 										<i class="icon submenu register-icon"></i>
 										회원가입
@@ -130,3 +140,24 @@
 	<script src="/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<script>	
+	const loveThemeBtn = document.getElementById('loveThemeBtn');
+	if (loveThemeBtn) {
+		loveThemeBtn.addEventListener('click', () => {
+			showModal();
+		});
+}
+	
+
+	function showModal() {
+        const modal = document.getElementById('loginError');
+        modal.style.display = 'block';
+	}
+
+	document.getElementById('closeModal').addEventListener('click',()=>{
+      console.log('클로즈모달 버튼')
+      var modal = document.querySelector('.modal');
+        modal.style.display="none";
+    })
+	
+</script>

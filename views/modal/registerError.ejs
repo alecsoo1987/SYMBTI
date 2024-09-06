@@ -8,7 +8,7 @@
         <p class="content" id="modalMessage"></p>
       </div>
       <div class="modal-footer">
-        <button class="btn-sm btn" id="closeModal">
+        <button class="btn-sm btn modal-footer close-registerError-modal">
           닫기
         </button>
       </div>      
@@ -16,8 +16,8 @@
   </div>
 
   <script>
-    document.getElementById('closeModal').addEventListener('click',()=>{
-      var modal = document.querySelector('.modal');
+    document.getElementsByClassName('close-registerError-modal')[0].addEventListener('click',()=>{
+      var modal = document.getElementById('registerError');
         modal.style.display="none";
     })
     
