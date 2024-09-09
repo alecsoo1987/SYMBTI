@@ -17,7 +17,7 @@
         </div>
         <div id="container">
             <div class="main-content-wrap">
-                <form id="answerForm" action="/submitAnswer" method="POST">
+                <form id="answerForm" action="/resultData" method="POST">
                     <article class="article-box-design01">
                         <% DBList.forEach(function(doc, index) { %>                        
                         <div class="title-style-01 mb-4">연애 / 썸 유형</div>
@@ -31,7 +31,7 @@
                             <ul class="answerList pl-12">
                                 <% for (var key in doc) { %>
                                     <% if (key.startsWith('answer') && doc[key]) { %>
-                                        <li>
+                                        <li class="<%= (selectedNum == key.replace('answer', '')) ? 'active' : '' %>">
                                             <input type="radio" name="selectedAnswer"
                                                 id="selectedAnswer<%= key.replace('answer', '') %>"
                                                 value="<%= key.replace('answer', '') %>">
@@ -48,11 +48,11 @@
                         </div>
 
                         <input type="hidden" name="questionId" value="<%= doc._id %>">
-                        <button type="submit" class="btn show-resultBtn resultBtn btn-primary m-auto">
+                        <!-- <button type="submit" class="btn show-resultBtn resultBtn btn-primary m-auto">
                             <span class="fs-xs fw-b">
                                 결과보기
                             </span>
-                        </button>
+                        </button> -->
                     </article>
                 </form>
                 <% }); %>

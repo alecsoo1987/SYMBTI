@@ -47,6 +47,7 @@
                                     <% } %>
                             </ul>
                         </div>
+                        <input type="hidden" name="answers" id="answers" value='<%= JSON.stringify(doc) %>'>
                         <input type="hidden" name="selectedAnswerText" id="selectedAnswerText">
                         <input type="hidden" name="questionId" id="questionId" value="<%= doc._id %>">
                         <input type="hidden" name="question" id="question" value="<%= doc.question %>">
@@ -96,17 +97,20 @@
     }
    
     const answer_list = Array.from(document.querySelectorAll('.answerList li'));
-    answer_list.forEach(item => {
+    const answersLabelText = Array.from(document.querySelectorAll('.answerList li label')).map(label => label.innerText.trim());
+    
+    var answersList;
+    answer_list.forEach(item => {        
         item.addEventListener('click', function () {
             answer_list.forEach(li => li.classList.remove('active'));
             this.classList.add('active');
-        })
+        })        
     })
 
     document.querySelector('.resultBtn').addEventListener('click', (event) => {
         event.preventDefault();
         const isAnyActive = answer_list.some(item => item.classList.contains('active'));
-        const selectedRadio = document.querySelector('.active input');        
+        const selectedRadio = document.querySelector('.active input');
         const errorMessage = '번호를 선택해주세요.'
         
         if (!isAnyActive) {
@@ -115,7 +119,7 @@
              var label = document.querySelector('.active label');
              var answerText = label.innerText.trim();
              document.getElementById('selectedAnswerText').value = answerText;
-
+             var answers = document.getElementById('answers').value;
             fetch('/submitAnswer',{
                 method: 'post',
                 headers : {
@@ -127,6 +131,7 @@
                     questionIdx : questionIdx.value,
                     selectedAnswer : selectedRadio.value,
                     selectedAnswerText : answerText,
+                    allOfAnswers : answersLabelText,
                 }),
             })
 

@@ -318,22 +318,34 @@ app.post('/submitAnswer', loginCheck, async (req, res) => {
   let userId = req.user._id;
   let mbti = req.user.mbti;
   let userName = req.user.username;
+  let allOfAnswers = req.body.allOfAnswers;
 
   try {
     //현재 질문이 이미 존재하는지, 현재 유저가 참여한 이력이 있는지 확인하는 변수
     let existingAnswer = await db.collection('answers').findOne({ questionId: new ObjectId(questionId), "participants.participants_id": new ObjectId(userId) });
 
     //예외사항 처리 함수
-	if (existingAnswer) {
-
-		function checkIfSameAnswer(existingAnswer, userId, selectedAnswerNum) {
-		  if (!existingAnswer || !existingAnswer.participants) return false;
-		  let participant = existingAnswer.participants.find(p => p.participants_id.equals(userId));
-		  if (!participant) return false;
-		  return participant.participants_answer === parseInt(selectedAnswerNum);
-		}
-		checkIfSameAnswer();
+    if (existingAnswer) {
+      // 기존에 참여한 유저의 답변을 가져옴
+      let participant = existingAnswer.participants.find(p => p.participants_id.equals(userId));      
+      // 기존 답변과 현재 선택된 답변이 다를 경우에만 업데이트
+      if (participant && participant.participants_answer !== parseInt(selectedAnswerNum)) {
+        await db.collection('answers').updateOne(
+          { questionId: new ObjectId(questionId), "participants.participants_id": new ObjectId(userId) },
+          {
+            $set: {
+              "participants.$.participants_answer": parseInt(selectedAnswerNum),
+              "participants.$.participants_answertxt": selectedAnswerTxt,
+              "participants.$.updatedAt": new Date()
+            }
+          }
+        );
+      }
 	} else {
+    let answerArray = allOfAnswers.map(answer => ({
+      answer: answer
+    }));
+
 		await db.collection('answers').insertOne({
 			questionId: new ObjectId(questionId),
 			questionTitle: question,
@@ -347,6 +359,8 @@ app.post('/submitAnswer', loginCheck, async (req, res) => {
 				createdAt: new Date(),
 			  },
 			],
+      answers: answerArray,
+
 		  });
 	  
 	} 
@@ -368,11 +382,26 @@ app.get('/singleList/:num/result/:Id', async (req, res) => {
     loginedCheck = true;
   }
   let num = parseInt(req.params.num)
+  let selectedNum = null;
   let result = await db.collection('SYMBTI_Some').find().skip(num - 1).limit(1).toArray()
+  if (result.length > 0) {
+    let questionId = result[0]._id; // 여기서 _id를 추출합니다.
+    let userId = req.user._id;
+    let existingAnswer = await db.collection('answers').findOne({ questionId: new ObjectId(questionId), "participants.participants_id": new ObjectId(userId) });
+    if (existingAnswer) {
+      selectedNum = existingAnswer.participants[0].participants_answer;
+    }
+  }
   let result2 = await db.collection('answers').find({
     questionId: new ObjectId(req.params.Id)
   }).toArray()
-  res.render('singleListResult.ejs', { DBList: result, num: num, answerList: result2, loginedCheck: loginedCheck  })
+
+  result2.forEach(answerdatas => {
+    console.log(answerdatas.particiapnts.participants_id);
+    
+  });
+
+  res.render('singleListResult.ejs', { DBList: result, num: num, selectedNum: selectedNum, answerList: result2, loginedCheck: loginedCheck  })
 })
 
 
